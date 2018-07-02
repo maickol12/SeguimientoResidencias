@@ -1,0 +1,44 @@
+<resources>
+    <string name="app_name">SeguimientoResidencias</string>
+    <string name="username">Usuario...</string>
+    <string name="password">Contraseña...</string>
+    <string name="login">Inicio de sesión...</string>
+    <string name="calificacion">Calificación</string>
+    <string name="creditos">Creditos</string>
+    <string name="estatus">Estatus</string>
+    <string name="fechaInicio">Fecha inicio</string>
+    <string name="fechaFin">Fecha Fin</string>
+    <string name="descargarInformacion">Descargar Información</string>
+    <string name="alertaDescargarInformacion">Estas seguro que deseas descargar información entre las dos fechas seleccionadas?</string>
+    <string name="lorem">Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500.</string>
+    <string name="errorLogin">
+        <![CDATA[
+        <h1>ITSA</h1>
+        <h2>Hola :)</strong> Fallaste.</strong></h2>
+        <ul>
+            <li><h2>Asegúrate de <strong>ingresar bien tu contraseña y correo/matricula...</strong></h2></li>
+        </ul>
+       <ul>
+
+       </ul>
+        ]]>
+    </string>
+    <string name="noExpediente">
+        <![CDATA[
+        <h1>ITSA</h1>
+        <h2>Hola :)</strong> No encontrado.</strong></h2>
+        <ul>
+            <li><h2>Hola no se encontró ningún <strong>expediente final...</strong></h2></li>
+        </ul>
+       <ul>
+
+       </ul>
+        ]]>
+    </string>
+        <string name="tituloPermisos">Permisos Desactivados...</string>
+    <string name="mensajePermisos">Debes aceptar los permisos para el correcto funcionamiento de la App...</string>
+
+    <string name="tituloSalir">Hola...</string>
+    <string name="mensajeSalir">Estas seguro que deseas salir?...</string>
+
+</resources>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/backgroudRecyclerView"
+    >
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/cvRow"
+        >
+
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="vertical">
+          <LinearLayout
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:padding="16dp">
+
+              <ImageView
+                  android:id="@+id/IVAprobado"
+                  android:layout_width="70dp"
+                  android:layout_height="70dp"
+                  android:layout_alignParentLeft="true"
+                  android:layout_alignParentTop="true"
+                  android:layout_marginRight="16dp"
+                  android:src="@drawable/circulo_verde" />
+
+              <LinearLayout
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:orientation="vertical">
+                  <TextView
+                      android:id="@+id/TVTitulo"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:layout_alignParentTop="true"
+                      android:layout_toRightOf="@+id/person_photo"
+                      android:text="Solicitud"
+                      android:textSize="15sp" />
+                  <TextView
+                      android:id="@+id/TVDescripcion"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:layout_alignParentTop="true"
+                      android:layout_toRightOf="@+id/person_photo"
+                      android:layout_marginTop="10dp"
+                      android:text="Aluguna descripcion x"
+                      android:textSize="12sp" />
+              </LinearLayout>
+          </LinearLayout>
+          <View
+              android:layout_width="match_parent"
+              android:layout_height="1dp"
+              android:background="@color/colorPrimary"
+              android:layout_below="@+id/circleView"
+              android:layout_alignLeft="@+id/circleView"
+              android:layout_marginTop="8dp"
+              />
+      </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+
+</RelativeLayout>

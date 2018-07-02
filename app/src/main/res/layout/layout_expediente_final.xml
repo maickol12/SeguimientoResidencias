@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fab="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <android.support.design.widget.AppBarLayout
+                android:layout_width="match_parent"
+                android:background="@color/background"
+                android:layout_height="wrap_content">
+                <include layout="@layout/toolbar_desliza"/>
+            </android.support.design.widget.AppBarLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:elevation="5dp"
+                android:layout_marginTop="125dp"
+                android:gravity="center">
+
+                <ImageView
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:src="@drawable/men" />
+
+            </LinearLayout>
+        </RelativeLayout>
+        <LinearLayout
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:textStyle="bold"
+                android:textSize="11pt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Miguel Angel"
+                android:id="@+id/TVNombre"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ISC"
+                android:id="@+id/TVCarrera"
+                />
+
+                <LinearLayout
+                    android:layout_marginTop="10dp"
+                    android:background="@color/coloritsa"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+                    <LinearLayout
+                        android:gravity="center"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:orientation="vertical"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:id="@+id/TVCreditos"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="2"
+                            android:textColor="@color/primary_light"
+                            android:textSize="11pt"
+                            android:textStyle="bold" />
+                        <TextView
+                            android:textColor="@color/primary_light"
+                            android:textStyle="bold"
+                            android:textSize="7pt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/creditos"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:gravity="center"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:orientation="vertical"
+                        android:layout_height="match_parent">
+                        <TextView
+                            android:textColor="@color/primary_light"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="11pt"
+                            android:id="@+id/TVCalificacion"
+                            android:textStyle="bold"
+                            android:text="10"/>
+                        <TextView
+                            android:textColor="@color/primary_light"
+                            android:textStyle="bold"
+                            android:textSize="7pt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/calificacion"/>
+                    </LinearLayout>
+                </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:background="@color/coloritsa"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="06/05/2014"
+                        android:id="@+id/TVFechaInicio"
+                        android:textColor="@color/primary_light"
+                        android:textSize="11pt"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/fechaInicio"
+                        android:textColor="@color/primary_light"
+                        android:textSize="7pt"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="06/06/2014"
+                        android:id="@+id/TVFechaFin"
+                        android:textColor="@color/primary_light"
+                        android:textSize="11pt"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/fechaFin"
+                        android:textColor="@color/primary_light"
+                        android:textSize="7pt"
+                        android:textStyle="bold" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <ImageView
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/comments"/>
+            <TextView
+                android:id="@+id/TVDescripcion"
+                android:padding="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text=""/>
+        </LinearLayout>
+    </LinearLayout>
+
+</FrameLayout>
