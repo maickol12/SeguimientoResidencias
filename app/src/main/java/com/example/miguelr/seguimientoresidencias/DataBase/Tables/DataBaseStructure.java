@@ -7,6 +7,9 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.provider.CallLog;
 import android.util.Log;
 
+import com.example.miguelr.seguimientoresidencias.DataBase.Tables.Modelos.Malumnos;
+import com.example.miguelr.seguimientoresidencias.DataBase.Tables.Modelos.Mcarreras;
+
 /**
  * Created by miguelr on 06/02/2018.
  */
@@ -141,13 +144,17 @@ public class DataBaseStructure extends SQLiteOpenHelper{
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(alumnos);
-        db.execSQL(carreras);
+        //db.execSQL(carreras);
         db.execSQL(cartaPresentacion);
         db.execSQL(solicitudDeResidencias);
         db.execSQL(expedienteFinal);
         db.execSQL(reportesDeResidencias);
         db.execSQL(Usuarios);
         db.execSQL(cartaAceptacion);
+
+        //VERSION 2
+        db.execSQL(Malumnos.createTable());
+        db.execSQL(Mcarreras.createTable());
 
 
         llenarDatos(db);
@@ -165,16 +172,21 @@ public class DataBaseStructure extends SQLiteOpenHelper{
         db.execSQL("DROP TABLE IF EXISTS "+Creporte.getTableName());
         db.execSQL("DROP TABLE IF EXISTS "+Cusuarios.getTableName());
         db.execSQL("DROP TABLE IF EXISTS "+Caceptacion.getTableName());
-        Log.d("DBUPDATE","DBUPDATE");
+
+        //VERSION 2
+        db.execSQL(Malumnos.deleteTable());
+        db.execSQL(Mcarreras.deleteTable());
+
+
         this.onCreate(db);
     }
 
     private void llenarDatos(SQLiteDatabase db){
         ContentValues cv2 = new ContentValues();
-        cv2.put(Ccarreras.getiIdCarrera(),1);
-        cv2.put(Ccarreras.getvNombreCarrera(),"Sistemas");
-        cv2.put(Ccarreras.getiCreditos(),200);
-        db.insert(Ccarreras.getTableName(),null,cv2);
+        cv2.put(Mcarreras.idCarrera,1);
+        cv2.put(Mcarreras.vCarrera,"Sistemas");
+        cv2.put(Mcarreras.iCreditos,200);
+        db.insert(Mcarreras.table,null,cv2);
 
         ContentValues values = new ContentValues();
         values.put(Calumnos.getiIdAlumno(),"1");

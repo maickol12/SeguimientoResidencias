@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.provider.CallLog;
 import android.support.design.widget.Snackbar;
@@ -26,6 +27,20 @@ import com.example.miguelr.seguimientoresidencias.MainActivity;
 import com.example.miguelr.seguimientoresidencias.PerfilActivity;
 import com.example.miguelr.seguimientoresidencias.R;
 
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.util.EntityUtils;
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import static android.Manifest.permission.INTERNET;
 import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 
 /**
@@ -85,16 +100,19 @@ public class Common {
     }
 
     public boolean solicitarPermisosEscritura() {
+        boolean permissionWriteStorage = false;
         if(Build.VERSION.SDK_INT<Build.VERSION_CODES.M){
             return true;
         }
-        if(context.checkSelfPermission(WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED){
+        if(context.checkSelfPermission(WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED &&
+                context.checkSelfPermission(INTERNET) == PackageManager.PERMISSION_GRANTED){
             return true;
         }
-        if( ((Activity)context).shouldShowRequestPermissionRationale(WRITE_EXTERNAL_STORAGE)){
+
+        if( ((Activity)context).shouldShowRequestPermissionRationale(WRITE_EXTERNAL_STORAGE) || ((Activity)context).shouldShowRequestPermissionRationale(INTERNET)){
             dialogoRecomendacion();
         }else{
-            ((Activity)context).requestPermissions(new String[]{WRITE_EXTERNAL_STORAGE},100);
+            ((Activity)context).requestPermissions(new String[]{WRITE_EXTERNAL_STORAGE,INTERNET},100);
         }
         return false;
     }
@@ -161,5 +179,66 @@ public class Common {
         }
     }
 
+    public void dialogoMensajes(String title,String message,Context context){
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setMessage(message);
+        builder.setTitle(title);
+        builder.setPositiveButton("SI",null);
+        builder.show();
+    }
 
+    public void asyncMessages(){
+        String url = config.url+config.WebMethodMessages;
+        new asyncTask(context,1,url).execute();
+    }
+
+    public class asyncTask extends AsyncTask<String,String,String>{
+        private Context context;
+        private int     type;
+        private String  url;
+        public asyncTask(Context context,int type,String url){
+            this.context = context;
+            this.type    = type;
+            this.url     = url;
+        }
+        @Override
+        protected void onPreExecute(){
+
+
+        }
+
+        @Override
+            protected String doInBackground(String... strings) {
+            String respuesta = "";
+            try {
+                List<NameValuePair> params = new ArrayList<NameValuePair>();
+                final HttpClient Client = new DefaultHttpClient();
+                HttpPost httppostreq = new HttpPost(url);
+                httppostreq.setEntity(new UrlEncodedFormEntity(params));
+
+                HttpResponse httpresponse = Client.execute(httppostreq);
+                respuesta = EntityUtils.toString(httpresponse.getEntity());
+            }catch (Exception e){
+                Log.d("mensajeerror",e.getMessage());
+            }
+            return respuesta;
+        }
+
+        @Override
+        protected void onPostExecute(String json){
+            if(type==1){
+                if(json.trim().length()>2){
+                    try{
+                        JSONArray array = new JSONArray(json);
+                        JSONObject obj = array.getJSONObject(0);
+                        String titulo = obj.getString("vTitulo");
+                        String mensaje = obj.getString("vDescripcion");
+                        dialogoMensajes(titulo,mensaje,context);
+                    }catch (Exception e){
+                        Log.d("mensajeerror",e.getMessage());
+                    }
+                }
+            }
+        }
+    }
 }

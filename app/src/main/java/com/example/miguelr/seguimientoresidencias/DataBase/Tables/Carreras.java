@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
+import com.example.miguelr.seguimientoresidencias.DataBase.Tables.Modelos.Mcarreras;
 import com.example.miguelr.seguimientoresidencias.Helper.config;
 
 import java.util.ArrayList;
@@ -60,10 +61,10 @@ public class Carreras {
         ContentValues cv = new ContentValues();
         for(int i = 0;i<car.length;i++){
             String nombre = car[i];
-            cv.put(this.getiIdCarrera(),(i+1));
-            cv.put(this.getvNombreCarrera(),nombre);
-            cv.put(this.getiCreditos(),90+(i+1));
-            long inser = db.insert(this.getTableName(),null,cv);
+            cv.put(Mcarreras.idCarrera,(i+1));
+            cv.put(Mcarreras.vCarrera,nombre);
+            cv.put(Mcarreras.iCreditos,90+(i+1));
+            long inser = db.insert(Mcarreras.table,null,cv);
             Log.d("insert",""+inser);
         }
     }
@@ -76,9 +77,9 @@ public class Carreras {
         Carreras carrera = null;
         if(c.moveToFirst()){
             carrera = new Carreras();
-            carrera.setvNombreCarrea(c.getString(c.getColumnIndex(this.getvNombreCarrera())));
-            carrera.setbActive(c.getString(c.getColumnIndex(this.getbActive())));
-            carrera.setiCreditos(c.getString(c.getColumnIndex(this.getiCreditos())));
+            carrera.setvNombreCarrea(c.getString(c.getColumnIndex(Mcarreras.vCarrera)));
+            carrera.setbActive(c.getString(c.getColumnIndex(Mcarreras.bActivo)));
+            carrera.setiCreditos("100");
         }
         return carrera;
     }

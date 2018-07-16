@@ -65,6 +65,8 @@ public class MainActivity extends AppCompatActivity {
 
         common.solicitarPermisosEscritura();
 
+        common.asyncMessages();
+
         if (alumnos.comprobarSession() > 0) {
             Intent intent = new Intent(MainActivity.this, PerfilActivity.class);
             startActivity(intent);
