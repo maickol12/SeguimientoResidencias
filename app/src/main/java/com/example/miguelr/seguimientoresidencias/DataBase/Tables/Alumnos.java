@@ -1,6 +1,5 @@
 package com.example.miguelr.seguimientoresidencias.DataBase.Tables;
 
-import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -8,6 +7,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
+import com.example.miguelr.seguimientoresidencias.DataBase.Tables.Cascarones.Carreras;
+import com.example.miguelr.seguimientoresidencias.DataBase.Tables.Modelos.Mcarreras;
 import com.example.miguelr.seguimientoresidencias.Helper.config;
 
 import java.util.ArrayList;
@@ -115,11 +116,11 @@ public class Alumnos {
                         "a."+this.getvNombreAlumno()+"," +
                         "a."+this.getvApellidoPaterno()+", " +
                         "a."+this.getvApellidoMaterno()+","+
-                        "c."+carreras.getvNombreCarrera()+","+
+                        "c."+Mcarreras.vCarrera+","+
                         "IFNULL(s."+sol.getiAprobadoPorJefeDeCarrera()+",0) AS "+sol.getiAprobadoPorJefeDeCarrera()+" ,"+
                         "IFNULL(s."+sol.getiAprobadoPorAcademia()+",0) AS "+sol.getiAprobadoPorAcademia()+""+
                   " FROM "+this.getNameTable()+" AS a " +
-                  " LEFT JOIN "+carreras.getTableName()+" AS c ON (a."+this.getiIdCarrerafk()+" = c."+carreras.getiIdCarrera()+") " +
+                  " LEFT JOIN "+Mcarreras.table+" AS c ON (a."+this.getiIdCarrerafk()+" = c."+Mcarreras.idCarrera+") " +
                   " LEFT JOIN "+sol.getTableName()+" AS s ON(s."+sol.getiIdAlumnofk()+" = a."+this.getiIdAlumno()+") "+
                   " WHERE a."+this.getiIdAlumno()+" = "+idAlumno+" LIMIT 1";
             Log.d("sql",sql);
@@ -134,7 +135,7 @@ public class Alumnos {
                 alumnos.setvNombreAlumno(c.getString(4));
                 alumnos.setvApellidoPaterno(c.getString(5));
                 alumnos.setvApellidoMaterno(c.getString(6));
-                carreras.setvNombreCarrea(c.getString(7));
+                carreras.setvCarrera(c.getString(7));
                 sol.setiAprobadoPorAcademia(c.getString(8));
                 sol.setiAprobadoPorJefeDeCarrera(c.getString(9));
                 alumnos.setCarrera(carreras);
@@ -320,8 +321,8 @@ public class Alumnos {
         ArrayList<Alumnos> alumnos = new ArrayList<>();
 
         String query = "SELECT * FROM "+getNameTable()+" AS al " +
-                       "INNER JOIN "+carreras.getTableName()+" ca ON(al."+getiIdCarrerafk()+" = ca."+carreras.getiIdCarrera()+") " +
-                       "WHERE "+carreras.getiIdCarrera()+" = "+idCarrera;
+                       "INNER JOIN "+Mcarreras.table+" ca ON(al."+getiIdCarrerafk()+" = ca."+Mcarreras.idCarrera+") " +
+                       "WHERE "+Mcarreras.idCarrera+" = "+idCarrera;
 
         Cursor c = db.rawQuery(query,null);
         carreras  = carreras.obtenerCarreraPorId(idCarrera);
@@ -348,8 +349,8 @@ public class Alumnos {
         ArrayList<Alumnos> alumnos = new ArrayList<>();
 
         String query = "SELECT * FROM "+getNameTable()+" AS al " +
-                "INNER JOIN "+carreras.getTableName()+" ca ON(al."+getiIdCarrerafk()+" = ca."+carreras.getiIdCarrera()+") " +
-                "WHERE "+carreras.getiIdCarrera()+" = "+idCarrera+" AND al."+getvMatricula()+" LIKE '"+like+"'";
+                "INNER JOIN "+ Mcarreras.table+" ca ON(al."+getiIdCarrerafk()+" = ca."+Mcarreras.idCarrera+") " +
+                "WHERE "+Mcarreras.idCarrera+" = "+idCarrera+" AND al."+getvMatricula()+" LIKE '"+like+"'";
         Log.d("sql",query);
         Cursor c = db.rawQuery(query,null);
         carreras  = carreras.obtenerCarreraPorId(idCarrera);

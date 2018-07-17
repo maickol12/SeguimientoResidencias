@@ -1,17 +1,13 @@
 package com.example.miguelr.seguimientoresidencias.Helper;
 
-import android.Manifest;
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.os.Build;
-import android.provider.CallLog;
-import android.support.design.widget.Snackbar;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.text.Html;
 import android.text.Spanned;
@@ -21,10 +17,9 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.example.miguelr.seguimientoresidencias.DataBase.Tables.Alumnos;
-import com.example.miguelr.seguimientoresidencias.DataBase.Tables.DataBaseStructure;
+import com.example.miguelr.seguimientoresidencias.DataBase.Tables.Cascarones.Carreras;
 import com.example.miguelr.seguimientoresidencias.DataBase.Tables.usuarios;
-import com.example.miguelr.seguimientoresidencias.MainActivity;
-import com.example.miguelr.seguimientoresidencias.PerfilActivity;
+import com.example.miguelr.seguimientoresidencias.Login.MainActivity;
 import com.example.miguelr.seguimientoresidencias.R;
 
 import org.apache.http.HttpResponse;
@@ -190,6 +185,79 @@ public class Common {
     public void asyncMessages(){
         String url = config.url+config.WebMethodMessages;
         new asyncTask(context,1,url).execute();
+    }
+
+    public ProgressDialog getProgressBar(String titulo,String mensaje){
+        ProgressDialog dialog = new ProgressDialog(context);
+        dialog.setMessage(mensaje);
+        dialog.setTitle(titulo);
+        dialog.setMax(100);
+        dialog.setProgress(0);
+        dialog.setCancelable(false);
+        return dialog;
+    }
+
+    public void asyncDescargarCatalogos(){
+        String url = config.url+config.WebMethodCatalogs;
+        new asyncTaskDownloadCatalogs(context,1,url).execute();
+    }
+
+    public class asyncTaskDownloadCatalogs extends AsyncTask<Void,Void,Void>{
+        private Context context;
+        private int     type;
+        private String  url;
+        private ProgressDialog progressDialog;
+        public asyncTaskDownloadCatalogs(Context context,int type,String url){
+            this.context = context;
+            this.type    = type;
+            this.url     = url;
+        }
+        @Override
+        protected void onPreExecute(){
+            progressDialog = getProgressBar("ITSA","Espera un momento , estamos descargando información");
+            progressDialog.show();
+        }
+
+        @Override
+        protected Void doInBackground(Void... strings) {
+            String respuesta = "";
+            try {
+                List<NameValuePair> params = new ArrayList<NameValuePair>();
+                final HttpClient Client = new DefaultHttpClient();
+                HttpPost httppostreq = new HttpPost(url);
+                httppostreq.setEntity(new UrlEncodedFormEntity(params));
+
+                HttpResponse httpresponse = Client.execute(httppostreq);
+                respuesta = EntityUtils.toString(httpresponse.getEntity());
+
+                JSONObject array = new JSONObject(respuesta);
+
+                JSONArray jsonCarreras = array.optJSONArray("carreras");
+                JSONObject obj = null;
+                Carreras objCarreras = new Carreras(context);
+                objCarreras.abrirDB();
+                objCarreras.borrar();
+                for (int i = 0;i<jsonCarreras.length();i++){
+                    obj = jsonCarreras.getJSONObject(i);
+                    objCarreras.setIdCarrera(obj.getInt("idCarrera"));
+                    objCarreras.setvCarrera(obj.getString("vCarrera"));
+                    if(objCarreras.guardar()){
+                        Log.d("guardar","Carrera guardada");
+                    }else{
+                        Log.d("guardar","Carrera no guardada");
+                    }
+                }
+                objCarreras.cerrarDB();
+            }catch (Exception e){
+                Log.d("mensajeerror",e.getMessage());
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void args){
+            progressDialog.dismiss();
+        }
     }
 
     public class asyncTask extends AsyncTask<String,String,String>{

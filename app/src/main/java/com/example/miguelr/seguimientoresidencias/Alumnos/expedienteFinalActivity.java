@@ -51,7 +51,7 @@ public class expedienteFinalActivity extends AppCompatActivity{
         exp = CExpediente.obtenerExpedientePorAlumno(idAlumno);
         if(exp!=null){
             TVNombre.setText(exp.getAlumno().getvNombreAlumno());
-            TVCarrera.setText(exp.getAlumno().getCarrera().getvNombreCarrera());
+            TVCarrera.setText(exp.getAlumno().getCarrera().getvCarrera());
             TVCreditos.setText(exp.getAlumno().getiCreditos());
             TVFechaInicio.setText(exp.getAlumno().getdInicioServicio());
             TVFechaFin.setText(exp.getAlumno().getdFinServicio());

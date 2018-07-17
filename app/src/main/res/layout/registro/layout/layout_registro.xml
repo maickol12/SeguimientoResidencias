@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <include layout="@layout/toolbar"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+       <LinearLayout
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:layout_margin="@dimen/paddingRegistro"
+           android:orientation="horizontal"
+           android:layout_weight="5">
+           <TextView
+               android:layout_width="0dp"
+               android:layout_height="wrap_content"
+               android:layout_weight="1"
+               android:text="@string/carrera"/>
+           <LinearLayout
+               android:layout_width="0dp"
+               android:layout_height="match_parent"
+               android:layout_weight="4">
+               <Spinner
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:id="@+id/carreras"></Spinner>
+           </LinearLayout>
+       </LinearLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/Rtil_numerocontrol"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:layout_margin="@dimen/paddingRegistro"
+                android:id="@+id/RMatricula"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/numeroControl"
+                android:inputType="text"
+                android:singleLine="true" />
+        </android.support.design.widget.TextInputLayout>
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/RTil_nombre"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:layout_margin="@dimen/paddingRegistro"
+                android:id="@+id/RNombre"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/nombre"
+                android:inputType="text"
+                android:singleLine="true" />
+        </android.support.design.widget.TextInputLayout>
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/Rtil_apellidopaterno"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:layout_margin="@dimen/paddingRegistro"
+                android:id="@+id/RApellidopaterno"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/apellidoPaterno"
+                android:inputType="text"
+                android:singleLine="true" />
+        </android.support.design.widget.TextInputLayout>
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/Rtil_nombre"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:layout_margin="@dimen/paddingRegistro"
+                android:id="@+id/RApellidoMaterno"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/apellidoMaterno"
+                android:inputType="text"
+                android:singleLine="true" />
+        </android.support.design.widget.TextInputLayout>
+
+    </LinearLayout>
+</LinearLayout>

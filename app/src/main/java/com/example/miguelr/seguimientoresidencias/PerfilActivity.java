@@ -17,7 +17,7 @@ import android.widget.Toast;
 import com.example.miguelr.seguimientoresidencias.Alumnos.expedienteFinalActivity;
 import com.example.miguelr.seguimientoresidencias.Alumnos.mostrarAvanceAlumno;
 import com.example.miguelr.seguimientoresidencias.DataBase.Tables.Alumnos;
-import com.example.miguelr.seguimientoresidencias.DataBase.Tables.Carreras;
+import com.example.miguelr.seguimientoresidencias.DataBase.Tables.Cascarones.Carreras;
 import com.example.miguelr.seguimientoresidencias.DataBase.Tables.cartaAceptacion;
 import com.example.miguelr.seguimientoresidencias.DataBase.Tables.cartaDePresentacion;
 import com.example.miguelr.seguimientoresidencias.DataBase.Tables.expedienteFinal;
@@ -26,9 +26,8 @@ import com.example.miguelr.seguimientoresidencias.DataBase.Tables.solicitudDeRes
 import com.example.miguelr.seguimientoresidencias.DataBase.Tables.usuarios;
 import com.example.miguelr.seguimientoresidencias.Helper.Common;
 import com.example.miguelr.seguimientoresidencias.Alumnos.mostrarAlumnosActivity;
+import com.example.miguelr.seguimientoresidencias.Login.MainActivity;
 import com.github.clans.fab.FloatingActionButton;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -121,7 +120,7 @@ public class PerfilActivity extends AppCompatActivity{
             alumno = alumno.buscarAlumnoPorId(idAlumnoSession);
             if(alumno!=null){
                 nombreAlumno.setText(alumno.getvNombreAlumno()+" "+alumno.getvApellidoPaterno()+" "+alumno.getvApellidoMaterno());
-                TVcarrera.setText(alumno.getCarrera().getvNombreCarrera());
+                TVcarrera.setText(alumno.getCarrera().getvCarrera());
                 creditos.setText(alumno.getiCreditos());
                 if(alumno.getSolicitud()!=null){
                     if(alumno.getSolicitud().getiAprobadoPorJefeDeCarrera().equalsIgnoreCase("1") && alumno.getSolicitud().getiAprobadoPorAcademia().equalsIgnoreCase("1")){

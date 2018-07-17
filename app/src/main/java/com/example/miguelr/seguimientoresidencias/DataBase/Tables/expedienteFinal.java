@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
+import com.example.miguelr.seguimientoresidencias.DataBase.Tables.Cascarones.Carreras;
 import com.example.miguelr.seguimientoresidencias.Helper.config;
 
 /**
@@ -73,7 +74,7 @@ public class expedienteFinal {
                exp.getAlumno().setdInicioServicio(c.getString(10));
                exp.getAlumno().setdFinServicio(c.getString(11));
                exp.getAlumno().setCarrera(new Carreras());
-               exp.getAlumno().getCarrera().setvNombreCarrea(c.getString(12));
+               exp.getAlumno().getCarrera().setvCarrera(c.getString(12));
            }
        }catch (Exception e){
            Log.d("error",e.getMessage());

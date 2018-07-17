@@ -1,6 +1,5 @@
 package com.example.miguelr.seguimientoresidencias.Alumnos;
 
-import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -9,16 +8,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.DatePicker;
 
 import com.example.miguelr.seguimientoresidencias.Configuraciones.ConfiguracionesActivity;
 import com.example.miguelr.seguimientoresidencias.DataBase.Tables.usuarios;
-import com.example.miguelr.seguimientoresidencias.MainActivity;
+import com.example.miguelr.seguimientoresidencias.Login.MainActivity;
 import com.example.miguelr.seguimientoresidencias.R;
 import com.example.miguelr.seguimientoresidencias.adaptadores.PGAdapter;
-
-import java.util.Calendar;
 
 /**
  * Created by miguelr on 24/03/2018.

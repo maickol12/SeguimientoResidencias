@@ -50,7 +50,7 @@ public class rvMostrarAlumnosAdapter extends RecyclerView.Adapter<rvMostrarAlumn
     public void onBindViewHolder(mostrarAlumnosHolder holder, int position) {
         Alumnos alumno = alumnos.get(position);
         holder.nombre.setText(alumno.getvNombreAlumno()+" "+alumno.getvApellidoPaterno()+" "+alumno.getvApellidoMaterno());
-        holder.carrera.setText(alumno.getCarrera().getvNombreCarrera());
+        holder.carrera.setText(alumno.getCarrera().getvCarrera());
         holder.matricula.setText(alumno.getvMatricula());
         if(Integer.parseInt(alumno.getbSexo()) == 1){
             holder.sexo.setImageResource(R.drawable.men);

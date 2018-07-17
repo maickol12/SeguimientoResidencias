@@ -1,4 +1,4 @@
-package com.example.miguelr.seguimientoresidencias;
+package com.example.miguelr.seguimientoresidencias.Login;
 
 
 import android.content.Intent;
@@ -15,7 +15,7 @@ import android.widget.Toast;
 
 import com.example.miguelr.seguimientoresidencias.Alumnos.mostrarAlumnosActivity;
 import com.example.miguelr.seguimientoresidencias.DataBase.Tables.Alumnos;
-import com.example.miguelr.seguimientoresidencias.DataBase.Tables.Carreras;
+import com.example.miguelr.seguimientoresidencias.DataBase.Tables.Cascarones.Carreras;
 import com.example.miguelr.seguimientoresidencias.DataBase.Tables.cartaAceptacion;
 import com.example.miguelr.seguimientoresidencias.DataBase.Tables.cartaDePresentacion;
 import com.example.miguelr.seguimientoresidencias.DataBase.Tables.expedienteFinal;
@@ -24,6 +24,9 @@ import com.example.miguelr.seguimientoresidencias.DataBase.Tables.solicitudDeRes
 import com.example.miguelr.seguimientoresidencias.DataBase.Tables.usuarios;
 import com.example.miguelr.seguimientoresidencias.Helper.Common;
 import com.example.miguelr.seguimientoresidencias.Helper.config;
+import com.example.miguelr.seguimientoresidencias.PerfilActivity;
+import com.example.miguelr.seguimientoresidencias.R;
+import com.example.miguelr.seguimientoresidencias.registro.registroActivity;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -66,6 +69,7 @@ public class MainActivity extends AppCompatActivity {
         common.solicitarPermisosEscritura();
 
         common.asyncMessages();
+        common.asyncDescargarCatalogos();
 
         if (alumnos.comprobarSession() > 0) {
             Intent intent = new Intent(MainActivity.this, PerfilActivity.class);
@@ -87,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
         reportes = new reportesDeResidencias(this);
 
 
-        carreras.LlenarCarrerasDefault();
+        //carreras.LlenarCarrerasDefault();
         alumnos.llenarDatos();
        // respaldarBaseDatos();
 
@@ -130,7 +134,10 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-
+    public void iniciarRegistro(View view){
+        Intent intent = new Intent(this,registroActivity.class);
+        startActivity(intent);
+    }
 
     /*****************************************************************************************************
      * ESTE METODO SE LLAMA CUANDO EL USUARIO DE PERMISOS ALO QUE SE REQUIERE, O CUANDO EL USUARIO DENIEGA

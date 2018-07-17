@@ -10,6 +10,7 @@ public class config {
     public static String dbName             = "ServicioSocial";
     public static String url                = "http://residenciasitsa.diplomadosdelasep.com.mx/wssegres/";
     public static String WebMethodMessages  = "getMessages";
+    public static String WebMethodCatalogs  = "getCatalogs";
 
     /**********************************************************************************************************
      * METODO PARA RESPALDAR UNA BASE DE DATOS DE SQLITE V2

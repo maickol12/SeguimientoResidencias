@@ -1,4 +1,4 @@
-package com.example.miguelr.seguimientoresidencias.DataBase.Tables;
+package com.example.miguelr.seguimientoresidencias.DataBase.Tables.Cascarones;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -6,7 +6,9 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
+import com.example.miguelr.seguimientoresidencias.DataBase.Tables.DataBaseStructure;
 import com.example.miguelr.seguimientoresidencias.DataBase.Tables.Modelos.Mcarreras;
+import com.example.miguelr.seguimientoresidencias.DataBase.Tables.helperinterface;
 import com.example.miguelr.seguimientoresidencias.Helper.config;
 
 import java.util.ArrayList;
@@ -16,37 +18,42 @@ import java.util.List;
  * Created by miguelr on 14/03/2018.
  */
 
-public class Carreras {
-    private String TableName = "carreras";
-    private String iIdCarrera = "iIdcarrera";
-    private String vNombreCarrera = "vNombreCarrera";
-    private String iCreditos = "iCreditos";
-    private String bActive = "bActive";
+public class Carreras implements helperinterface {
+    private int idCarrera;
+    private String vCarrera;
+    private int bActive;
     private Context context;
+    private SQLiteDatabase mDB;
 
     public Carreras(){}
     public Carreras(Context context){
         this.context = context;
     }
 
-    public String getTableName() {
-        return TableName;
+    public void abrirDB(){
+        mDB  = dbWritable();
     }
+    public void cerrarDB(){
+        mDB.close();
+    }
+
+
 
     public List<Carreras> obtenerTodasLasCarrera(){
         SQLiteDatabase db = dbRedeable();
 
-        String sql = "SELECT * FROM "+getTableName();
+        String sql = "SELECT "+Mcarreras.idCarrera+","+Mcarreras.vCarrera+","+Mcarreras.bActivo+" FROM "+Mcarreras.table;
 
         Cursor c = db.rawQuery(sql,null);
 
         ArrayList<Carreras> carreras = null;
         if(c.moveToFirst()){
             carreras = new ArrayList<>();
+            Carreras ca = null;
             do{
-                Carreras ca = new Carreras(context);
-                ca.setvNombreCarrea(c.getString(c.getColumnIndex(this.getvNombreCarrera())));
-                ca.setiIdCarrera(c.getString(c.getColumnIndex(this.getiIdCarrera())));
+                ca = new Carreras();
+                ca.setIdCarrera(c.getInt(c.getColumnIndex(Mcarreras.idCarrera)));
+                ca.setvCarrera(c.getString(c.getColumnIndex(Mcarreras.vCarrera)));
                 carreras.add(ca);
             }while (c.moveToNext());
         }
@@ -56,7 +63,7 @@ public class Carreras {
     public void LlenarCarrerasDefault(){
         SQLiteDatabase db = dbWritable();
 
-        db.delete(this.getTableName(),null,null);
+        db.delete(Mcarreras.table,null,null);
         String[] car = {"Sistemas","Informatica","Civil","Gestion","Industrial","Contabilidad","Innovacion"};
         ContentValues cv = new ContentValues();
         for(int i = 0;i<car.length;i++){
@@ -71,15 +78,14 @@ public class Carreras {
 
     public Carreras obtenerCarreraPorId(int idCarrera){
         SQLiteDatabase db = dbRedeable();
-        String sql = "SELECT * FROM "+getTableName()+" WHERE "+getiIdCarrera()+" = '"+idCarrera+"'";
+        String sql = "SELECT "+Mcarreras.vCarrera+","+Mcarreras.bActivo+" FROM "+Mcarreras.table+" WHERE "+Mcarreras.idCarrera+" = '"+idCarrera+"'";
 
         Cursor c = db.rawQuery(sql,null);
         Carreras carrera = null;
         if(c.moveToFirst()){
             carrera = new Carreras();
-            carrera.setvNombreCarrea(c.getString(c.getColumnIndex(Mcarreras.vCarrera)));
-            carrera.setbActive(c.getString(c.getColumnIndex(Mcarreras.bActivo)));
-            carrera.setiCreditos("100");
+            carrera.setvCarrera(c.getString(c.getColumnIndex(Mcarreras.vCarrera)));
+            carrera.setbActive(c.getInt(c.getColumnIndex(Mcarreras.bActivo)));
         }
         return carrera;
     }
@@ -96,39 +102,44 @@ public class Carreras {
         return db;
     }
 
-    public void setTableName(String tableName) {
-        TableName = tableName;
+    public int getIdCarrera() {
+        return idCarrera;
     }
 
-    public String getiIdCarrera() {
-        return iIdCarrera;
+    public void setIdCarrera(int idCarrera) {
+        this.idCarrera = idCarrera;
     }
 
-    public void setiIdCarrera(String iIdCarrera) {
-        this.iIdCarrera = iIdCarrera;
+    public String getvCarrera() {
+        return vCarrera;
     }
 
-    public String getvNombreCarrera() {
-        return vNombreCarrera;
+    public void setvCarrera(String vCarrera) {
+        this.vCarrera = vCarrera;
     }
 
-    public void setvNombreCarrea(String vNombreCarrea) {
-        this.vNombreCarrera = vNombreCarrea;
-    }
-
-    public String getiCreditos() {
-        return iCreditos;
-    }
-
-    public void setiCreditos(String iCreditos) {
-        this.iCreditos = iCreditos;
-    }
-
-    public String getbActive() {
+    public int getbActive() {
         return bActive;
     }
 
-    public void setbActive(String bActive) {
+    public void setbActive(int bActive) {
         this.bActive = bActive;
     }
+
+    @Override
+    public boolean guardar() {
+        ContentValues cv = new ContentValues();
+        cv.put(Mcarreras.idCarrera,getIdCarrera());
+        cv.put(Mcarreras.vCarrera,getvCarrera());
+        cv.put(Mcarreras.bActivo,1);
+
+        long i = mDB.insert(Mcarreras.table,null,cv);
+
+        return i>0;
+    }
+    @Override
+    public boolean borrar() {
+        return mDB.delete(Mcarreras.table,null,null)>0;
+    }
+
 }

@@ -6,7 +6,8 @@ android {
         main {
             res.srcDirs = [
                     '/src/main/res/drawable/icons',
-                    '/src/main/res/login',
+                    '/src/main/res/layout/login',
+                    '/src/main/res/layout/registro',
                     '/src/main/res'
             ]
         }

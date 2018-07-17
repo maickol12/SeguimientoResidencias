@@ -5,7 +5,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import com.example.miguelr.seguimientoresidencias.DataBase.Tables.Carreras;
+import com.example.miguelr.seguimientoresidencias.DataBase.Tables.Cascarones.Carreras;
 import com.example.miguelr.seguimientoresidencias.fragments.MostrarAlumnosFragment;
 
 import java.util.List;
@@ -32,7 +32,7 @@ public class PGAdapter extends FragmentPagerAdapter {
     private void llenarCarreras(){
         for(int i = 0;i<LCarreras.size();i++){
             Carreras carreras = LCarreras.get(i);
-            mensajes[i] = carreras.getvNombreCarrera();
+            mensajes[i] = carreras.getvCarrera();
         }
     }
 

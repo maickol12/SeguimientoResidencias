@@ -4,9 +4,8 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.provider.CallLog;
-import android.util.Log;
 
+import com.example.miguelr.seguimientoresidencias.DataBase.Tables.Cascarones.Carreras;
 import com.example.miguelr.seguimientoresidencias.DataBase.Tables.Modelos.Malumnos;
 import com.example.miguelr.seguimientoresidencias.DataBase.Tables.Modelos.Mcarreras;
 
@@ -50,17 +49,11 @@ public class DataBaseStructure extends SQLiteOpenHelper{
             Calumnos.getdInicioServicio()+" TEXT," +
             Calumnos.getdFinServicio()+" TEXT," +
             Calumnos.getbActive()+" INTEGER DEFAULT 1," +
-            "FOREIGN KEY("+Calumnos.getiIdCarrerafk()+")REFERENCES "+Ccarreras.getTableName()+"("+Ccarreras.getiIdCarrera()+")" +
+            "FOREIGN KEY("+Calumnos.getiIdCarrerafk()+")REFERENCES "+Mcarreras.table+"("+Mcarreras.idCarrera+")" +
             ")";
 
 
-    private String carreras = "" +
-            "CREATE TABLE "+Ccarreras.getTableName()+"(" +
-            Ccarreras.getiIdCarrera()+" INTEGER PRIMARY KEY AUTOINCREMENT," +
-            Ccarreras.getvNombreCarrera()+" TEXT NOT NULL," +
-            Ccarreras.getiCreditos()+" INTEGER," +
-            Ccarreras.getbActive()+" INTEGER DEFAULT 1" +
-            ")";
+
 
 
     private String cartaPresentacion = "CREATE TABLE "+Cpresentacion.getTableName()+"(" +
@@ -165,7 +158,6 @@ public class DataBaseStructure extends SQLiteOpenHelper{
     @Override
     public void onUpgrade(SQLiteDatabase db, int i, int i1) {
         db.execSQL("DROP TABLE IF EXISTS "+Calumnos.getNameTable());
-        db.execSQL("DROP TABLE IF EXISTS "+Ccarreras.getTableName());
         db.execSQL("DROP TABLE IF EXISTS "+Cpresentacion.getTableName());
         db.execSQL("DROP TABLE IF EXISTS "+Csolicitud.getTableName());
         db.execSQL("DROP TABLE IF EXISTS "+Cexpediente.getTableName());

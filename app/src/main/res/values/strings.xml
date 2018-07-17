@@ -40,5 +40,11 @@
 
     <string name="tituloSalir">Hola...</string>
     <string name="mensajeSalir">Estas seguro que deseas salir?...</string>
+    <string name="numeroControl">Número Control</string>
+    <string name="nombre">Nombre</string>
+    <string name="carrera">Carrera</string>
+    <string name="apellidoPaterno">Apellido Paterno</string>
+    <string name="apellidoMaterno">Apellido Materno</string>
+    <string name="fechaNacimiento">Fecha Nacimiento</string>
 
 </resources>
