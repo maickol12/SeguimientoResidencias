@@ -46,5 +46,10 @@
     <string name="apellidoPaterno">Apellido Paterno</string>
     <string name="apellidoMaterno">Apellido Materno</string>
     <string name="fechaNacimiento">Fecha Nacimiento</string>
+    <string name="correo">Correo Instatucional</string>
+    <string name="semestre">Semestre </string>
+    <string name="contrasenia">Contraseña</string>
+    <string name="usuario">Usuario</string>
+    <string name="btnGuardar">Guardar</string>
 
 </resources>

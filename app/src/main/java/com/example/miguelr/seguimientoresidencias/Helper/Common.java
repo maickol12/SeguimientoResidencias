@@ -174,7 +174,7 @@ public class Common {
         }
     }
 
-    public void dialogoMensajes(String title,String message,Context context){
+    public void dialogoMensajes(String title,String message){
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setMessage(message);
         builder.setTitle(title);
@@ -301,7 +301,7 @@ public class Common {
                         JSONObject obj = array.getJSONObject(0);
                         String titulo = obj.getString("vTitulo");
                         String mensaje = obj.getString("vDescripcion");
-                        dialogoMensajes(titulo,mensaje,context);
+                        dialogoMensajes(titulo,mensaje);
                     }catch (Exception e){
                         Log.d("mensajeerror",e.getMessage());
                     }

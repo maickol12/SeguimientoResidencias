@@ -126,6 +126,23 @@ public class Carreras implements helperinterface {
         this.bActive = bActive;
     }
 
+    public ArrayList<Carreras> obtenerCarreras(){
+        ArrayList<Carreras> resultCarreras = null;
+        String sql = "SELECT "+Mcarreras.idCarrera+","+Mcarreras.vCarrera+" FROM "+Mcarreras.table;
+        Cursor c = mDB.rawQuery(sql,null);
+        if(c.moveToFirst()){
+            resultCarreras = new ArrayList<>();
+            Carreras car = null;
+                do{
+                    car = new Carreras();
+                    car.setIdCarrera(c.getInt(0));
+                    car.setvCarrera(c.getString(1));
+                    resultCarreras.add(car);
+            }while (c.moveToNext());
+        }
+        return resultCarreras;
+    }
+
     @Override
     public boolean guardar() {
         ContentValues cv = new ContentValues();
@@ -140,6 +157,11 @@ public class Carreras implements helperinterface {
     @Override
     public boolean borrar() {
         return mDB.delete(Mcarreras.table,null,null)>0;
+    }
+
+    @Override
+    public String toString(){
+        return getvCarrera();
     }
 
 }

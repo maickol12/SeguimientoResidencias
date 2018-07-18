@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:fitsSystemWindows="true"
+    android:weightSum="2"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
@@ -9,88 +16,186 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-       <LinearLayout
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content"
-           android:layout_margin="@dimen/paddingRegistro"
-           android:orientation="horizontal"
-           android:layout_weight="5">
-           <TextView
-               android:layout_width="0dp"
-               android:layout_height="wrap_content"
-               android:layout_weight="1"
-               android:text="@string/carrera"/>
-           <LinearLayout
-               android:layout_width="0dp"
-               android:layout_height="match_parent"
-               android:layout_weight="4">
-               <Spinner
-                   android:layout_width="match_parent"
-                   android:layout_height="wrap_content"
-                   android:id="@+id/carreras"></Spinner>
-           </LinearLayout>
-       </LinearLayout>
+          <LinearLayout
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_margin="@dimen/paddingRegistro"
+              android:orientation="horizontal"
+              android:layout_weight="5">
+              <TextView
+                  android:layout_width="0dp"
+                  android:layout_height="wrap_content"
+                  android:layout_weight="1"
+                  android:text="@string/carrera"/>
+              <LinearLayout
+                  android:layout_width="0dp"
+                  android:layout_height="match_parent"
+                  android:layout_weight="4">
+                  <Spinner
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:id="@+id/carreras"></Spinner>
+              </LinearLayout>
+          </LinearLayout>
 
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/Rtil_numerocontrol"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+          <android.support.design.widget.TextInputLayout
+              android:id="@+id/Rtil_numerocontrol"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content">
 
-            <EditText
-                android:layout_margin="@dimen/paddingRegistro"
-                android:id="@+id/RMatricula"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="@string/numeroControl"
-                android:inputType="text"
-                android:singleLine="true" />
-        </android.support.design.widget.TextInputLayout>
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/RTil_nombre"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+              <EditText
+                  android:text="14020463"
+                  android:layout_margin="@dimen/paddingRegistro"
+                  android:id="@+id/RMatricula"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:ems="10"
+                  android:hint="@string/numeroControl"
+                  android:inputType="text"
+                  android:singleLine="true" />
+          </android.support.design.widget.TextInputLayout>
+          <android.support.design.widget.TextInputLayout
+              android:id="@+id/RTil_nombre"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content">
 
-            <EditText
-                android:layout_margin="@dimen/paddingRegistro"
-                android:id="@+id/RNombre"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="@string/nombre"
-                android:inputType="text"
-                android:singleLine="true" />
-        </android.support.design.widget.TextInputLayout>
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/Rtil_apellidopaterno"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+              <EditText
+                  android:text="Miguel Ángel"
+                  android:layout_margin="@dimen/paddingRegistro"
+                  android:id="@+id/RNombre"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:ems="10"
+                  android:hint="@string/nombre"
+                  android:inputType="text"
+                  android:singleLine="true" />
+          </android.support.design.widget.TextInputLayout>
+          <android.support.design.widget.TextInputLayout
+              android:id="@+id/Rtil_apellidopaterno"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content">
 
-            <EditText
-                android:layout_margin="@dimen/paddingRegistro"
-                android:id="@+id/RApellidopaterno"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="@string/apellidoPaterno"
-                android:inputType="text"
-                android:singleLine="true" />
-        </android.support.design.widget.TextInputLayout>
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/Rtil_nombre"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+              <EditText
+                  android:text="Rodriguez"
+                  android:id="@+id/RApellidopaterno"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:layout_margin="@dimen/paddingRegistro"
+                  android:ems="10"
+                  android:hint="@string/apellidoPaterno"
+                  android:inputType="text"
+                  android:singleLine="true"
+                 />
+          </android.support.design.widget.TextInputLayout>
+          <android.support.design.widget.TextInputLayout
+              android:id="@+id/Rtil_nombre"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content">
 
-            <EditText
-                android:layout_margin="@dimen/paddingRegistro"
-                android:id="@+id/RApellidoMaterno"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="@string/apellidoMaterno"
-                android:inputType="text"
-                android:singleLine="true" />
-        </android.support.design.widget.TextInputLayout>
+              <EditText
+                  android:text="Cornejo"
+                  android:layout_margin="@dimen/paddingRegistro"
+                  android:id="@+id/RApellidoMaterno"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:ems="10"
+                  android:hint="@string/apellidoMaterno"
+                  android:inputType="text"
+                  android:singleLine="true" />
+          </android.support.design.widget.TextInputLayout>
 
+          <android.support.design.widget.TextInputLayout
+              android:id="@+id/Rtil_fechaNacimiento"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content">
+
+              <EditText
+                  android:text="1996-01-07"
+                  android:layout_margin="@dimen/paddingRegistro"
+                  android:id="@+id/RFechaNamimiento"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:ems="10"
+                  android:hint="@string/fechaNacimiento"
+                  android:inputType="text"
+                  android:onClick="escogerFecha"
+                  android:singleLine="true" />
+          </android.support.design.widget.TextInputLayout>
+          <android.support.design.widget.TextInputLayout
+              android:id="@+id/Rtilcorreo"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content">
+
+              <EditText
+                  android:text="al14020463"
+                  android:layout_margin="@dimen/paddingRegistro"
+                  android:id="@+id/RCorreo"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:ems="10"
+                  android:hint="@string/correo"
+                  android:inputType="text"
+                  android:onClick="escogerFecha"
+                  android:singleLine="true" />
+          </android.support.design.widget.TextInputLayout>
+          <android.support.design.widget.TextInputLayout
+              android:id="@+id/Rtilsemestre"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content">
+
+              <EditText
+                  android:text="9"
+                  android:layout_margin="@dimen/paddingRegistro"
+                  android:id="@+id/RSemestre"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:ems="10"
+                  android:hint="@string/semestre"
+                  android:inputType="number"
+                  android:singleLine="true" />
+          </android.support.design.widget.TextInputLayout>
+          <android.support.design.widget.TextInputLayout
+              android:id="@+id/Rtil_usuario"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content">
+
+              <EditText
+                  android:text="miguelr"
+                  android:layout_margin="@dimen/paddingRegistro"
+                  android:id="@+id/RUsuario"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:ems="10"
+                  android:hint="@string/usuario"
+                  android:inputType="text"
+                  android:onClick="escogerFecha"
+                  android:singleLine="true" />
+          </android.support.design.widget.TextInputLayout>
+          <android.support.design.widget.TextInputLayout
+              android:id="@+id/Rtil_contrasenia"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content">
+
+              <EditText
+                  android:text="Julio2018"
+                  android:layout_margin="@dimen/paddingRegistro"
+                  android:id="@+id/RContrasenia"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:ems="10"
+                  android:hint="@string/contrasenia"
+                  android:inputType="text"
+                  android:onClick="escogerFecha"
+                  android:singleLine="true" />
+          </android.support.design.widget.TextInputLayout>
+          <Button
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:background="@color/colorPrimary"
+              android:textColor="@color/primary_light"
+              android:layout_margin="@dimen/paddingRegistro"
+              android:onClick="guardarUsuario"
+              android:text="@string/btnGuardar"/>
     </LinearLayout>
 </LinearLayout>
+</ScrollView>
