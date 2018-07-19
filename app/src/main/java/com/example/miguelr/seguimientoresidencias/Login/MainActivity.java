@@ -167,6 +167,7 @@ public class MainActivity extends AppCompatActivity {
 
         Susuario = ETusuario.getText().toString().trim();
         Scontrasenia = ETcontrasenia.getText().toString().trim();
+        /*
         int idAlumno = alumnos.inicioSession(Susuario,Scontrasenia);
         if(idAlumno>0){
             if(alumnos.guardarSession(idAlumno)){
@@ -190,7 +191,7 @@ public class MainActivity extends AppCompatActivity {
             }else{
                 common.dialogErrorLogin().show();
             }
-        }
+        }*/
 
 
 

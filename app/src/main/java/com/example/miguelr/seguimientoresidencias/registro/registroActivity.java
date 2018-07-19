@@ -131,7 +131,8 @@ public class registroActivity extends AppCompatActivity{
 
     public class asyntaskGuardarUsuario extends AsyncTask<Void,Void,Void>{
         private ProgressDialog dialog;
-        private int idUsuario;
+        private int idUsuario,response;
+        private String result;
         public asyntaskGuardarUsuario(ProgressDialog dialog){
             this.dialog = dialog;
             idUsuario = 0;
@@ -143,6 +144,7 @@ public class registroActivity extends AppCompatActivity{
         protected Void doInBackground(Void... voids) {
             final HttpClient Client = new DefaultHttpClient();
             String jsoncadena = "";
+
             try{
                 List<NameValuePair> params = new ArrayList<NameValuePair>();
                 params.add(new BasicNameValuePair("idCarrera", ""+carrerasSpinner.get(SpinnerCarreras.getSelectedItemPosition()).getIdCarrera()));
@@ -162,13 +164,23 @@ public class registroActivity extends AppCompatActivity{
                 HttpResponse httpresponse = Client.execute(httppostreq);
                 jsoncadena = EntityUtils.toString(httpresponse.getEntity());
 
-                JSONArray array = new JSONArray(jsoncadena);
+                JSONObject obj = new JSONObject(jsoncadena);
 
-                JSONObject obj = array.getJSONObject(0);
 
-                idUsuario = obj.getInt("idUsuario");
+                JSONArray tabla1Array = obj.optJSONArray("tabla1");
+                JSONObject objTabla1 = tabla1Array.getJSONObject(0);
+
+                response = objTabla1.getInt("response");
+
+                if(response == 200){
+                    JSONArray array = new JSONArray(objTabla1.getString("result"));
+                    JSONObject res = array.getJSONObject(0);
+                    idUsuario = res.getInt("idUsuario");
+                }else if(response == 500){
+                    result = objTabla1.getString("result");
+                }
                 Log.d("json",jsoncadena);
-                Log.d("json",""+idUsuario);
+                Log.d("json",response+""+idUsuario);
             }catch (Exception e){
                 Log.d("json",e.getMessage());
                 idUsuario = 0;
@@ -177,11 +189,21 @@ public class registroActivity extends AppCompatActivity{
         }
         public void onPostExecute(Void args){
             dialog.dismiss();
-            if(idUsuario>0){
+            if(response == 200){
+                RNombre.setText("");
+                RApellidoPaterno.setText("");
+                RApellidoMaterno.setText("");
+                RMatricula.setText("");
+                RFechaNamimiento.setText("");
+                RCorreo.setText("");
+                RSemestre.setText("");
+                RUsuario.setText("");
+                RContrasenia.setText("");
                 common.dialogoMensajes("ITSA","Guardado con exito");
-            }else{
-                common.dialogoMensajes("ITSA","Ocurrio un error al guardar");
+            }else if(response == 500){
+                common.dialogoMensajes("ITSA",result);
             }
+
         }
     }
 }
