@@ -54,7 +54,7 @@
                         android:id="@+id/usuario"
                         android:layout_height="wrap_content"
                         android:drawableTint="#FF4081"
-                        android:text="ricardo"
+                        android:text="miguelr"
                         android:gravity="center"
                         android:singleLine="true"
                         android:hint="@string/username"
@@ -73,7 +73,7 @@
                         android:gravity="center"
                         android:hint="@string/password"
                         android:inputType="textPassword"
-                        android:text="ricardoadmin"
+                        android:text="Julio2018"
                         android:textAlignment="center" />
                     <!-- <EditText
                          android:layout_width="fill_parent"

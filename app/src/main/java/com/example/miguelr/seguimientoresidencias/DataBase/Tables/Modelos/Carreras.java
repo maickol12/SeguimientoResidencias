@@ -1,4 +1,4 @@
-package com.example.miguelr.seguimientoresidencias.DataBase.Tables.Cascarones;
+package com.example.miguelr.seguimientoresidencias.DataBase.Tables.Modelos;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -6,10 +6,10 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
-import com.example.miguelr.seguimientoresidencias.DataBase.Tables.DataBaseStructure;
-import com.example.miguelr.seguimientoresidencias.DataBase.Tables.Modelos.Mcarreras;
+
+import com.example.miguelr.seguimientoresidencias.DataBase.Tables.DBTablas.Mcarreras;
 import com.example.miguelr.seguimientoresidencias.DataBase.Tables.helperinterface;
-import com.example.miguelr.seguimientoresidencias.Helper.config;
+import com.example.miguelr.seguimientoresidencias.Helper.Common;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,23 +24,23 @@ public class Carreras implements helperinterface {
     private int bActive;
     private Context context;
     private SQLiteDatabase mDB;
-
+    private Common common;
     public Carreras(){}
     public Carreras(Context context){
         this.context = context;
+        this.common  = new Common(context);
     }
 
     public void abrirDB(){
-        mDB  = dbWritable();
+        mDB = common.databaseWritable();
     }
     public void cerrarDB(){
         mDB.close();
     }
 
 
-
     public List<Carreras> obtenerTodasLasCarrera(){
-        SQLiteDatabase db = dbRedeable();
+        SQLiteDatabase db = common.databaseReadeable();
 
         String sql = "SELECT "+Mcarreras.idCarrera+","+Mcarreras.vCarrera+","+Mcarreras.bActivo+" FROM "+Mcarreras.table;
 
@@ -60,47 +60,8 @@ public class Carreras implements helperinterface {
         return carreras;
     }
 
-    public void LlenarCarrerasDefault(){
-        SQLiteDatabase db = dbWritable();
-
-        db.delete(Mcarreras.table,null,null);
-        String[] car = {"Sistemas","Informatica","Civil","Gestion","Industrial","Contabilidad","Innovacion"};
-        ContentValues cv = new ContentValues();
-        for(int i = 0;i<car.length;i++){
-            String nombre = car[i];
-            cv.put(Mcarreras.idCarrera,(i+1));
-            cv.put(Mcarreras.vCarrera,nombre);
-            cv.put(Mcarreras.iCreditos,90+(i+1));
-            long inser = db.insert(Mcarreras.table,null,cv);
-            Log.d("insert",""+inser);
-        }
-    }
-
-    public Carreras obtenerCarreraPorId(int idCarrera){
-        SQLiteDatabase db = dbRedeable();
-        String sql = "SELECT "+Mcarreras.vCarrera+","+Mcarreras.bActivo+" FROM "+Mcarreras.table+" WHERE "+Mcarreras.idCarrera+" = '"+idCarrera+"'";
-
-        Cursor c = db.rawQuery(sql,null);
-        Carreras carrera = null;
-        if(c.moveToFirst()){
-            carrera = new Carreras();
-            carrera.setvCarrera(c.getString(c.getColumnIndex(Mcarreras.vCarrera)));
-            carrera.setbActive(c.getInt(c.getColumnIndex(Mcarreras.bActivo)));
-        }
-        return carrera;
-    }
 
 
-    public SQLiteDatabase dbRedeable(){
-        DataBaseStructure help = new DataBaseStructure(context, config.dbName,null,config.versionDB);
-        SQLiteDatabase db = help.getReadableDatabase();
-        return db;
-    }
-    public SQLiteDatabase dbWritable(){
-        DataBaseStructure help = new DataBaseStructure(context, config.dbName,null,config.versionDB);
-        SQLiteDatabase db = help.getWritableDatabase();
-        return db;
-    }
 
     public int getIdCarrera() {
         return idCarrera;
@@ -150,13 +111,23 @@ public class Carreras implements helperinterface {
         cv.put(Mcarreras.vCarrera,getvCarrera());
         cv.put(Mcarreras.bActivo,1);
 
-        long i = mDB.insert(Mcarreras.table,null,cv);
+        long i = common.databaseWritable().insert(Mcarreras.table,null,cv);
 
         return i>0;
     }
     @Override
     public boolean borrar() {
         return mDB.delete(Mcarreras.table,null,null)>0;
+    }
+
+    @Override
+    public boolean buscar() {
+        return false;
+    }
+
+    @Override
+    public ContentValues contentValues() {
+        return null;
     }
 
     @Override

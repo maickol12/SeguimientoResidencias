@@ -1,4 +1,4 @@
-package com.example.miguelr.seguimientoresidencias.DataBase.Tables.Cascarones;
+package com.example.miguelr.seguimientoresidencias.DataBase.Tables.Modelos;
 
 /**
  * Created by miguelr on 31/03/2018.

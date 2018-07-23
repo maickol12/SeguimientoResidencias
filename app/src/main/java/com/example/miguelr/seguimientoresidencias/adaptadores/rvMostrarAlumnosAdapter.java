@@ -1,16 +1,14 @@
 package com.example.miguelr.seguimientoresidencias.adaptadores;
 
 import android.content.Context;
-import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 
-import com.example.miguelr.seguimientoresidencias.DataBase.Tables.Alumnos;
+import com.example.miguelr.seguimientoresidencias.DataBase.Tables.Modelos.Alumnos;
 import com.example.miguelr.seguimientoresidencias.R;
 
 import java.util.ArrayList;
@@ -49,10 +47,10 @@ public class rvMostrarAlumnosAdapter extends RecyclerView.Adapter<rvMostrarAlumn
     @Override
     public void onBindViewHolder(mostrarAlumnosHolder holder, int position) {
         Alumnos alumno = alumnos.get(position);
-        holder.nombre.setText(alumno.getvNombreAlumno()+" "+alumno.getvApellidoPaterno()+" "+alumno.getvApellidoMaterno());
-        holder.carrera.setText(alumno.getCarrera().getvCarrera());
-        holder.matricula.setText(alumno.getvMatricula());
-        if(Integer.parseInt(alumno.getbSexo()) == 1){
+        holder.nombre.setText(alumno.getvNombre()+" "+alumno.getvApellidoPaterno()+" "+alumno.getvApellidoMaterno());
+        holder.carrera.setText(""+alumno.getIdCarrera());
+        holder.matricula.setText(alumno.getvNumeroControl());
+        if(alumno.getbSexo() == 1){
             holder.sexo.setImageResource(R.drawable.men);
         }else{
             holder.sexo.setImageResource(R.drawable.woman);

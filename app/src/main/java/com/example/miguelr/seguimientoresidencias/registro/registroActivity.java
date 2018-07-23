@@ -16,7 +16,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 
 
-import com.example.miguelr.seguimientoresidencias.DataBase.Tables.Cascarones.Carreras;
+import com.example.miguelr.seguimientoresidencias.DataBase.Tables.Modelos.Carreras;
 import com.example.miguelr.seguimientoresidencias.Helper.Common;
 import com.example.miguelr.seguimientoresidencias.Helper.config;
 import com.example.miguelr.seguimientoresidencias.R;

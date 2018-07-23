@@ -17,12 +17,9 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
-import com.example.miguelr.seguimientoresidencias.Alumnos.mostrarAvanceAlumno;
-import com.example.miguelr.seguimientoresidencias.DataBase.Tables.Alumnos;
-import com.example.miguelr.seguimientoresidencias.DataBase.Tables.usuarios;
-import com.example.miguelr.seguimientoresidencias.PerfilActivity;
+import com.example.miguelr.seguimientoresidencias.DataBase.Tables.Modelos.Alumnos;
+import com.example.miguelr.seguimientoresidencias.Perfil.PerfilActivity;
 import com.example.miguelr.seguimientoresidencias.R;
 import com.example.miguelr.seguimientoresidencias.adaptadores.rvMostrarAlumnosAdapter;
 import com.example.miguelr.seguimientoresidencias.eventos.ClickListener;
@@ -40,9 +37,6 @@ public class MostrarAlumnosFragment extends Fragment {
     private Alumnos alumnos;
     private int idCarrera = 0;
     private rvMostrarAlumnosAdapter adapter;
-    private usuarios users;
-
-
     public static MostrarAlumnosFragment newInstance(int idCarrea){
         MostrarAlumnosFragment fragment = new MostrarAlumnosFragment();
         Bundle bundle = new Bundle();
@@ -77,8 +71,8 @@ public class MostrarAlumnosFragment extends Fragment {
             public boolean onQueryTextChange(String newText) {
                 newText = "%"+newText+"%";
                 ALalumnos.clear();
-                ArrayList<Alumnos> nuevos = alumnos.obtenerTodosLosAlumnosPorCarreraYLike(idCarrera,newText);
-                ALalumnos.addAll(nuevos);
+                //ArrayList<Alumnos> nuevos = alumnos.obtenerTodosLosAlumnosPorCarreraYLike(idCarrera,newText);
+               // ALalumnos.addAll(nuevos);
                 adapter.notifyDataSetChanged();
 
                 return true;
@@ -87,23 +81,22 @@ public class MostrarAlumnosFragment extends Fragment {
         super.onCreateOptionsMenu(menu, inflater);
     }
 
-    public View onCreateView(LayoutInflater inflater, ViewGroup group,Bundle saveInstances){
+    public View onCreateView(LayoutInflater inflater, ViewGroup group,Bundle saveInstances) {
         final Context context = getActivity();
-        View view = inflater.inflate(R.layout.fragment_mostrar_alumnos,null);
+        View view = inflater.inflate(R.layout.fragment_mostrar_alumnos, null);
         Bundle bundle = getArguments();
 
-        if(bundle!=null){
+        if (bundle != null) {
             idCarrera = bundle.getInt("idCarrera");
         }
-
 
 
         rvMostrarAlumnos = view.findViewById(R.id.rvMostrarAlumnos);
         rvMostrarAlumnos.setHasFixedSize(true);
 
         alumnos = new Alumnos(context);
-        users = new usuarios(context);
-        ALalumnos = alumnos.obtenerTodosLosAlumnosPorCarrera(idCarrera);
+
+        //ALalumnos = alumnos.obtenerTodosLosAlumnosPorCarrera(idCarrera);
 
         LinearLayoutManager llm = new LinearLayoutManager(context);
         llm.setOrientation(LinearLayoutManager.VERTICAL);
@@ -116,21 +109,21 @@ public class MostrarAlumnosFragment extends Fragment {
         rvMostrarAlumnos.addOnItemTouchListener(new RecyclerTouchListener(context, rvMostrarAlumnos, new ClickListener() {
             @Override
             public void onClick(View view, int position) {
-                int idAlumno = Integer.parseInt(ALalumnos.get(position).getiIdAlumno());
-                lanzarActividad(mostrarAvanceAlumno.class,idAlumno,0,0);
+                //int idAlumno = Integer.parseInt(ALalumnos.get(position).getiIdAlumno());
+               // lanzarActividad(mostrarAvanceAlumno.class,idAlumno,0,0);
             }
 
             @Override
             public void onLongClick(View view, int position) {
                 try{
-                    usuarios u = users.obtenerRootSession();
+                 /*   usuarios u = users.obtenerRootSession();
                     if(u!=null){
                         if(Integer.parseInt(u.getRoot())==1){
                             int idAlumno = Integer.parseInt(ALalumnos.get(position).getiIdAlumno());
                             lanzarActividad(PerfilActivity.class,idAlumno,Integer.parseInt(u.getIdUsuario()),Integer.parseInt(u.getRoot()));
                             ((Activity)context).finish();
                         }
-                    }
+                    }*/
                 }catch (Exception e){
                     Log.d("error",e.getMessage());
                 }

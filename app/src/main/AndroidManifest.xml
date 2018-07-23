@@ -18,12 +18,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".PerfilActivity"/>
+        <activity android:name=".Perfil.PerfilActivity"/>
         <activity android:name=".registro.registroActivity"/>
-        <activity android:name=".Alumnos.mostrarAlumnosActivity"/>
-        <activity android:name=".Alumnos.mostrarAvanceAlumno"/>
-        <activity android:name=".Alumnos.mostrarReporteActivity"/>
-        <activity android:name=".Alumnos.expedienteFinalActivity"/>
+        <activity android:name=".menuPrincipal.menuPrincipal"/>
         <activity android:name=".Configuraciones.ConfiguracionesActivity"/>
     </application>
 

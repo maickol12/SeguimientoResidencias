@@ -10,7 +10,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.miguelr.seguimientoresidencias.DataBase.Tables.Cascarones.cascaronAvance;
+import com.example.miguelr.seguimientoresidencias.DataBase.Tables.Modelos.cascaronAvance;
 import com.example.miguelr.seguimientoresidencias.R;
 
 import java.util.ArrayList;

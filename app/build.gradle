@@ -8,6 +8,8 @@ android {
                     '/src/main/res/drawable/icons',
                     '/src/main/res/layout/login',
                     '/src/main/res/layout/registro',
+                    '/src/main/res/layout/perfil',
+                    '/src/main/res/layout/menuPrincipal',
                     '/src/main/res'
             ]
         }

@@ -12,6 +12,7 @@ public class config {
     public static String WebMethodMessages  = "getMessages";
     public static String WebMethodCatalogs  = "getCatalogs";
     public static String WebMethodSaveUsuer = "registrarAlumno";
+    public static String WebMethodLogin     = "login";
 
     /**********************************************************************************************************
      * METODO PARA RESPALDAR UNA BASE DE DATOS DE SQLITE V2

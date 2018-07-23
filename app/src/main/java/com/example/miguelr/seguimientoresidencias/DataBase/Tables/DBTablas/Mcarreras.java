@@ -1,4 +1,4 @@
-package com.example.miguelr.seguimientoresidencias.DataBase.Tables.Modelos;
+package com.example.miguelr.seguimientoresidencias.DataBase.Tables.DBTablas;
 
 
 

@@ -13,19 +13,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.miguelr.seguimientoresidencias.Alumnos.mostrarAlumnosActivity;
-import com.example.miguelr.seguimientoresidencias.DataBase.Tables.Alumnos;
-import com.example.miguelr.seguimientoresidencias.DataBase.Tables.Cascarones.Carreras;
-import com.example.miguelr.seguimientoresidencias.DataBase.Tables.cartaAceptacion;
-import com.example.miguelr.seguimientoresidencias.DataBase.Tables.cartaDePresentacion;
-import com.example.miguelr.seguimientoresidencias.DataBase.Tables.expedienteFinal;
-import com.example.miguelr.seguimientoresidencias.DataBase.Tables.reportesDeResidencias;
-import com.example.miguelr.seguimientoresidencias.DataBase.Tables.solicitudDeResidencias;
-import com.example.miguelr.seguimientoresidencias.DataBase.Tables.usuarios;
+import com.example.miguelr.seguimientoresidencias.DataBase.Tables.Modelos.Alumnos;
+import com.example.miguelr.seguimientoresidencias.DataBase.Tables.Modelos.Carreras;
 import com.example.miguelr.seguimientoresidencias.Helper.Common;
 import com.example.miguelr.seguimientoresidencias.Helper.config;
-import com.example.miguelr.seguimientoresidencias.PerfilActivity;
+import com.example.miguelr.seguimientoresidencias.Helper.sessionHelper;
 import com.example.miguelr.seguimientoresidencias.R;
+import com.example.miguelr.seguimientoresidencias.menuPrincipal.menuPrincipal;
 import com.example.miguelr.seguimientoresidencias.registro.registroActivity;
 
 import java.io.File;
@@ -37,15 +31,10 @@ public class MainActivity extends AppCompatActivity {
     private EditText ETusuario,ETcontrasenia;
     private String Susuario,Scontrasenia;
     private Common common;
+    private sessionHelper session;
     private  Alumnos alumnos;
     private Carreras carreras;
     private Button btnLogin;
-    private cartaAceptacion ca;
-    private cartaDePresentacion cp;
-    private expedienteFinal ex;
-    private solicitudDeResidencias sol;
-    private reportesDeResidencias reportes;
-    private usuarios users;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,69 +53,18 @@ public class MainActivity extends AppCompatActivity {
 
         common = new Common(this);
         alumnos = new Alumnos(this);
-        users = new usuarios(this);
 
         common.solicitarPermisosEscritura();
 
         common.asyncMessages();
         common.asyncDescargarCatalogos();
 
-        if (alumnos.comprobarSession() > 0) {
-            Intent intent = new Intent(MainActivity.this, PerfilActivity.class);
-            startActivity(intent);
-            finish();
-        }
-        int idUsuario = users.comprobarSession();
-        if(idUsuario>0){
-            Intent intent = new Intent(MainActivity.this,mostrarAlumnosActivity.class);
-            startActivity(intent);
-            finish();
-        }
-
         carreras = new Carreras(this);
-        ca = new cartaAceptacion(this);
-        cp = new cartaDePresentacion(this);
-        ex = new expedienteFinal(this);
-        sol = new solicitudDeResidencias(this);
-        reportes = new reportesDeResidencias(this);
+        session = new sessionHelper(this);
 
-
-        //carreras.LlenarCarrerasDefault();
-        alumnos.llenarDatos();
-       // respaldarBaseDatos();
-
-        if (sol.llenarSolicitudesPorDefault()) {
-            Log.d("dbmaickol", "SOL si");
-        } else {
-            Log.d("dbmaickol", "SOL NO");
-        }
-
-        if (ca.llenarDefaultCartaAceptacion()) {
-            Log.d("dbmaickol", "Carta Aceptacion si");
-        } else {
-            Log.d("dbmaickol", "Carta Aceptacion no");
-        }
-
-        if (cp.llenarDefaultCartaPresentacion()) {
-            Log.d("dbmaickol", "Carta Presentacion si");
-        } else {
-            Log.d("dbmaickol", "Carta Presentacion no");
-        }
-        if (ex.llenarExpedienteDefault()) {
-            Log.d("dbmaickol", "Expediente si");
-        } else {
-            Log.d("dbmaickol", "Expediente no");
-        }
-
-        if(reportes.llenarDefault()){
-            Log.d("dbmaickol", "Reportes si");
-        }else{
-            Log.d("dbmaickol", "Reportes no");
-        }
-        if(users.llenarUsuariosDefault()){
-            Log.d("dbmaickol", "Usuario si ");
-        }else{
-            Log.d("dbmaickol", "Usuario no");
+        if(session.isLogin()){
+            Intent intent = new Intent(this,menuPrincipal.class);
+            startActivity(intent);
         }
 
     }
@@ -165,36 +103,10 @@ public class MainActivity extends AppCompatActivity {
      ******************************************************************************************************/
     public void inicioDeSession(View v){
 
-        Susuario = ETusuario.getText().toString().trim();
-        Scontrasenia = ETcontrasenia.getText().toString().trim();
-        /*
-        int idAlumno = alumnos.inicioSession(Susuario,Scontrasenia);
-        if(idAlumno>0){
-            if(alumnos.guardarSession(idAlumno)){
-                Intent intent = new Intent(MainActivity.this,PerfilActivity.class);
-                startActivity(intent);
-                finish();
-            }else{
-                common.dialogErrorLogin().show();
-            }
+        String usuario = ETusuario.getText().toString().trim();
+        String contrasenia = ETcontrasenia.getText().toString().trim();
 
-        }else{
-            int idUsuario = users.buscarUsuario(Susuario,Scontrasenia);
-            if(idUsuario!=0){
-                if(users.guardarSession(idUsuario)){
-                    Intent intent = new Intent(MainActivity.this,mostrarAlumnosActivity.class);
-                    startActivity(intent);
-                    finish();
-                }else{
-                    common.dialogErrorLogin().show();
-                }
-            }else{
-                common.dialogErrorLogin().show();
-            }
-        }*/
-
-
-
+        common.asyncLogin(usuario,contrasenia);
     }
 
     /*****************************************************************************************************
