@@ -19,6 +19,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".Perfil.PerfilActivity"/>
+        <activity android:name=".escogerProyecto.escogerProyecto"/>
         <activity android:name=".registro.registroActivity"/>
         <activity android:name=".menuPrincipal.menuPrincipal"/>
         <activity android:name=".Configuraciones.ConfiguracionesActivity"/>

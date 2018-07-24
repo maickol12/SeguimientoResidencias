@@ -5,6 +5,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import com.example.miguelr.seguimientoresidencias.DataBase.Tables.DBTablas.Malumnos;
+import com.example.miguelr.seguimientoresidencias.DataBase.Tables.DBTablas.Mbancoproyectos;
 import com.example.miguelr.seguimientoresidencias.DataBase.Tables.DBTablas.Mcarreras;
 import com.example.miguelr.seguimientoresidencias.DataBase.Tables.DBTablas.Mgiros;
 import com.example.miguelr.seguimientoresidencias.DataBase.Tables.DBTablas.Mopciones;
@@ -32,6 +33,7 @@ public class DataBase extends SQLiteOpenHelper{
         db.execSQL(Mopciones.createTable());
         db.execSQL(Mperiodos.createTable());
         db.execSQL(Msectores.createTable());
+        db.execSQL(Mbancoproyectos.createTable());
 
 
     }
@@ -46,6 +48,7 @@ public class DataBase extends SQLiteOpenHelper{
         db.execSQL(Mopciones.deleteTable());
         db.execSQL(Mperiodos.deleteTable());
         db.execSQL(Msectores.deleteTable());
+        db.execSQL(Mbancoproyectos.deleteTable());
         this.onCreate(db);
     }
 

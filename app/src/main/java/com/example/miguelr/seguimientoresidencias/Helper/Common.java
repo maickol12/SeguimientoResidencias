@@ -19,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.miguelr.seguimientoresidencias.DataBase.Tables.DBTablas.Malumnos;
+import com.example.miguelr.seguimientoresidencias.DataBase.Tables.DBTablas.Mbancoproyectos;
 import com.example.miguelr.seguimientoresidencias.DataBase.Tables.DBTablas.Mgiros;
 import com.example.miguelr.seguimientoresidencias.DataBase.Tables.DBTablas.Mopciones;
 import com.example.miguelr.seguimientoresidencias.DataBase.Tables.DataBase;
@@ -27,6 +28,7 @@ import com.example.miguelr.seguimientoresidencias.DataBase.Tables.Modelos.Alumno
 import com.example.miguelr.seguimientoresidencias.DataBase.Tables.Modelos.Carreras;
 import com.example.miguelr.seguimientoresidencias.DataBase.Tables.Modelos.Giros;
 import com.example.miguelr.seguimientoresidencias.DataBase.Tables.Modelos.Opciones;
+import com.example.miguelr.seguimientoresidencias.DataBase.Tables.Modelos.bancoProyectos;
 import com.example.miguelr.seguimientoresidencias.Login.MainActivity;
 import com.example.miguelr.seguimientoresidencias.R;
 import com.example.miguelr.seguimientoresidencias.menuPrincipal.menuPrincipal;
@@ -391,6 +393,29 @@ public class Common {
                     }
                 }
                 op.cerrarDB();
+                /****************************
+                 * bancoProyectos
+                 *****************************/
+                JSONArray bancoPro = array.getJSONArray("bancoProyectos");
+                bancoProyectos bp  = new bancoProyectos(context);
+                bp.borrar();
+                for (int i = 0;i<bancoPro.length();i++){
+                    obj = bancoPro.getJSONObject(i);
+                    bp.setIdbancoProyecto(obj.getInt(Mbancoproyectos.idbancoProyecto));
+                    bp.setIdEmpresa(obj.getInt(Mbancoproyectos.idEmpresa));
+                    bp.setIdCarrera(obj.getInt(Mbancoproyectos.idCarrera));
+                    bp.setIdEstado(obj.getInt(Mbancoproyectos.idEstado));
+                    bp.setvNombreProyecto(obj.getString(Mbancoproyectos.vNombreProyecto));
+                    bp.setvDescripcion(obj.getString(Mbancoproyectos.vDescripcion));
+                    bp.setvDependencia(obj.getString(Mbancoproyectos.vDependencia));
+                    bp.setiTotalResidentes(obj.getInt(Mbancoproyectos.iTotalResidentes));
+                    if(bp.guardar()){
+                        Log.d("guardar","bancoProyecto guardado");
+                    }else{
+                        Log.d("guardar","bancoProyecto no guardado");
+                    }
+                }
+                bp.cerrarDB();
 
             }catch (Exception e){
                 Log.d("error",e.getMessage());

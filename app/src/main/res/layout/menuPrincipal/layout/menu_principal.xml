@@ -27,12 +27,12 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1">
                 <android.support.v7.widget.CardView
-                    android:id="@+id/escogerProyecto"
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
                     card_view:cardCornerRadius="6dp"
                     card_view:cardElevation="10dp"
-                    card_view:cardUseCompatPadding="true" >
+                    card_view:cardUseCompatPadding="true"
+                    android:onClick="escogerProyecto">
 
                     <ImageView
                         android:layout_width="match_parent"
@@ -60,7 +60,6 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1">
                 <android.support.v7.widget.CardView
-                    android:id="@+id/card1"
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
                     card_view:cardCornerRadius="6dp"
@@ -75,7 +74,6 @@
                         />
 
                     <TextView
-                        android:id="@+id/txt2"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:padding="10dp"

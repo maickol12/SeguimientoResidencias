@@ -8,12 +8,14 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.example.miguelr.seguimientoresidencias.DataBase.Tables.Modelos.Alumnos;
 import com.example.miguelr.seguimientoresidencias.Helper.Common;
 import com.example.miguelr.seguimientoresidencias.Helper.sessionHelper;
 import com.example.miguelr.seguimientoresidencias.Login.MainActivity;
 import com.example.miguelr.seguimientoresidencias.R;
+import com.example.miguelr.seguimientoresidencias.escogerProyecto.escogerProyecto;
 
 /**
  * Created by miguelr on 22/07/2018.
@@ -49,6 +51,10 @@ public class menuPrincipal extends AppCompatActivity{
             break;
         }
         return true;
+    }
+    public void escogerProyecto(View view){
+        Intent intent = new Intent(this,escogerProyecto.class);
+        startActivity(intent);
     }
     public void onBackPressed(){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);

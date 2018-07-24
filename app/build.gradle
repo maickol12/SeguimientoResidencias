@@ -10,6 +10,7 @@ android {
                     '/src/main/res/layout/registro',
                     '/src/main/res/layout/perfil',
                     '/src/main/res/layout/menuPrincipal',
+                    '/src/main/res/layout/escogerProyecto',
                     '/src/main/res'
             ]
         }
