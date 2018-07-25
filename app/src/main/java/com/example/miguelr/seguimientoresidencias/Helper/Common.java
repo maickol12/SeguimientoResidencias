@@ -22,12 +22,14 @@ import com.example.miguelr.seguimientoresidencias.DataBase.Tables.DBTablas.Malum
 import com.example.miguelr.seguimientoresidencias.DataBase.Tables.DBTablas.Mbancoproyectos;
 import com.example.miguelr.seguimientoresidencias.DataBase.Tables.DBTablas.Mgiros;
 import com.example.miguelr.seguimientoresidencias.DataBase.Tables.DBTablas.Mopciones;
+import com.example.miguelr.seguimientoresidencias.DataBase.Tables.DBTablas.Mperiodos;
 import com.example.miguelr.seguimientoresidencias.DataBase.Tables.DataBase;
 
 import com.example.miguelr.seguimientoresidencias.DataBase.Tables.Modelos.Alumnos;
 import com.example.miguelr.seguimientoresidencias.DataBase.Tables.Modelos.Carreras;
 import com.example.miguelr.seguimientoresidencias.DataBase.Tables.Modelos.Giros;
 import com.example.miguelr.seguimientoresidencias.DataBase.Tables.Modelos.Opciones;
+import com.example.miguelr.seguimientoresidencias.DataBase.Tables.Modelos.Periodos;
 import com.example.miguelr.seguimientoresidencias.DataBase.Tables.Modelos.bancoProyectos;
 import com.example.miguelr.seguimientoresidencias.Login.MainActivity;
 import com.example.miguelr.seguimientoresidencias.R;
@@ -376,6 +378,25 @@ public class Common {
                         Log.d("guardar","giro no guardado");
                     }
                 }
+
+                /****************************
+                 * periodos
+                 *****************************/
+                JSONArray periodos = array.getJSONArray("periodos");
+                Periodos per = new Periodos(context);
+                per.borrar();
+                for (int i = 0;i<periodos.length();i++){
+                    obj = periodos.getJSONObject(i);
+                    per.setIdPeriodo(obj.getInt(Mperiodos.idPeriodo));
+                    per.setvPeriodo(obj.getString(Mperiodos.vPeriodo));
+                    if(per.guardar()){
+                        Log.d("guardar","periodo guardado");
+                    }else{
+                        Log.d("guardar","periodo no guardado");
+                    }
+                }
+                per.cerrarDB();
+
                 /****************************
                  * opciones
                  *****************************/

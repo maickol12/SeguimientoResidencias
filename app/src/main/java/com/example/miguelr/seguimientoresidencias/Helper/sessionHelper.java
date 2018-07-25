@@ -17,6 +17,7 @@ public class sessionHelper {
     private SharedPreferences.Editor editor;
     private static final String PREFERENCES_FILE = "residenciasfile";
     private static final String ID_ALUMNO_KEY = "idAlumno";
+    private static final String ID_CARRERA_KEY = "idCarrera";
     public static final String ISLOGED_KEY = "idLoged";
 
     public sessionHelper(Context context){
@@ -26,6 +27,7 @@ public class sessionHelper {
     public void createSession(Alumnos alumnos){
         editor = sessioData.edit();
         editor.putInt(ID_ALUMNO_KEY,alumnos.getIdAlumno());
+        editor.putInt(ID_CARRERA_KEY,alumnos.getIdCarrera());
         editor.putBoolean(ISLOGED_KEY,true);
         editor.commit();
     }
@@ -42,6 +44,9 @@ public class sessionHelper {
     }
     public int obtenerIdAlumno(){
         return sessioData.getInt(ID_ALUMNO_KEY,0);
+    }
+    public int obtenerIdCarrera(){
+        return sessioData.getInt(ID_CARRERA_KEY,0);
     }
     public void redirectToLogin(){
         Intent intent = new Intent(context, MainActivity.class);

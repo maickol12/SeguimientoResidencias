@@ -2,11 +2,14 @@ package com.example.miguelr.seguimientoresidencias.DataBase.Tables.Modelos;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.example.miguelr.seguimientoresidencias.DataBase.Tables.DBTablas.Mbancoproyectos;
 import com.example.miguelr.seguimientoresidencias.DataBase.Tables.helperinterface;
 import com.example.miguelr.seguimientoresidencias.Helper.Common;
+
+import java.util.ArrayList;
 
 /**
  * Created by miguelr on 23/07/2018.
@@ -24,10 +27,32 @@ public class bancoProyectos implements helperinterface {
     private SQLiteDatabase mDB;
     private Common common;
     private Context context;
+    public bancoProyectos(){
 
+    }
     public bancoProyectos(Context context){
         this.common = new Common(context);
         this.mDB    = this.common.databaseWritable();
+    }
+    public ArrayList<bancoProyectos> obtenerProyectos(int idCarrera){
+        String sql = "SELECT "+Mbancoproyectos.idbancoProyecto+","+Mbancoproyectos.vNombreProyecto+
+                     " FROM "+Mbancoproyectos.table+" WHERE "+Mbancoproyectos.idCarrera+" = "+idCarrera;
+        ArrayList<bancoProyectos> proyectos = null;
+        try{
+            Cursor c = mDB.rawQuery(sql,null);
+            if(c.moveToFirst()){
+                proyectos = new ArrayList<>();
+                do{
+                    bancoProyectos ban = new bancoProyectos();
+                    ban.setIdbancoProyecto(c.getInt(0));
+                    ban.setvNombreProyecto(c.getString(1));
+                    proyectos.add(ban);
+                }while (c.moveToNext());
+            }
+        }catch (Exception e){
+
+        }
+        return proyectos;
     }
 
 
@@ -95,6 +120,7 @@ public class bancoProyectos implements helperinterface {
         this.iTotalResidentes = iTotalResidentes;
     }
 
+
     @Override
     public boolean guardar() {
         long i = common.databaseWritable().insert(Mbancoproyectos.table,null,contentValues());
@@ -128,5 +154,9 @@ public class bancoProyectos implements helperinterface {
         cv.put(Mbancoproyectos.vDependencia,getvDependencia());
         cv.put(Mbancoproyectos.iTotalResidentes,getiTotalResidentes());
         return cv;
+    }
+
+    public String toString(){
+        return this.vNombreProyecto;
     }
 }
