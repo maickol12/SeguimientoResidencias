@@ -23,6 +23,7 @@ import com.example.miguelr.seguimientoresidencias.DataBase.Tables.DBTablas.Mbanc
 import com.example.miguelr.seguimientoresidencias.DataBase.Tables.DBTablas.Mgiros;
 import com.example.miguelr.seguimientoresidencias.DataBase.Tables.DBTablas.Mopciones;
 import com.example.miguelr.seguimientoresidencias.DataBase.Tables.DBTablas.Mperiodos;
+import com.example.miguelr.seguimientoresidencias.DataBase.Tables.DBTablas.Msectores;
 import com.example.miguelr.seguimientoresidencias.DataBase.Tables.DataBase;
 
 import com.example.miguelr.seguimientoresidencias.DataBase.Tables.Modelos.Alumnos;
@@ -30,6 +31,7 @@ import com.example.miguelr.seguimientoresidencias.DataBase.Tables.Modelos.Carrer
 import com.example.miguelr.seguimientoresidencias.DataBase.Tables.Modelos.Giros;
 import com.example.miguelr.seguimientoresidencias.DataBase.Tables.Modelos.Opciones;
 import com.example.miguelr.seguimientoresidencias.DataBase.Tables.Modelos.Periodos;
+import com.example.miguelr.seguimientoresidencias.DataBase.Tables.Modelos.Sectores;
 import com.example.miguelr.seguimientoresidencias.DataBase.Tables.Modelos.bancoProyectos;
 import com.example.miguelr.seguimientoresidencias.Login.MainActivity;
 import com.example.miguelr.seguimientoresidencias.R;
@@ -378,7 +380,7 @@ public class Common {
                         Log.d("guardar","giro no guardado");
                     }
                 }
-
+                g.cerrarDB();
                 /****************************
                  * periodos
                  *****************************/
@@ -414,6 +416,26 @@ public class Common {
                     }
                 }
                 op.cerrarDB();
+
+
+                /****************************
+                 * Sectores
+                 *****************************/
+                JSONArray sectores = array.getJSONArray("sectores");
+                Sectores sec = new Sectores(context);
+                sec.borrar();
+                for (int i = 0;i<sectores.length();i++){
+                    obj = sectores.getJSONObject(i);
+                    sec.setIdSector(obj.getInt(Msectores.idSector));
+                    sec.setvSector(obj.getString(Msectores.vSector));
+                    if(sec.guardar()){
+                        Log.d("guardar","sector guardado");
+                    }else{
+                        Log.d("guardar","sector no guardado");
+                    }
+                }
+                sec.cerrarDB();
+
                 /****************************
                  * bancoProyectos
                  *****************************/

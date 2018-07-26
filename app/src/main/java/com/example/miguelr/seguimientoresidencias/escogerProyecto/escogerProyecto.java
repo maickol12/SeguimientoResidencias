@@ -11,6 +11,7 @@ import android.widget.Spinner;
 import com.example.miguelr.seguimientoresidencias.DataBase.Tables.Modelos.Giros;
 import com.example.miguelr.seguimientoresidencias.DataBase.Tables.Modelos.Opciones;
 import com.example.miguelr.seguimientoresidencias.DataBase.Tables.Modelos.Periodos;
+import com.example.miguelr.seguimientoresidencias.DataBase.Tables.Modelos.Sectores;
 import com.example.miguelr.seguimientoresidencias.DataBase.Tables.Modelos.bancoProyectos;
 import com.example.miguelr.seguimientoresidencias.Helper.sessionHelper;
 import com.example.miguelr.seguimientoresidencias.R;
@@ -23,11 +24,12 @@ import java.util.ArrayList;
 
 public class escogerProyecto extends AppCompatActivity{
     private Toolbar toolbar;
-    private Spinner SProyecto,SPeriodos,SOpciones,SGiros;
+    private Spinner SProyecto,SPeriodos,SOpciones,SGiros,SSector;
     private bancoProyectos bancoProy;
     private Periodos periodos;
     private Opciones opciones;
     private Giros giros;
+    private Sectores sectores;
     private sessionHelper session;
     public void onCreate(Bundle bundle){
         super.onCreate(bundle);
@@ -37,11 +39,13 @@ public class escogerProyecto extends AppCompatActivity{
         SPeriodos = (Spinner) findViewById(R.id.SPeriodos);
         SOpciones = (Spinner) findViewById(R.id.SOpciones);
         SGiros    = (Spinner) findViewById(R.id.SGiro);
+        SSector   = (Spinner) findViewById(R.id.SSector);
 
         bancoProy   = new bancoProyectos(this);
         periodos    = new Periodos(this);
         opciones    = new Opciones(this);
         giros       = new Giros(this);
+        sectores    = new Sectores(this);
 
         session = new sessionHelper(this);
 
@@ -88,6 +92,16 @@ public class escogerProyecto extends AppCompatActivity{
             adapterGir.setDropDownViewResource(android.R.layout
                     .simple_spinner_dropdown_item);
             SGiros.setAdapter(adapterGir);
+        }
+
+        ArrayList<Sectores> sec =  sectores.obtenerSectores();
+        if(sec!=null){
+
+            ArrayAdapter<Sectores> adapterGir = new ArrayAdapter<Sectores>
+                    (this, android.R.layout.simple_spinner_item,sec); //selected item will look like a spinner set from XML
+            adapterGir.setDropDownViewResource(android.R.layout
+                    .simple_spinner_dropdown_item);
+            SSector.setAdapter(adapterGir);
         }
     }
 

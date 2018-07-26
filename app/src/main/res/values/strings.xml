@@ -56,5 +56,6 @@
     <string name="periodo">Periodo</string>
     <string name="opciones">Opciones</string>
     <string name="giro">Giro</string>
+    <string name="sector">Sector</string>
 
 </resources>
