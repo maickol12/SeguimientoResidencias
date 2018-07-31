@@ -22,36 +22,37 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:weightSum="2">
+
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1">
+
                 <android.support.v7.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
                     card_view:cardCornerRadius="6dp"
+                    android:onClick="onClickPerfil"
                     card_view:cardElevation="10dp"
-                    card_view:cardUseCompatPadding="true"
-                    android:onClick="escogerProyecto">
+                    card_view:cardUseCompatPadding="true">
 
                     <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:padding="@dimen/paddingRegistro"
-                        android:src="@drawable/proyecto"
-                        />
+                        android:src="@drawable/usuario" />
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:padding="10dp"
-                        android:text="@string/escogerProyecto"
                         android:layout_gravity="bottom"
                         android:background="#8c000000"
+                        android:gravity="center"
+                        android:padding="10dp"
+                        android:text="@string/perfil"
                         android:textColor="#ffe3e3e3"
                         android:textSize="13sp"
-                        android:gravity="center"
-                        android:textStyle="bold"/>
+                        android:textStyle="bold" />
 
                 </android.support.v7.widget.CardView>
             </LinearLayout>
@@ -64,7 +65,8 @@
                     android:layout_height="200dp"
                     card_view:cardCornerRadius="6dp"
                     card_view:cardElevation="10dp"
-                    card_view:cardUseCompatPadding="true" >
+                    card_view:cardUseCompatPadding="true"
+                    android:onClick="escogerProyecto">
 
                     <ImageView
                         android:layout_width="match_parent"

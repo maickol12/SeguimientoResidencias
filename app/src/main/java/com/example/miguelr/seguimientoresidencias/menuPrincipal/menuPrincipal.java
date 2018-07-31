@@ -14,6 +14,7 @@ import com.example.miguelr.seguimientoresidencias.DataBase.Tables.Modelos.Alumno
 import com.example.miguelr.seguimientoresidencias.Helper.Common;
 import com.example.miguelr.seguimientoresidencias.Helper.sessionHelper;
 import com.example.miguelr.seguimientoresidencias.Login.MainActivity;
+import com.example.miguelr.seguimientoresidencias.Perfil.PerfilActivity;
 import com.example.miguelr.seguimientoresidencias.R;
 import com.example.miguelr.seguimientoresidencias.escogerProyecto.escogerProyecto;
 
@@ -42,6 +43,10 @@ public class menuPrincipal extends AppCompatActivity{
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle(alumno.getvNombre());
+    }
+    public void onClickPerfil(View view){
+        Intent intent = new Intent(this, PerfilActivity.class);
+        startActivity(intent);
     }
 
     public boolean onOptionsItemSelected(MenuItem item){

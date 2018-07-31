@@ -42,13 +42,8 @@ public class PerfilActivity extends AppCompatActivity{
         setContentView(R.layout.acitivity_perfil);
 
         common = new Common(this);
-        toolbar = (Toolbar) findViewById(R.id.toolbarMasDetalles);
-        nombreAlumno = (TextView) findViewById(R.id.nombreAlumno);
-        creditos = (TextView) findViewById(R.id.creditos);
-        IVestatus = (ImageView) findViewById(R.id.estatus);
-        progressBar = (ProgressBar) findViewById(R.id.progressBarAvance);
-        txtProgress = (TextView) findViewById(R.id.txtProgress);
-        TVcarrera = (TextView) findViewById(R.id.carrera);
+        toolbar = (Toolbar) findViewById(R.id.toolbarGeneralDez);
+
         FBmostrarAlumnos = (FloatingActionButton) findViewById(R.id.FBmostrarAlumnos);
         FBmostrarExpedienteFinal = (FloatingActionButton) findViewById(R.id.FBmostrarExpedienteFinal);
         FBmostrarAvance = (FloatingActionButton) findViewById(R.id.FBmostrarAvance);
@@ -58,7 +53,6 @@ public class PerfilActivity extends AppCompatActivity{
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         alumno = new Alumnos(PerfilActivity.this);
 

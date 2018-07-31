@@ -31,10 +31,12 @@ import com.example.miguelr.seguimientoresidencias.DataBase.Tables.Modelos.Carrer
 import com.example.miguelr.seguimientoresidencias.DataBase.Tables.Modelos.Giros;
 import com.example.miguelr.seguimientoresidencias.DataBase.Tables.Modelos.Opciones;
 import com.example.miguelr.seguimientoresidencias.DataBase.Tables.Modelos.Periodos;
+import com.example.miguelr.seguimientoresidencias.DataBase.Tables.Modelos.ProyectoSeleccionado;
 import com.example.miguelr.seguimientoresidencias.DataBase.Tables.Modelos.Sectores;
 import com.example.miguelr.seguimientoresidencias.DataBase.Tables.Modelos.bancoProyectos;
 import com.example.miguelr.seguimientoresidencias.Login.MainActivity;
 import com.example.miguelr.seguimientoresidencias.R;
+import com.example.miguelr.seguimientoresidencias.escogerProyecto.escogerProyecto;
 import com.example.miguelr.seguimientoresidencias.menuPrincipal.menuPrincipal;
 
 import org.apache.http.HttpResponse;
@@ -215,6 +217,102 @@ public class Common {
         new asyncTaskLogin(url,usuario,contrasenia).execute();
     }
 
+    public void asyncEncogerProyecto(int idBancoProyecto,int idAlumno,int idPeriodo,int idOpcion,int idGiro,int idEstado, int idSector){
+        new asyncTaskEscogerProyecto(idBancoProyecto,idAlumno,idPeriodo,idOpcion,idGiro,idEstado,idSector).execute();
+    }
+
+    public class asyncTaskEscogerProyecto extends AsyncTask<Void,String,String>{
+        private ProgressDialog dialog;
+        private int idBancoProyecto,idAlumno,idPeriodo,idOpcion,idGiro,idEstado,idSector;
+        public asyncTaskEscogerProyecto(int idBancoProyecto,int idAlumno,int idPeriodo,int idOpcion,int idGiro,int idEstado, int idSector){
+            this.idBancoProyecto = idBancoProyecto;
+            this.idAlumno        = idAlumno;
+            this.idPeriodo       = idPeriodo;
+            this.idOpcion        = idOpcion;
+            this.idGiro          = idGiro;
+            this.idEstado        = idEstado;
+            this.idSector        = idSector;
+        }
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            dialog = getProgressBar("ITSA","Espera un momento , estamos comprobando la información");
+            dialog.show();
+        }
+
+        @Override
+        protected  String doInBackground(Void... voids) {
+            String json = "[]";
+            try{
+                List<NameValuePair> values = new ArrayList<>();
+                values.add(new BasicNameValuePair("idBancoProyecto",String.valueOf(idBancoProyecto)));
+                values.add(new BasicNameValuePair("idAlumno",String.valueOf(idAlumno)));
+                values.add(new BasicNameValuePair("idPeriodo",String.valueOf(idPeriodo)));
+                values.add(new BasicNameValuePair("idOpcion",String.valueOf(idOpcion)));
+                values.add(new BasicNameValuePair("idGiro",String.valueOf(idGiro)));
+                values.add(new BasicNameValuePair("idEstado",String.valueOf(idEstado)));
+                values.add(new BasicNameValuePair("idSector",String.valueOf(idSector)));
+
+                final HttpClient client = new DefaultHttpClient();
+                HttpPost post = new HttpPost(config.url+config.WebMehodEscogerProy);
+                post.setEntity(new UrlEncodedFormEntity(values));
+                HttpResponse response = client.execute(post);
+                json = EntityUtils.toString(response.getEntity());
+
+            }catch (Exception e){
+                Log.d("error",e.getMessage());
+                json = "[]";
+            }
+            return json;
+        }
+
+        @Override
+        protected void onPostExecute(String json) {
+            try{
+                JSONObject object = new JSONObject(json);
+                JSONArray table1 = object.getJSONArray("tabla1");
+                int response = table1.getJSONObject(0).getInt("response");
+                if(response == 200){
+                    JSONArray table2 = object.getJSONArray("tabla2");
+                    JSONObject obj = table2.getJSONObject(0);
+
+                    ProyectoSeleccionado proyecto = new ProyectoSeleccionado(context);
+                    proyecto.setIdBancoProyecto(obj.getInt("idProyectoSeleccionado"));
+                    proyecto.setIdAlumno(obj.getInt("idAlumno"));
+                    proyecto.setIdPeriodo(obj.getInt("idPeriodo"));
+                    proyecto.setIdOpcion(obj.getInt("idOpcion"));
+                    proyecto.setIdGiro(obj.getInt("idGiro"));
+                    proyecto.setIdEstado(obj.getInt("idEstado"));
+                    proyecto.setIdSector(obj.getInt("idSector"));
+                    proyecto.setvNombreProyecto(obj.getString("vNombreProyecto"));
+                    proyecto.setvDescripcion(obj.getString("vDescripcion"));
+                    proyecto.setvDependencia(obj.getString("vDependencia"));
+                    proyecto.setvMotivoNoAceptacion(obj.getString("vMotivoNoAceptacion"));
+                    proyecto.setbCartaAceptacion(obj.getInt("bCartAceptacion"));
+                    proyecto.setbCartaPresentacion(obj.getInt("bCartaPresentacion"));
+                    proyecto.setbSolicitud(obj.getInt("bSolicitud"));
+                    proyecto.setbReporte1(obj.getInt("bReporte1"));
+                    proyecto.setbReporte2(obj.getInt("bReporte2"));
+                    proyecto.setbReporte3(obj.getInt("bReporte3"));
+
+                    if(proyecto.guardar()){
+                        dialogoMensajes("ITSA","Proyecto seleccionado correctamente");
+                    }else{
+                        dialogoMensajes("ERROR ITSA","Ocurrio algo inesperado");
+                    }
+                    proyecto.cerrarDB();
+
+                }else{
+                    String mensaje = table1.getJSONObject(0).getString("result");
+                    dialogoMensajes("ITSA ERROR",mensaje);
+                }
+            }catch (Exception e){
+                Log.d("error",e.getMessage());
+            }
+            dialog.dismiss();
+        }
+    }
+
     public class asyncTaskLogin extends AsyncTask<String,String,String>{
         private String url;
         private ProgressDialog progressDialog;
@@ -309,6 +407,7 @@ public class Common {
 
         }
     }
+
     public void redirigirMenu(){
         Intent intent = new Intent(context, menuPrincipal.class);
         context.startActivity(intent);

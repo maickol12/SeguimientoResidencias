@@ -10,6 +10,7 @@ import com.example.miguelr.seguimientoresidencias.DataBase.Tables.DBTablas.Mcarr
 import com.example.miguelr.seguimientoresidencias.DataBase.Tables.DBTablas.Mgiros;
 import com.example.miguelr.seguimientoresidencias.DataBase.Tables.DBTablas.Mopciones;
 import com.example.miguelr.seguimientoresidencias.DataBase.Tables.DBTablas.Mperiodos;
+import com.example.miguelr.seguimientoresidencias.DataBase.Tables.DBTablas.MproyectoSeleccionado;
 import com.example.miguelr.seguimientoresidencias.DataBase.Tables.DBTablas.Msectores;
 
 /**
@@ -34,6 +35,7 @@ public class DataBase extends SQLiteOpenHelper{
         db.execSQL(Mperiodos.createTable());
         db.execSQL(Msectores.createTable());
         db.execSQL(Mbancoproyectos.createTable());
+        db.execSQL(MproyectoSeleccionado.createTable());
 
 
     }
@@ -49,6 +51,7 @@ public class DataBase extends SQLiteOpenHelper{
         db.execSQL(Mperiodos.deleteTable());
         db.execSQL(Msectores.deleteTable());
         db.execSQL(Mbancoproyectos.deleteTable());
+        db.execSQL(MproyectoSeleccionado.deleteTable());
         this.onCreate(db);
     }
 

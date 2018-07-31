@@ -57,5 +57,7 @@
     <string name="opciones">Opciones</string>
     <string name="giro">Giro</string>
     <string name="sector">Sector</string>
+    <string name="guardarProyecto">Sector</string>
+    <string name="perfil">Perfil</string>
 
 </resources>

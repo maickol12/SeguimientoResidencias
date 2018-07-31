@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
@@ -13,6 +14,7 @@ import com.example.miguelr.seguimientoresidencias.DataBase.Tables.Modelos.Opcion
 import com.example.miguelr.seguimientoresidencias.DataBase.Tables.Modelos.Periodos;
 import com.example.miguelr.seguimientoresidencias.DataBase.Tables.Modelos.Sectores;
 import com.example.miguelr.seguimientoresidencias.DataBase.Tables.Modelos.bancoProyectos;
+import com.example.miguelr.seguimientoresidencias.Helper.Common;
 import com.example.miguelr.seguimientoresidencias.Helper.sessionHelper;
 import com.example.miguelr.seguimientoresidencias.R;
 
@@ -31,6 +33,7 @@ public class escogerProyecto extends AppCompatActivity{
     private Giros giros;
     private Sectores sectores;
     private sessionHelper session;
+    private Common common;
     public void onCreate(Bundle bundle){
         super.onCreate(bundle);
         setContentView(R.layout.escoger_proyecto);
@@ -46,63 +49,81 @@ public class escogerProyecto extends AppCompatActivity{
         opciones    = new Opciones(this);
         giros       = new Giros(this);
         sectores    = new Sectores(this);
+        common      = new Common(this);
 
         session = new sessionHelper(this);
 
         configurarToolbar();
         cargarControles();
     }
+    ArrayList<bancoProyectos> arrayBancoProyectos;
+    ArrayList<Periodos> arrayPeriodos;
+    ArrayList<Opciones> arrayOpciones;
+    ArrayList<Giros>  arrayGiros;
+    ArrayList<Sectores> arraySectores;
 
     private void cargarControles(){
 
-        ArrayList<bancoProyectos> p =  bancoProy.obtenerProyectos(session.obtenerIdCarrera());
-        if(p!=null){
+        arrayBancoProyectos  =  bancoProy.obtenerProyectos(session.obtenerIdCarrera());
+        if(arrayBancoProyectos!=null){
             ArrayAdapter<bancoProyectos> spinnerArrayAdapter = new ArrayAdapter<bancoProyectos>
-                    (this, android.R.layout.simple_spinner_item,p); //selected item will look like a spinner set from XML
+                    (this, android.R.layout.simple_spinner_item,arrayBancoProyectos); //selected item will look like a spinner set from XML
             spinnerArrayAdapter.setDropDownViewResource(android.R.layout
                     .simple_spinner_dropdown_item);
             SProyecto.setAdapter(spinnerArrayAdapter);
         }
 
-        ArrayList<Periodos> per =  periodos.obtenerPeriodos();
-        if(per!=null){
+        arrayPeriodos=  periodos.obtenerPeriodos();
+        if(arrayPeriodos!=null){
 
             ArrayAdapter<Periodos> adapterPer = new ArrayAdapter<Periodos>
-                    (this, android.R.layout.simple_spinner_item,per); //selected item will look like a spinner set from XML
+                    (this, android.R.layout.simple_spinner_item,arrayPeriodos); //selected item will look like a spinner set from XML
             adapterPer.setDropDownViewResource(android.R.layout
                     .simple_spinner_dropdown_item);
             SPeriodos.setAdapter(adapterPer);
         }
 
-        ArrayList<Opciones> op =  opciones.obtenerOpciones();
-        if(per!=null){
+        arrayOpciones =  opciones.obtenerOpciones();
+        if(arrayOpciones!=null){
 
             ArrayAdapter<Opciones> adapterOpc = new ArrayAdapter<Opciones>
-                    (this, android.R.layout.simple_spinner_item,op); //selected item will look like a spinner set from XML
+                    (this, android.R.layout.simple_spinner_item,arrayOpciones); //selected item will look like a spinner set from XML
             adapterOpc.setDropDownViewResource(android.R.layout
                     .simple_spinner_dropdown_item);
             SOpciones.setAdapter(adapterOpc);
         }
 
-        ArrayList<Giros> gir =  giros.obtenerGiros();
-        if(per!=null){
+        arrayGiros =  giros.obtenerGiros();
+        if(arrayGiros!=null){
 
             ArrayAdapter<Giros> adapterGir = new ArrayAdapter<Giros>
-                    (this, android.R.layout.simple_spinner_item,gir); //selected item will look like a spinner set from XML
+                    (this, android.R.layout.simple_spinner_item,arrayGiros); //selected item will look like a spinner set from XML
             adapterGir.setDropDownViewResource(android.R.layout
                     .simple_spinner_dropdown_item);
             SGiros.setAdapter(adapterGir);
         }
 
-        ArrayList<Sectores> sec =  sectores.obtenerSectores();
-        if(sec!=null){
+        arraySectores =  sectores.obtenerSectores();
+        if(arraySectores!=null){
 
             ArrayAdapter<Sectores> adapterGir = new ArrayAdapter<Sectores>
-                    (this, android.R.layout.simple_spinner_item,sec); //selected item will look like a spinner set from XML
+                    (this, android.R.layout.simple_spinner_item,arraySectores); //selected item will look like a spinner set from XML
             adapterGir.setDropDownViewResource(android.R.layout
                     .simple_spinner_dropdown_item);
             SSector.setAdapter(adapterGir);
         }
+    }
+
+    public void guardarProyectoSeleccionado(View v){
+        int idBancoProyecto,idAlumno,idPeriodo,idOpcion,idGiro,idEstado,idSector;
+        idBancoProyecto = arrayBancoProyectos.get(SProyecto.getSelectedItemPosition()).getIdbancoProyecto();
+        idAlumno        = session.obtenerIdAlumno();
+        idPeriodo       = arrayPeriodos.get(SPeriodos.getSelectedItemPosition()).getIdPeriodo();
+        idOpcion        = arrayOpciones.get(SOpciones.getSelectedItemPosition()).getIdOpcion();
+        idGiro          = arrayGiros.get(SGiros.getSelectedItemPosition()).getIdGiro();
+        idEstado        = 1;
+        idSector        = arraySectores.get(SSector.getSelectedItemPosition()).getIdSector();
+        this.common.asyncEncogerProyecto(idBancoProyecto,idAlumno,idPeriodo,idOpcion,idGiro,idEstado,idSector);
     }
 
     public void configurarToolbar(){
