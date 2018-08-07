@@ -23,6 +23,7 @@
         <activity android:name=".registro.registroActivity"/>
         <activity android:name=".menuPrincipal.menuPrincipal"/>
         <activity android:name=".Configuraciones.ConfiguracionesActivity"/>
+        <activity android:name=".cartaPresentacion.cartaPresentacion"/>
     </application>
 
 </manifest>

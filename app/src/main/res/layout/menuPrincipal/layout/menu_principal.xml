@@ -100,25 +100,26 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1">
                 <android.support.v7.widget.CardView
-                    android:id="@+id/escogerProyecto"
+                    android:id="@+id/cartaPresentacion"
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
                     card_view:cardCornerRadius="6dp"
                     card_view:cardElevation="10dp"
-                    card_view:cardUseCompatPadding="true" >
+                    card_view:cardUseCompatPadding="true"
+                    android:onClick="cartaPresentacion">
 
                     <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:padding="@dimen/paddingRegistro"
-                        android:src="@drawable/proyecto"
+                        android:src="@drawable/carta"
                         />
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:padding="10dp"
-                        android:text="@string/escogerProyecto"
+                        android:text="@string/cartaPresentacion"
                         android:layout_gravity="bottom"
                         android:background="#8c000000"
                         android:textColor="#ffe3e3e3"

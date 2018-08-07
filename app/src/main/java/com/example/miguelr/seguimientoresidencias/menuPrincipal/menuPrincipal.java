@@ -16,6 +16,7 @@ import com.example.miguelr.seguimientoresidencias.Helper.sessionHelper;
 import com.example.miguelr.seguimientoresidencias.Login.MainActivity;
 import com.example.miguelr.seguimientoresidencias.Perfil.PerfilActivity;
 import com.example.miguelr.seguimientoresidencias.R;
+import com.example.miguelr.seguimientoresidencias.cartaPresentacion.cartaPresentacion;
 import com.example.miguelr.seguimientoresidencias.escogerProyecto.escogerProyecto;
 
 /**
@@ -59,6 +60,10 @@ public class menuPrincipal extends AppCompatActivity{
     }
     public void escogerProyecto(View view){
         Intent intent = new Intent(this,escogerProyecto.class);
+        startActivity(intent);
+    }
+    public void cartaPresentacion(View view){
+        Intent intent = new Intent(this,cartaPresentacion.class);
         startActivity(intent);
     }
     public void onBackPressed(){

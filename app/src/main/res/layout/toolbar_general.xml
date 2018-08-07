@@ -7,5 +7,6 @@
     android:elevation="5dp"
     app:layout_collapseMode="pin"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    app:popupTheme="@style/Theme.AppCompat.Light"
-    app:theme="@style/Theme.AppCompat"/>
+    android:theme="@style/GalaxyZooThemeToolbarDarkOverflow"
+    app:popupTheme="@style/Theme.AppCompat.NoActionBar"
+   />

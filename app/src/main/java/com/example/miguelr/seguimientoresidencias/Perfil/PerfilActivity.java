@@ -26,16 +26,7 @@ public class PerfilActivity extends AppCompatActivity{
     private Toolbar toolbar;
     private Common common;
     private Alumnos alumno;
-    private TextView nombreAlumno;
-    private TextView TVcarrera;
-    private TextView creditos;
-    private ImageView IVestatus;
-    private ProgressBar progressBar;
-    private Carreras carreras;
-    private Button btnLogin;
-    private TextView txtProgress;
     private FloatingActionButton FBmostrarAlumnos,FBmostrarExpedienteFinal,FBmostrarAvance;
-    private int idAlumnoSession;
 
     public void onCreate(Bundle bundle){
         super.onCreate(bundle);
@@ -48,19 +39,23 @@ public class PerfilActivity extends AppCompatActivity{
         FBmostrarExpedienteFinal = (FloatingActionButton) findViewById(R.id.FBmostrarExpedienteFinal);
         FBmostrarAvance = (FloatingActionButton) findViewById(R.id.FBmostrarAvance);
 
-
-        carreras = new Carreras(this);
-
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
         alumno = new Alumnos(PerfilActivity.this);
+        alumno = alumno.obtenerAlumnoSession();
+
+        configurarToolbar();
+
 
 
     }
 
 
+    public void configurarToolbar(){
+        setSupportActionBar(toolbar);
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        getSupportActionBar().setTitle(alumno.getvNombre());
+    }
 
 
     public boolean onCreateOptionsMenu(Menu menu){

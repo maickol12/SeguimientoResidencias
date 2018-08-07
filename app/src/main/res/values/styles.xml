@@ -8,8 +8,10 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <style name="AppThemeToolbar" parent="Theme.AppCompat.Light.NoActionBar">
-        <!-- Customize your theme here. -->
-        <item name="colorPrimary">#000</item>
+    <style name="GalaxyZooThemeToolbarDarkOverflow" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:textColorPrimary">@color/colorTexto</item>
+        <item name="actionMenuTextColor">@color/colorTexto</item>
+        <item name="android:textColorSecondary">@color/colorTexto</item>
     </style>
+
 </resources>
