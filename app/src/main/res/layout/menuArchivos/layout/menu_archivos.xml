@@ -1,0 +1,330 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:background="@color/colorMenuColpaseBack"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <include layout="@layout/toolbar"/>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:fitsSystemWindows="true"
+        android:weightSum="2"
+        xmlns:android="http://schemas.android.com/apk/res/android">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <com.github.florent37.expansionpanel.viewgroup.ExpansionsViewGroupLinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:expansion_openOnlyOne="true"
+                android:orientation="vertical">
+                    <!--Lineas panel carta presentacion-->
+                    <LinearLayout
+                        android:layout_marginTop="@dimen/paddingRegistro"
+                        android:layout_marginLeft="@dimen/paddingRegistro"
+                        android:layout_marginRight="@dimen/paddingRegistro"
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:orientation="vertical"
+                        android:background="@color/primary_light"
+                        >
+                        <com.github.florent37.expansionpanel.ExpansionHeader
+                            android:layout_height="wrap_content"
+                            android:layout_width="match_parent"
+                            app:expansion_headerIndicator="@id/headerIndicatorCartaPresentacion"
+                            app:expansion_layout="@id/expansionLayoutCartaPresentacion"
+                            app:expansion_toggleOnClick="true">
+                            <!-- HEADER -->
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textStyle="bold"
+                                android:padding="@dimen/paddingRegistro"
+                                android:text="@string/cartaPresentacion"/>
+                            ...
+                            <!-- HEADER INDICATOR -->
+                            <android.support.v7.widget.AppCompatImageView
+                                android:adjustViewBounds="true"
+                                android:layout_gravity="right"
+                                android:padding="@dimen/paddingRegistro"
+                                android:id="@+id/headerIndicatorCartaPresentacion"
+                                android:layout_height="wrap_content"
+                                android:layout_width="wrap_content"
+                                app:srcCompat="@drawable/ic_expansion_header_indicator_grey_24dp" />
+                        </com.github.florent37.expansionpanel.ExpansionHeader>
+
+                        <com.github.florent37.expansionpanel.ExpansionLayout
+                            android:id="@+id/expansionLayoutCartaPresentacion"
+                            android:layout_height="wrap_content"
+                            android:layout_width="match_parent"
+                            android:background="@color/primary_light">
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:padding="@dimen/paddingRegistro"
+                                android:orientation="vertical">
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/cartaPresentacionMenu"/>
+                                <ImageView
+                                    android:layout_margin="@dimen/paddingRegistro"
+                                    android:id="@+id/imageCartaPresentacion"
+                                    android:layout_gravity="center"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:src="@drawable/choose"/>
+                            </LinearLayout>
+                        </com.github.florent37.expansionpanel.ExpansionLayout>
+                    </LinearLayout>
+
+                    <!--Lineas panel carta Aceptacion-->
+                    <LinearLayout
+
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:orientation="vertical"
+                        android:layout_margin="@dimen/paddingRegistro"
+                        android:background="@color/primary_light"
+                        >
+
+                        <com.github.florent37.expansionpanel.ExpansionHeader
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:expansion_headerIndicator="@id/headerIndicatorCartaAceptacion"
+                            app:expansion_layout="@id/expansionLayoutCartaAceptacion"
+                            app:expansion_toggleOnClick="true">
+                            <!-- HEADER -->
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:padding="@dimen/paddingRegistro"
+                                android:text="@string/cartaAceptacion"
+                                android:textStyle="bold" />
+                            ...
+                            <!-- HEADER INDICATOR -->
+                            <android.support.v7.widget.AppCompatImageView
+                                android:id="@+id/headerIndicatorCartaAceptacion"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="right"
+                                android:adjustViewBounds="true"
+                                android:padding="@dimen/paddingRegistro"
+                                app:srcCompat="@drawable/ic_expansion_header_indicator_grey_24dp" />
+                        </com.github.florent37.expansionpanel.ExpansionHeader>
+
+                        <com.github.florent37.expansionpanel.ExpansionLayout
+                            android:id="@+id/expansionLayoutCartaAceptacion"
+                            android:layout_height="wrap_content"
+                            android:layout_width="match_parent"
+                            android:background="@color/primary_light">
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:padding="@dimen/paddingRegistro"
+                                android:orientation="vertical">
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/cartaAceptacioMenu"/>
+                                <ImageView
+                                    android:layout_margin="@dimen/paddingRegistro"
+                                    android:id="@+id/imageCartaAceptacion"
+                                    android:layout_gravity="center"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:src="@drawable/choose"/>
+                            </LinearLayout>
+                        </com.github.florent37.expansionpanel.ExpansionLayout>
+                    </LinearLayout>
+
+                    <!--Lineas panel carta Reporte1-->
+                    <LinearLayout
+
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:orientation="vertical"
+                        android:layout_margin="@dimen/paddingRegistro"
+                        android:background="@color/primary_light"
+                        >
+
+                        <com.github.florent37.expansionpanel.ExpansionHeader
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:expansion_headerIndicator="@id/headerIndicatorReporte1"
+                            app:expansion_layout="@id/expansionLayoutReporte1"
+                            app:expansion_toggleOnClick="true">
+                            <!-- HEADER -->
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:padding="@dimen/paddingRegistro"
+                                android:text="@string/reporte1"
+                                android:textStyle="bold" />
+                            ...
+                            <!-- HEADER INDICATOR -->
+                            <android.support.v7.widget.AppCompatImageView
+                                android:id="@+id/headerIndicatorReporte1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="right"
+                                android:adjustViewBounds="true"
+                                android:padding="@dimen/paddingRegistro"
+                                app:srcCompat="@drawable/ic_expansion_header_indicator_grey_24dp" />
+                        </com.github.florent37.expansionpanel.ExpansionHeader>
+
+                        <com.github.florent37.expansionpanel.ExpansionLayout
+                            android:id="@+id/expansionLayoutReporte1"
+                            android:layout_height="wrap_content"
+                            android:layout_width="match_parent"
+                            android:background="@color/primary_light">
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:padding="@dimen/paddingRegistro"
+                                android:orientation="vertical">
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/reporte1Menu"/>
+                                <ImageView
+                                    android:layout_margin="@dimen/paddingRegistro"
+                                    android:id="@+id/imageReporte1"
+                                    android:layout_gravity="center"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:src="@drawable/choose"/>
+                            </LinearLayout>
+                        </com.github.florent37.expansionpanel.ExpansionLayout>
+                    </LinearLayout>
+
+                    <!--Lineas panel carta Reporte2-->
+                    <LinearLayout
+
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:orientation="vertical"
+                        android:layout_margin="@dimen/paddingRegistro"
+                        android:background="@color/primary_light"
+                        >
+
+                        <com.github.florent37.expansionpanel.ExpansionHeader
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            app:expansion_headerIndicator="@id/headerIndicatorReporte2"
+                            app:expansion_layout="@id/expansionLayoutReporte2"
+                            app:expansion_toggleOnClick="true">
+                            <!-- HEADER -->
+                            ...
+                            <!-- HEADER INDICATOR -->
+                            <android.support.v7.widget.AppCompatImageView
+                                android:id="@+id/headerIndicatorReporte2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="right"
+                                android:adjustViewBounds="true"
+                                android:padding="@dimen/paddingRegistro"
+                                app:srcCompat="@drawable/ic_expansion_header_indicator_grey_24dp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+
+                                android:padding="@dimen/paddingRegistro"
+                                android:text="@string/reporte2"
+                                android:textStyle="bold" />
+                        </com.github.florent37.expansionpanel.ExpansionHeader>
+
+                        <com.github.florent37.expansionpanel.ExpansionLayout
+                            android:id="@+id/expansionLayoutReporte2"
+                            android:layout_height="wrap_content"
+                            android:layout_width="match_parent"
+                            android:background="@color/primary_light">
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:padding="@dimen/paddingRegistro"
+                                android:orientation="vertical">
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/reporte2Menu"/>
+                                <ImageView
+                                    android:layout_margin="@dimen/paddingRegistro"
+                                    android:id="@+id/imageReporte2"
+                                    android:layout_gravity="center"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:src="@drawable/choose"/>
+                            </LinearLayout>
+                        </com.github.florent37.expansionpanel.ExpansionLayout>
+                    </LinearLayout>
+
+                    <!--Lineas panel carta Reporte3-->
+                    <LinearLayout
+
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:orientation="vertical"
+                        android:layout_margin="@dimen/paddingRegistro"
+                        android:background="@color/primary_light"
+                        >
+
+                        <com.github.florent37.expansionpanel.ExpansionHeader
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:expansion_headerIndicator="@id/headerIndicatorReporte3"
+                            app:expansion_layout="@id/expansionLayoutReporte3"
+                            app:expansion_toggleOnClick="true">
+                            <!-- HEADER -->
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:padding="@dimen/paddingRegistro"
+                                android:text="@string/reporte3"
+                                android:textStyle="bold" />
+                            ...
+                            <!-- HEADER INDICATOR -->
+                            <android.support.v7.widget.AppCompatImageView
+                                android:id="@+id/headerIndicatorReporte3"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="right"
+                                android:adjustViewBounds="true"
+                                android:padding="@dimen/paddingRegistro"
+                                app:srcCompat="@drawable/ic_expansion_header_indicator_grey_24dp" />
+                        </com.github.florent37.expansionpanel.ExpansionHeader>
+
+                        <com.github.florent37.expansionpanel.ExpansionLayout
+                            android:id="@+id/expansionLayoutReporte3"
+                            android:layout_height="wrap_content"
+                            android:layout_width="match_parent"
+                            android:background="@color/primary_light">
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:padding="@dimen/paddingRegistro"
+                                android:orientation="vertical">
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/reporte3Menu"/>
+                                <ImageView
+                                    android:id="@+id/imgreporte3"
+                                    android:layout_margin="@dimen/paddingRegistro"
+                                    android:layout_gravity="center"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:src="@drawable/choose"/>
+                            </LinearLayout>
+                        </com.github.florent37.expansionpanel.ExpansionLayout>
+                    </LinearLayout>
+            </com.github.florent37.expansionpanel.viewgroup.ExpansionsViewGroupLinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

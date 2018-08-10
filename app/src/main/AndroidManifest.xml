@@ -24,6 +24,7 @@
         <activity android:name=".menuPrincipal.menuPrincipal"/>
         <activity android:name=".Configuraciones.ConfiguracionesActivity"/>
         <activity android:name=".cartaPresentacion.cartaPresentacion"/>
+        <activity android:name=".MenuArchivos.menuArchivos"/>
     </application>
 
 </manifest>

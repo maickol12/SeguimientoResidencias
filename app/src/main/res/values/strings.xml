@@ -53,6 +53,7 @@
     <string name="btnGuardar">Guardar</string>
     <string name="escogerProyecto">Escoger Proyecto</string>
     <string name="cartaPresentacion">Carta Presentación</string>
+    <string name="cartaAceptacion">Carta Aceptación</string>
     <string name="bancoProyecto">Proyecto</string>
     <string name="periodo">Periodo</string>
     <string name="opciones">Opciones</string>
@@ -60,5 +61,15 @@
     <string name="sector">Sector</string>
     <string name="guardarProyecto">Sector</string>
     <string name="perfil">Perfil</string>
+    <string name="reporte1">Reporte 1</string>
+    <string name="reporte2">Reporte 2</string>
+    <string name="reporte3">Reporte 3</string>
+
+
+    <string name="cartaPresentacionMenu">Menú para subir la carta de presentación al sistema</string>
+    <string name="cartaAceptacioMenu">Menú para subir la carta de aceptación al sistema</string>
+    <string name="reporte1Menu">Menú para subir el reporte uno al sistema</string>
+    <string name="reporte2Menu">Menú para subir el reporte dos al sistema</string>
+    <string name="reporte3Menu">Menú para subir el reporte tres al sistema</string>
 
 </resources>

@@ -106,7 +106,7 @@
                     card_view:cardCornerRadius="6dp"
                     card_view:cardElevation="10dp"
                     card_view:cardUseCompatPadding="true"
-                    android:onClick="cartaPresentacion">
+                    android:onClick="menuArchivosClick">
 
                     <ImageView
                         android:layout_width="match_parent"

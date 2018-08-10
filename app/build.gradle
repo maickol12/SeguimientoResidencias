@@ -12,6 +12,7 @@ android {
                     '/src/main/res/layout/menuPrincipal',
                     '/src/main/res/layout/escogerProyecto',
                     '/src/main/res/layout/cartaPresentacion',
+                    '/src/main/res/layout/menuArchivos',
                     '/src/main/res'
             ]
         }
@@ -37,8 +38,6 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'com.android.support:appcompat-v7:26.1.0'
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
-    compile 'org.apache.commons:commons-io:1.3.2'
-
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
@@ -46,5 +45,7 @@ dependencies {
     compile 'com.android.support:cardview-v7:26.+'
     compile 'com.android.support:recyclerview-v7:26.0.+'
     compile 'com.github.clans:fab:1.6.4'
+    compile 'com.github.florent37:expansionpanel:1.0.3'
+
 
 }

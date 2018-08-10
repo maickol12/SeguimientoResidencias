@@ -1,7 +1,6 @@
 package com.example.miguelr.seguimientoresidencias.menuPrincipal;
 
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,6 +13,7 @@ import com.example.miguelr.seguimientoresidencias.DataBase.Tables.Modelos.Alumno
 import com.example.miguelr.seguimientoresidencias.Helper.Common;
 import com.example.miguelr.seguimientoresidencias.Helper.sessionHelper;
 import com.example.miguelr.seguimientoresidencias.Login.MainActivity;
+import com.example.miguelr.seguimientoresidencias.MenuArchivos.menuArchivos;
 import com.example.miguelr.seguimientoresidencias.Perfil.PerfilActivity;
 import com.example.miguelr.seguimientoresidencias.R;
 import com.example.miguelr.seguimientoresidencias.cartaPresentacion.cartaPresentacion;
@@ -62,8 +62,8 @@ public class menuPrincipal extends AppCompatActivity{
         Intent intent = new Intent(this,escogerProyecto.class);
         startActivity(intent);
     }
-    public void cartaPresentacion(View view){
-        Intent intent = new Intent(this,cartaPresentacion.class);
+    public void menuArchivosClick(View view){
+        Intent intent = new Intent(this,menuArchivos.class);
         startActivity(intent);
     }
     public void onBackPressed(){
