@@ -64,6 +64,7 @@
     <string name="reporte1">Reporte 1</string>
     <string name="reporte2">Reporte 2</string>
     <string name="reporte3">Reporte 3</string>
+    <string name="archivoSeleccionado">Archivo seleccionado</string>
 
 
     <string name="cartaPresentacionMenu">Menú para subir la carta de presentación al sistema</string>

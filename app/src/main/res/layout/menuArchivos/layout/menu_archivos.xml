@@ -73,12 +73,20 @@
                                     android:layout_height="wrap_content"
                                     android:text="@string/cartaPresentacionMenu"/>
                                 <ImageView
+                                    android:onClick="cartaPresentacion"
                                     android:layout_margin="@dimen/paddingRegistro"
                                     android:id="@+id/imageCartaPresentacion"
                                     android:layout_gravity="center"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:src="@drawable/choose"/>
+                                <TextView
+                                    android:id="@+id/cartaPresentacionMensaje"
+                                    android:visibility="gone"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:text="@string/archivoSeleccionado"/>
                             </LinearLayout>
                         </com.github.florent37.expansionpanel.ExpansionLayout>
                     </LinearLayout>

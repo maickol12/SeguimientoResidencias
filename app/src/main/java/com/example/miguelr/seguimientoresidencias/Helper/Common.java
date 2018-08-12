@@ -191,6 +191,13 @@ public class Common {
         builder.setPositiveButton("SI",null);
         builder.show();
     }
+    public AlertDialog.Builder dialogoGeneral(String title,String message){
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setMessage(message);
+        builder.setTitle(title);
+        builder.setPositiveButton("SI",null);
+        return builder;
+    }
 
     public void asyncMessages(){
         String url = config.url+config.WebMethodMessages;
