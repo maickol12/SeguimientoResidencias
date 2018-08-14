@@ -119,7 +119,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:padding="10dp"
-                        android:text="@string/cartaPresentacion"
+                        android:text="@string/cartaArchivos"
                         android:layout_gravity="bottom"
                         android:background="#8c000000"
                         android:textColor="#ffe3e3e3"
@@ -134,7 +134,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1">
                 <android.support.v7.widget.CardView
-                    android:id="@+id/card1"
+                    android:id="@+id/card19"
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
                     card_view:cardCornerRadius="6dp"
@@ -149,7 +149,7 @@
                         />
 
                     <TextView
-                        android:id="@+id/txt2"
+                        android:id="@+id/txt21"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:padding="10dp"
