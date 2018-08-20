@@ -73,7 +73,7 @@
                                     android:layout_height="wrap_content"
                                     android:text="@string/cartaPresentacionMenu"/>
                                 <ImageView
-                                    android:onClick="escogerProyecto"
+                                    android:onClick="escogerArhivo"
                                     android:layout_margin="@dimen/paddingRegistro"
                                     android:id="@+id/imageCartaPresentacion"
                                     android:layout_gravity="center"

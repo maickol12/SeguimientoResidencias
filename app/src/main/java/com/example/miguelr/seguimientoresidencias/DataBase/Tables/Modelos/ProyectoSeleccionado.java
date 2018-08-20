@@ -2,6 +2,7 @@ package com.example.miguelr.seguimientoresidencias.DataBase.Tables.Modelos;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.example.miguelr.seguimientoresidencias.DataBase.Tables.DBTablas.MproyectoSeleccionado;
@@ -39,6 +40,18 @@ public class ProyectoSeleccionado {
         this.db     = this.common.databaseWritable();
     }
 
+    public int obtenerIdProyectoSeleccionado(int idAlumno){
+        String sql = "SELECT "+MproyectoSeleccionado.idBancoProyecto+" FROM "+MproyectoSeleccionado.table+" WHERE "+MproyectoSeleccionado.idAlumno+" = "+idAlumno;
+        Cursor c = db.rawQuery(sql,null);
+        int idProyectoSeleccionado = 0;
+        if(c.moveToFirst()){
+            do{
+                idProyectoSeleccionado = c.getInt(c.getColumnIndex(MproyectoSeleccionado.idBancoProyecto));
+            }while(c.moveToNext());
+        }
+        return idProyectoSeleccionado;
+    }
+
     public boolean guardar(){
         ContentValues cv = new ContentValues();
         cv.put(MproyectoSeleccionado.idBancoProyecto,getIdBancoProyecto());
@@ -48,11 +61,11 @@ public class ProyectoSeleccionado {
         cv.put(MproyectoSeleccionado.idGiro,getIdGiro());
         cv.put(MproyectoSeleccionado.idEstado,getIdEstado());
         cv.put(MproyectoSeleccionado.idSector,getIdSector());
-        cv.put(MproyectoSeleccionado.vNombreProyecto,getvNombreProyecto());
+        /*cv.put(MproyectoSeleccionado.vNombreProyecto,getvNombreProyecto());
         cv.put(MproyectoSeleccionado.vDescripcion,getvDescripcion());
-        cv.put(MproyectoSeleccionado.vDependencia,getvDependencia());
+        cv.put(MproyectoSeleccionado.vDependencia,getvDependencia());*/
         cv.put(MproyectoSeleccionado.vMotivoNoAceptacion,getvMotivoNoAceptacion());
-        cv.put(MproyectoSeleccionado.bCartaAceptacion,getbCartaAceptacion());
+        //cv.put(MproyectoSeleccionado.bCartaAceptacion,getbCartaAceptacion());
         cv.put(MproyectoSeleccionado.bSolicitud,getbSolicitud());
         cv.put(MproyectoSeleccionado.bReporte1,getbReporte1());
         cv.put(MproyectoSeleccionado.bReporte2,getbReporte2());
