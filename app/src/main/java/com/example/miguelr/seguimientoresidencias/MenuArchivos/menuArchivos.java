@@ -22,6 +22,7 @@ import com.example.miguelr.seguimientoresidencias.Helper.config;
 import com.example.miguelr.seguimientoresidencias.Helper.sessionHelper;
 import com.example.miguelr.seguimientoresidencias.R;
 
+import java.io.File;
 import java.util.ArrayList;
 
 /**
@@ -96,9 +97,22 @@ public class menuArchivos extends AppCompatActivity {
     }
 
     public void escogerArhivo(View v){
-        if(v.getId() == R.id.imageCartaPresentacion){
-            TIPO_DE_ARCHIVO = 4;
+        switch (v.getId()){
+            case R.id.imageCartaPresentacion:
+                TIPO_DE_ARCHIVO = 4;
+                break;
+            case R.id.imageCartaAceptacion:
+                TIPO_DE_ARCHIVO = 9;
+                break;
+            case R.id.imageReporte1:
+                TIPO_DE_ARCHIVO = 5;
+                break;
+            case R.id.imageReporte2:
+                TIPO_DE_ARCHIVO = 6;
+                break;
+
         }
+
 
         Common common = new Common(this);
         AlertDialog.Builder builder =  common.dialogoGeneral("ITSA","Seguro que deseas subir la carta de preentación?");
@@ -137,7 +151,7 @@ public class menuArchivos extends AppCompatActivity {
                 if (resultCode == RESULT_OK) {
 
                     Uri uri = data.getData();
-
+                    File sourceFile = new File(uri.toString());
 
                     if(TIPO_DE_ARCHIVO==4){
                         imageCartaPresentacion.clearAnimation();
@@ -147,7 +161,7 @@ public class menuArchivos extends AppCompatActivity {
                     int idAlumno = sessionHelper.obtenerIdAlumno();
                     archivoSel.setvRuta(uri.getPath());
                     archivoSel.setdDate(config.getDateTime());
-                    archivoSel.setUUID(config.generateUUID());
+                    archivoSel.setUUID(config.generateUUID()+"."+getFileExtension(sourceFile));
                     archivoSel.setIdAlumno(idAlumno);
                     int proySel = proySelec.obtenerIdProyectoSeleccionado(idAlumno);
                     archivoSel.setIdProyectoSeleccionado(proySel);
@@ -171,13 +185,21 @@ public class menuArchivos extends AppCompatActivity {
         }
         super.onActivityResult(requestCode, resultCode, data);
     }
+    private String getFileExtension(File file) {
+        String fileName = file.getName();
+        if(fileName.lastIndexOf(".") != -1 && fileName.lastIndexOf(".") != 0)
+            return fileName.substring(fileName.lastIndexOf(".")+1);
+        else return "";
+    }
 
     private void guardarInformacion(){
         ArrayList<ArchivoSeleccionado> archivoSeleccionados = archivoSel.obtenerArchivosSincronizar();
+        boolean someData = false;
         if(archivoSeleccionados!=null){
             for(ArchivoSeleccionado as : archivoSeleccionados){
                 common.asyncFile(as.getvRuta(),as.getUUID());
             }
+            someData = true;
         }
 
         ArrayList<ArchivoSeleccionado> dataArchivosSync = archivoSel.obtenerInformacionArchivosSincronizar();
@@ -185,6 +207,11 @@ public class menuArchivos extends AppCompatActivity {
             for(ArchivoSeleccionado as:dataArchivosSync){
                 common.asynDataFiles(as.getUUID(),as.getIdAlumno(),as.getTipoArchivo(),as.getIdProyectoSeleccionado());
             }
+            someData = true;
+        }
+
+        if(!someData){
+            common.dialogoGeneral("ITSA","La información ya se encuentra sincronizada").show();
         }
     }
 

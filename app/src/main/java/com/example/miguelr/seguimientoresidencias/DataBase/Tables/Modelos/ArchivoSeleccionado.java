@@ -113,6 +113,14 @@ public class ArchivoSeleccionado implements helperinterface {
         db.close();
         return i>0;
     }
+    public boolean updateBitDato(String UUID){
+        ContentValues cv = new ContentValues();
+        cv.put(MArchivosSeleccionados.bSyncData,1);
+        SQLiteDatabase db = common.databaseWritable();
+        long i = db.update(MArchivosSeleccionados.table,cv,MArchivosSeleccionados.UUID+" = '"+UUID+"'",null);
+        db.close();
+        return i>0;
+    }
     public ArrayList<ArchivoSeleccionado> obtenerInformacionArchivosSincronizar(){
         ArrayList<ArchivoSeleccionado> archivoSeleccionados = null;
         SQLiteDatabase db = common.databaseWritable();

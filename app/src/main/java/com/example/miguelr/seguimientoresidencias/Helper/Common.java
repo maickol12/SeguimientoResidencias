@@ -484,6 +484,19 @@ public class Common {
                 HttpResponse httpresponse = client.execute(post);
                 respuesta = EntityUtils.toString(httpresponse.getEntity());
                 Log.d("respuesta",respuesta);
+                JSONObject json = new JSONObject(respuesta);
+                JSONArray jsonTabla1 = json.getJSONArray("tabla1");
+                JSONArray jsonTabla2 = json.getJSONArray("tabla2");
+
+                JSONObject objt2 = jsonTabla2.getJSONObject(0);
+                String UUID = objt2.getString("UUID").toString();
+                archivoSeleccionado = new ArchivoSeleccionado(context);
+                if(archivoSeleccionado.updateBitDato(UUID)){
+                    Log.d("bitData","data sincronizada con exito");
+                }else{
+                    Log.d("bitData","Ocurrio un error al actualizar el bit de data");
+                }
+
             }catch (Exception e){
                 Log.d("error",e.getMessage());
             }
@@ -774,7 +787,7 @@ public class Common {
                         dos = new DataOutputStream(conn.getOutputStream());
 
                         dos.writeBytes(twoHyphens + boundary + lineEnd);
-                        dos.writeBytes("Content-Disposition: form-data; name=\"bill\";filename=\"" + UUID + "."+getFileExtension(sourceFile)+"\"" + lineEnd);
+                        dos.writeBytes("Content-Disposition: form-data; name=\"bill\";filename=\"" + UUID +"\"" + lineEnd);
                         dos.writeBytes(lineEnd);
 
 
@@ -838,15 +851,6 @@ public class Common {
                 ex.printStackTrace();
             }
             return "Executed";
-        }
-
-
-
-        private String getFileExtension(File file) {
-            String fileName = file.getName();
-            if(fileName.lastIndexOf(".") != -1 && fileName.lastIndexOf(".") != 0)
-                return fileName.substring(fileName.lastIndexOf(".")+1);
-            else return "";
         }
 
         @Override

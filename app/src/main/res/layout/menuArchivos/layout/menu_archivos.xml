@@ -141,6 +141,7 @@
                                     android:layout_height="wrap_content"
                                     android:text="@string/cartaAceptacioMenu"/>
                                 <ImageView
+                                    android:onClick="escogerArhivo"
                                     android:layout_margin="@dimen/paddingRegistro"
                                     android:id="@+id/imageCartaAceptacion"
                                     android:layout_gravity="center"
@@ -201,6 +202,7 @@
                                     android:layout_height="wrap_content"
                                     android:text="@string/reporte1Menu"/>
                                 <ImageView
+                                    android:onClick="escogerArhivo"
                                     android:layout_margin="@dimen/paddingRegistro"
                                     android:id="@+id/imageReporte1"
                                     android:layout_gravity="center"
@@ -263,6 +265,7 @@
                                     android:layout_height="wrap_content"
                                     android:text="@string/reporte2Menu"/>
                                 <ImageView
+                                    android:onClick="escogerArhivo"
                                     android:layout_margin="@dimen/paddingRegistro"
                                     android:id="@+id/imageReporte2"
                                     android:layout_gravity="center"
