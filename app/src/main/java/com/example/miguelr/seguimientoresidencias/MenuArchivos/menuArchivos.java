@@ -110,7 +110,9 @@ public class menuArchivos extends AppCompatActivity {
             case R.id.imageReporte2:
                 TIPO_DE_ARCHIVO = 6;
                 break;
-
+            case R.id.imgreporte3:
+                TIPO_DE_ARCHIVO = 7;
+                break;
         }
 
 
@@ -202,14 +204,13 @@ public class menuArchivos extends AppCompatActivity {
             someData = true;
         }
 
-        ArrayList<ArchivoSeleccionado> dataArchivosSync = archivoSel.obtenerInformacionArchivosSincronizar();
+       /* ArrayList<ArchivoSeleccionado> dataArchivosSync = archivoSel.obtenerInformacionArchivosSincronizar();
         if(dataArchivosSync!=null){
             for(ArchivoSeleccionado as:dataArchivosSync){
                 common.asynDataFiles(as.getUUID(),as.getIdAlumno(),as.getTipoArchivo(),as.getIdProyectoSeleccionado());
             }
             someData = true;
-        }
-
+        }*/
         if(!someData){
             common.dialogoGeneral("ITSA","La información ya se encuentra sincronizada").show();
         }

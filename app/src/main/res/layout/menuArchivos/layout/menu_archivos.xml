@@ -327,6 +327,7 @@
                                     android:text="@string/reporte3Menu"/>
                                 <ImageView
                                     android:id="@+id/imgreporte3"
+                                    android:onClick="escogerArhivo"
                                     android:layout_margin="@dimen/paddingRegistro"
                                     android:layout_gravity="center"
                                     android:layout_width="wrap_content"

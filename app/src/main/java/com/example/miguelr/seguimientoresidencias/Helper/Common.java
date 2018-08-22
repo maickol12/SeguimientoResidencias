@@ -824,6 +824,38 @@ public class Common {
                             subidadExito = 1;
                             archivoSeleccionado = new ArchivoSeleccionado(context);
                             archivoSeleccionado.updateBitArchivo(UUID);
+
+                            archivoSeleccionado = archivoSeleccionado.obtenerInformacionArchivo(UUID);
+                            String respuesta = "";
+                            try{
+                                List<NameValuePair> values = new ArrayList<>();
+                                values.add(new BasicNameValuePair("idProyectoSeleccionado",""+archivoSeleccionado.idProyectoSeleccionado));
+                                values.add(new BasicNameValuePair("idTipoDocumento",""+archivoSeleccionado.tipoArchivo));
+                                values.add(new BasicNameValuePair("UUID",archivoSeleccionado.UUID));
+                                values.add(new BasicNameValuePair("idAlumno",""+archivoSeleccionado.idAlumno));
+                                final HttpClient client = new DefaultHttpClient();
+                                HttpPost post = new HttpPost(config.url+config.WebMethoduploadDataFromFile);
+                                post.setEntity(new UrlEncodedFormEntity(values));
+                                HttpResponse httpresponse = client.execute(post);
+                                respuesta = EntityUtils.toString(httpresponse.getEntity());
+                                Log.d("respuesta",respuesta);
+                                JSONObject json = new JSONObject(respuesta);
+                                JSONArray jsonTabla1 = json.getJSONArray("tabla1");
+                                JSONArray jsonTabla2 = json.getJSONArray("tabla2");
+
+                                JSONObject objt2 = jsonTabla2.getJSONObject(0);
+                                String UUID = objt2.getString("UUID").toString();
+                                archivoSeleccionado = new ArchivoSeleccionado(context);
+                                if(archivoSeleccionado.updateBitDato(UUID)){
+                                    Log.d("bitData","data sincronizada con exito");
+                                }else{
+                                    Log.d("bitData","Ocurrio un error al actualizar el bit de data");
+                                }
+
+                            }catch (Exception e){
+                                Log.d("error",e.getMessage());
+                            }
+
                         }
 
 

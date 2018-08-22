@@ -121,6 +121,26 @@ public class ArchivoSeleccionado implements helperinterface {
         db.close();
         return i>0;
     }
+    public ArchivoSeleccionado obtenerInformacionArchivo(String UUID){
+        SQLiteDatabase db = common.databaseWritable();
+        String sql = "SELECT "+
+                MArchivosSeleccionados.tipoArchivo+ ","+
+                MArchivosSeleccionados.UUID+","+
+                MArchivosSeleccionados.idAlumno+","+
+                MArchivosSeleccionados.idProyecto+
+                " FROM "+MArchivosSeleccionados.table+" WHERE "+MArchivosSeleccionados.bSyncData+" = 0 AND "+MArchivosSeleccionados.UUID+" = '"+UUID+"'";
+        Cursor c = db.rawQuery(sql,null);
+        ArchivoSeleccionado as = null;
+        if(c.moveToFirst()){
+                as                   = new ArchivoSeleccionado();
+                as.setTipoArchivo(c.getInt(c.getColumnIndex(MArchivosSeleccionados.tipoArchivo)));
+                as.setUUID(c.getString(c.getColumnIndex(MArchivosSeleccionados.UUID)));
+                as.setIdAlumno(c.getInt(c.getColumnIndex(MArchivosSeleccionados.idAlumno)));
+                as.setIdProyectoSeleccionado(c.getInt(c.getColumnIndex(MArchivosSeleccionados.idProyecto)));
+        }
+        db.close();
+        return as;
+    }
     public ArrayList<ArchivoSeleccionado> obtenerInformacionArchivosSincronizar(){
         ArrayList<ArchivoSeleccionado> archivoSeleccionados = null;
         SQLiteDatabase db = common.databaseWritable();
@@ -133,15 +153,15 @@ public class ArchivoSeleccionado implements helperinterface {
         Cursor c = db.rawQuery(sql,null);
         ArchivoSeleccionado as = null;
         if(c.moveToFirst()){
-            archivoSeleccionados = new ArrayList<>();
-            as                   = new ArchivoSeleccionado();
-
-
-            as.setTipoArchivo(c.getInt(c.getColumnIndex(MArchivosSeleccionados.tipoArchivo)));
-            as.setUUID(c.getString(c.getColumnIndex(MArchivosSeleccionados.UUID)));
-            as.setIdAlumno(c.getInt(c.getColumnIndex(MArchivosSeleccionados.idAlumno)));
-            as.setIdProyectoSeleccionado(c.getInt(c.getColumnIndex(MArchivosSeleccionados.idProyecto)));
-            archivoSeleccionados.add(as);
+           do{
+               archivoSeleccionados = new ArrayList<>();
+               as                   = new ArchivoSeleccionado();
+               as.setTipoArchivo(c.getInt(c.getColumnIndex(MArchivosSeleccionados.tipoArchivo)));
+               as.setUUID(c.getString(c.getColumnIndex(MArchivosSeleccionados.UUID)));
+               as.setIdAlumno(c.getInt(c.getColumnIndex(MArchivosSeleccionados.idAlumno)));
+               as.setIdProyectoSeleccionado(c.getInt(c.getColumnIndex(MArchivosSeleccionados.idProyecto)));
+               archivoSeleccionados.add(as);
+           }while(c.moveToNext());
         }
         db.close();
         return archivoSeleccionados;
@@ -159,11 +179,13 @@ public class ArchivoSeleccionado implements helperinterface {
         ArchivoSeleccionado as = null;
         if(c.moveToFirst()){
             archivoSeleccionados = new ArrayList<>();
-            as                   = new ArchivoSeleccionado();
-            as.setvRuta(c.getString(c.getColumnIndex(MArchivosSeleccionados.vRuta)));
-            as.setTipoArchivo(c.getInt(c.getColumnIndex(MArchivosSeleccionados.tipoArchivo)));
-            as.setUUID(c.getString(c.getColumnIndex(MArchivosSeleccionados.UUID)));
-            archivoSeleccionados.add(as);
+           do{
+               as                   = new ArchivoSeleccionado();
+               as.setvRuta(c.getString(c.getColumnIndex(MArchivosSeleccionados.vRuta)));
+               as.setTipoArchivo(c.getInt(c.getColumnIndex(MArchivosSeleccionados.tipoArchivo)));
+               as.setUUID(c.getString(c.getColumnIndex(MArchivosSeleccionados.UUID)));
+               archivoSeleccionados.add(as);
+           }while (c.moveToNext());
         }
         db.close();
         return archivoSeleccionados;
