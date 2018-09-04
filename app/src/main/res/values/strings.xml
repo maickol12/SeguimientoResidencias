@@ -73,5 +73,5 @@
     <string name="reporte1Menu">Menú para subir el reporte uno al sistema</string>
     <string name="reporte2Menu">Menú para subir el reporte dos al sistema</string>
     <string name="reporte3Menu">Menú para subir el reporte tres al sistema</string>
-
+    <string name="carreraProfile">Carrera</string>
 </resources>

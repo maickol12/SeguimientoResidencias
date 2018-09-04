@@ -38,6 +38,7 @@ public class menuArchivos extends AppCompatActivity {
     private ProyectoSeleccionado proySelec;
     private Common common;
     private sessionHelper sessionHelper;
+
     public void onCreate(Bundle b){
         super.onCreate(b);
         setContentView(R.layout.menu_archivos);
@@ -115,19 +116,24 @@ public class menuArchivos extends AppCompatActivity {
                 break;
         }
 
+        if(proySelec.obtenerIdProyectoSeleccionado(sessionHelper.obtenerIdAlumno())>0){
 
-        Common common = new Common(this);
-        AlertDialog.Builder builder =  common.dialogoGeneral("ITSA","Seguro que deseas subir la carta de preentación?");
+            AlertDialog.Builder builder =  common.dialogoGeneral("ITSA","Seguro que deseas subir el archivo?");
 
-        builder.setPositiveButton("SI", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                showFileChooser();
-            }
-        });
-        builder.setNegativeButton("NO",null);
+            builder.setPositiveButton("SI", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    showFileChooser();
+                }
+            });
+            builder.setNegativeButton("NO",null);
 
-        builder.show();
+            builder.show();
+        }else{
+            common.dialogoGeneral("ITSA","No has seleccionado ningún proyecto , debes de seleccionar uno..").show();
+        }
+
+
     }
     private static final int FILE_SELECT_CODE = 0;
 

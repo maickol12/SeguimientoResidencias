@@ -2,4 +2,9 @@
 <resources>
         <dimen name="altoToolbar">4dp</dimen>
         <dimen name="paddingRegistro">10dp</dimen>
+        <dimen name="letterTittle">25dp</dimen>
+        <dimen name="letterDescription">18dp</dimen>
+        <dimen name="marginLeftProfile">30dp</dimen>
+        <dimen name="marginTop">10dp</dimen>
+        <dimen name="marging">1dp</dimen>
 </resources>

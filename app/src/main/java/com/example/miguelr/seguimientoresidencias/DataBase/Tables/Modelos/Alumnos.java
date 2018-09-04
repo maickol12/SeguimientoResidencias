@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import com.example.miguelr.seguimientoresidencias.DataBase.Tables.DBTablas.Malumnos;
+import com.example.miguelr.seguimientoresidencias.DataBase.Tables.DBTablas.Mcarreras;
 import com.example.miguelr.seguimientoresidencias.DataBase.Tables.helperinterface;
 import com.example.miguelr.seguimientoresidencias.Helper.Common;
 import com.example.miguelr.seguimientoresidencias.Helper.sessionHelper;
@@ -76,6 +77,16 @@ public class Alumnos implements helperinterface {
         return i>0;
     }
 
+    public String getNombreCarrera(){
+        SQLiteDatabase db = common.databaseReadeable();
+        String sql = "SELECT "+ Mcarreras.idCarrera+ ","+Mcarreras.vCarrera+" FROM "+Mcarreras.table+" WHERE "+Mcarreras.idCarrera+" = "+this.getIdCarrera();
+        Cursor c = db.rawQuery(sql,null);
+        String nombreCarrera = "";
+        if(c.moveToFirst()){
+            nombreCarrera = c.getString(c.getColumnIndex(Mcarreras.vCarrera));
+        }
+        return nombreCarrera;
+    }
 
     public Alumnos obtenerAlumnoSession() {
         int idAlumno = session.obtenerIdAlumno();
@@ -84,7 +95,8 @@ public class Alumnos implements helperinterface {
                          Malumnos.vNombre+","+
                          Malumnos.vApellidoPaterno+","+
                          Malumnos.vApellidoMaterno+","+
-                         Malumnos.vNumeroControl+" "+
+                         Malumnos.vNumeroControl+", "+
+                         Malumnos.idCarrera+" "+
                      "FROM "+Malumnos.table+" WHERE "+Malumnos.idAlumno+" = "+idAlumno;
         Cursor c = null;
         Alumnos al = null;
@@ -98,6 +110,7 @@ public class Alumnos implements helperinterface {
                al.setvApellidoPaterno(c.getString(c.getColumnIndex(Malumnos.vApellidoPaterno)));
                al.setvApellidoMaterno(c.getString(c.getColumnIndex(Malumnos.vApellidoMaterno)));
                al.setvNumeroControl(c.getString(c.getColumnIndex(Malumnos.vNumeroControl)));
+               al.setIdCarrera(c.getInt(c.getColumnIndex(Malumnos.idCarrera)));
             }
         }catch (Exception e){
             Log.d("error",e.getMessage());

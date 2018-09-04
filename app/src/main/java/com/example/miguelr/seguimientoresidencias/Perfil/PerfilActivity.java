@@ -26,6 +26,7 @@ public class PerfilActivity extends AppCompatActivity{
     private Toolbar toolbar;
     private Common common;
     private Alumnos alumno;
+    private TextView TVNombreAlumno,tvCarrera;
     private FloatingActionButton FBmostrarAlumnos,FBmostrarExpedienteFinal,FBmostrarAvance;
 
     public void onCreate(Bundle bundle){
@@ -39,8 +40,16 @@ public class PerfilActivity extends AppCompatActivity{
         FBmostrarExpedienteFinal = (FloatingActionButton) findViewById(R.id.FBmostrarExpedienteFinal);
         FBmostrarAvance = (FloatingActionButton) findViewById(R.id.FBmostrarAvance);
 
+        TVNombreAlumno = (TextView)  findViewById(R.id.TVNombreAlumno);
+        tvCarrera      = (TextView)  findViewById(R.id.tvCarrera);
+
         alumno = new Alumnos(PerfilActivity.this);
         alumno = alumno.obtenerAlumnoSession();
+
+        if(alumno!=null){
+            TVNombreAlumno.setText(alumno.getvNombre());
+            tvCarrera.setText(alumno.getNombreCarrera());
+        }
 
         configurarToolbar();
 
@@ -65,7 +74,8 @@ public class PerfilActivity extends AppCompatActivity{
     public boolean onOptionsItemSelected(MenuItem item){
         switch (item.getItemId()){
             case android.R.id.home:
-                common.dialogoSalir();
+                //common.dialogoSalir();
+                onBackPressed();
             break;
             case R.id.mostrarAlumnos:
 
@@ -75,10 +85,10 @@ public class PerfilActivity extends AppCompatActivity{
     }
 
 
-    public void onBackPressed(){
+   /* public void onBackPressed(){
         common.dialogoSalir();
     }
-
+*/
 
     private void iniciarActividad(Class<?> clase){
         Intent intent = new Intent(PerfilActivity.this,clase);
