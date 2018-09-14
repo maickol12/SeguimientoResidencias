@@ -305,7 +305,8 @@ public class Common {
                 int idAlumno = obj.getInt("idAlumno");
 
                 ProyectoSeleccionado proyecto = new ProyectoSeleccionado(context);
-                proyecto.setIdBancoProyecto(obj.getInt("idProyectoSeleccionado"));
+                proyecto.setIdProyectoSeleccionado(obj.getInt("idProyectoSeleccionado"));
+                proyecto.setIdBancoProyecto(obj.getInt("idbancoProyecto"));
                 proyecto.setIdAlumno(idAlumno);
                 proyecto.setIdPeriodo(obj.getInt("idPeriodo"));
                 proyecto.setIdOpcion(obj.getInt("idOpcion"));
@@ -347,7 +348,7 @@ public class Common {
 
 
             }catch (Exception e){
-                Log.d("error",e.getMessage());
+                Toast.makeText(context,e.getMessage(),Toast.LENGTH_LONG).show();
             }
             dialog.dismiss();
         }
@@ -397,6 +398,8 @@ public class Common {
                 JSONObject object = new JSONObject(json);
                 JSONArray tabla1 = object.optJSONArray("tabla1");
                 JSONArray tabla2 = object.optJSONArray("tabla2");
+                JSONArray tabla3 = object.getJSONArray("tabla3");
+                JSONArray tabla4 = object.getJSONArray("tabla4");
 
 
                 int response = tabla1.getJSONObject(0).getInt("response");
@@ -431,6 +434,53 @@ public class Common {
                     if(alumnos.buscar()){
                         alumnos.borrar();
                     }
+
+                    if(tabla3.length()>0){
+                        ArchivoSeleccionado as = new ArchivoSeleccionado(context);
+                        as.borrar(alumnos.getIdAlumno());
+                        for(int i = 0;i<tabla3.length();i++){
+                            object = tabla3.getJSONObject(i);
+                            as = new ArchivoSeleccionado(context);
+                            as.setIdArchivo(object.getInt("idDocumento"));
+                            as.setvRuta(object.getString("vRuta"));
+                            as.setIdArchivo(object.getInt("idAlumno"));
+                            as.setIdProyectoSeleccionado(object.getInt("idProyectoSeleccionado"));
+                            as.setTipoArchivo(object.getInt("idTipoDocumento"));
+                            as.setbSyncFile(1);
+                            as.setbSyncData(1);
+                            as.setUUID(object.getString("vNombre"));
+
+                            as.guardar();
+                        }
+
+                    }
+
+                    if(tabla4.length()>0) {
+                        ProyectoSeleccionado ps = new ProyectoSeleccionado(context);
+                        ps.borrar(alumnos.getIdAlumno());
+
+
+                        object = tabla4.getJSONObject(0);
+                        ps.setIdProyectoSeleccionado(object.getInt("idProyectoSeleccionado"));
+                        ps.setIdBancoProyecto(object.getInt("idbancoProyecto"));
+                        ps.setIdAlumno(object.getInt("idAlumno"));
+                        ps.setIdPeriodo(object.getInt("idPeriodo"));
+                        ps.setIdOpcion(object.getInt("idOpcion"));
+                        ps.setIdGiro(object.getInt("idGiro"));
+                        ps.setIdEstado(object.getInt("idEstado"));
+                        ps.setIdSector(object.getInt("idSector"));
+                        ps.setbCartaAceptacion(object.getInt("bCartaAceptacion"));
+                        ps.setbCartaPresentacion(object.getInt("bCartaPresentacion"));
+                        ps.setbSolicitud(object.getInt("bSolicitud"));
+                        ps.setbReporte1(object.getInt("bReporte1"));
+                        ps.setbReporte1(object.getInt("bReporte2"));
+                        ps.setbReporte1(object.getInt("bReporte3"));
+
+                        ps.guardar();
+                    }
+
+
+
                     if(alumnos.guardar()){
                        session.createSession(alumnos);
                         redirigirMenu();
@@ -816,6 +866,7 @@ public class Common {
                                 + lineEnd);
 
                         // Responses from the server (code and message)
+                        String mensaje = conn.getResponseMessage();
                         int serverResponseCode = conn.getResponseCode();
                         String serverResponseMessage = conn
                                 .getResponseMessage();

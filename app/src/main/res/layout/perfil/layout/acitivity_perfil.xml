@@ -10,6 +10,7 @@
     android:fitsSystemWindows="true">
 
     <android.support.design.widget.AppBarLayout
+        android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:background="@color/background"
         android:layout_height="wrap_content">
@@ -90,6 +91,21 @@
                 android:text="@string/carreraProfile"/>
             <TextView
                 android:id="@+id/tvCarrera"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/primary_text"
+                android:textSize="@dimen/letterDescription"
+                android:text="text"
+                android:paddingRight="@dimen/marging"/>
+            <TextView
+                android:textColor="@color/coloritsa"
+                android:textStyle="bold"
+                android:textSize="@dimen/letterTittle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/proyectoSeleccionadoProfile"/>
+            <TextView
+                android:id="@+id/tvProyectoSeleccionado"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/primary_text"

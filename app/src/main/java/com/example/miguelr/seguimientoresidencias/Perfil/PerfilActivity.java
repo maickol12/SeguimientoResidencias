@@ -2,6 +2,8 @@ package com.example.miguelr.seguimientoresidencias.Perfil;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.AppBarLayout;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -26,8 +28,10 @@ public class PerfilActivity extends AppCompatActivity{
     private Toolbar toolbar;
     private Common common;
     private Alumnos alumno;
-    private TextView TVNombreAlumno,tvCarrera;
+    private TextView TVNombreAlumno,tvCarrera,tvProyectoSeleccionado;
     private FloatingActionButton FBmostrarAlumnos,FBmostrarExpedienteFinal,FBmostrarAvance;
+    private CollapsingToolbarLayout collapsingToolbarLayout;
+    private AppBarLayout appBarLayout;
 
     public void onCreate(Bundle bundle){
         super.onCreate(bundle);
@@ -39,6 +43,9 @@ public class PerfilActivity extends AppCompatActivity{
         FBmostrarAlumnos = (FloatingActionButton) findViewById(R.id.FBmostrarAlumnos);
         FBmostrarExpedienteFinal = (FloatingActionButton) findViewById(R.id.FBmostrarExpedienteFinal);
         FBmostrarAvance = (FloatingActionButton) findViewById(R.id.FBmostrarAvance);
+        collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
+        appBarLayout            = (AppBarLayout) findViewById(R.id.appBarLayout);
+        tvProyectoSeleccionado  = (TextView) findViewById(R.id.tvProyectoSeleccionado);
 
         TVNombreAlumno = (TextView)  findViewById(R.id.TVNombreAlumno);
         tvCarrera      = (TextView)  findViewById(R.id.tvCarrera);
@@ -49,6 +56,7 @@ public class PerfilActivity extends AppCompatActivity{
         if(alumno!=null){
             TVNombreAlumno.setText(alumno.getvNombre());
             tvCarrera.setText(alumno.getNombreCarrera());
+            tvProyectoSeleccionado.setText(alumno.getProyectoSeleccionado());
         }
 
         configurarToolbar();
@@ -64,6 +72,25 @@ public class PerfilActivity extends AppCompatActivity{
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         getSupportActionBar().setTitle(alumno.getvNombre());
+
+        appBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
+            boolean isShow = true;
+            int scrollRange = -1;
+
+            @Override
+            public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
+                if (scrollRange == -1) {
+                    scrollRange = appBarLayout.getTotalScrollRange();
+                }
+                if (scrollRange + verticalOffset == 0) {
+                    collapsingToolbarLayout.setTitle(alumno.getvNombre());
+                    isShow = true;
+                } else if(isShow) {
+                    collapsingToolbarLayout.setTitle(" ");//carefull there should a space between double quote otherwise it wont work
+                    isShow = false;
+                }
+            }
+        });
     }
 
 

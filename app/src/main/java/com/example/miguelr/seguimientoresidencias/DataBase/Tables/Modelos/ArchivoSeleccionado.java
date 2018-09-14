@@ -200,11 +200,19 @@ public class ArchivoSeleccionado implements helperinterface {
     }
 
 
+
     @Override
     public boolean borrar() {
+
         return false;
     }
-
+    public boolean borrar(int idAlumno){
+        SQLiteDatabase db = common.databaseWritable();
+        String sql = "DELETE FROM "+MArchivosSeleccionados.table+" WHERE "+MArchivosSeleccionados.idAlumno+" = "+idAlumno;
+        db.rawQuery(sql,null);
+        db.close();
+        return true;
+    }
     @Override
     public boolean buscar() {
         SQLiteDatabase db = common.databaseReadeable();

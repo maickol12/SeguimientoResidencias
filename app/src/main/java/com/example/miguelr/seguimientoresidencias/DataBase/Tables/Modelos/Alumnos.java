@@ -7,7 +7,9 @@ import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import com.example.miguelr.seguimientoresidencias.DataBase.Tables.DBTablas.Malumnos;
+import com.example.miguelr.seguimientoresidencias.DataBase.Tables.DBTablas.Mbancoproyectos;
 import com.example.miguelr.seguimientoresidencias.DataBase.Tables.DBTablas.Mcarreras;
+import com.example.miguelr.seguimientoresidencias.DataBase.Tables.DBTablas.MproyectoSeleccionado;
 import com.example.miguelr.seguimientoresidencias.DataBase.Tables.helperinterface;
 import com.example.miguelr.seguimientoresidencias.Helper.Common;
 import com.example.miguelr.seguimientoresidencias.Helper.sessionHelper;
@@ -86,6 +88,19 @@ public class Alumnos implements helperinterface {
             nombreCarrera = c.getString(c.getColumnIndex(Mcarreras.vCarrera));
         }
         return nombreCarrera;
+    }
+    public String getProyectoSeleccionado(){
+        SQLiteDatabase db = common.databaseReadeable();
+        String sql = "SELECT bp."+ Mbancoproyectos.vNombreProyecto+" FROM "+MproyectoSeleccionado.table+" AS ps "+
+                    " INNER JOIN "+ Mbancoproyectos.table+" AS bp ON(bp."+Mbancoproyectos.idbancoProyecto+" = ps."+MproyectoSeleccionado.idBancoProyecto+") "
+                    +" WHERE ps."+MproyectoSeleccionado.idAlumno+" = "+getIdAlumno();
+        Cursor c = db.rawQuery(sql,null);
+        String nombreProyecto = "";
+        if(c.moveToFirst()){
+            nombreProyecto = c.getString(c.getColumnIndex(Mbancoproyectos.vNombreProyecto));
+        }
+        db.close();
+        return nombreProyecto;
     }
 
     public Alumnos obtenerAlumnoSession() {

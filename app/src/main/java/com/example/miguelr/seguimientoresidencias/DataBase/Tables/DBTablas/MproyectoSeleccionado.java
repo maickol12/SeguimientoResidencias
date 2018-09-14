@@ -6,6 +6,8 @@ package com.example.miguelr.seguimientoresidencias.DataBase.Tables.DBTablas;
 
 public class MproyectoSeleccionado {
     public static String table                  = "proyectoSeleccionado";
+
+    public static String idProyectoSeleccionado = "idProyectoSeleccionado";
     public static String idBancoProyecto        = "idBancoProyecto";
     public static String idAlumno               = "idAlumno";
     public static String idPeriodo              = "idPeriodo";
@@ -26,6 +28,7 @@ public class MproyectoSeleccionado {
 
     public static String createTable(){
         return "CREATE TABLE "+table+"("+
+                idProyectoSeleccionado+" INTEGER,"+
                 idBancoProyecto+"       INTEGER,"+
                 idAlumno+"              INTEGER,"+
                 idPeriodo+"             INTEGER,"+

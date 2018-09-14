@@ -17,6 +17,8 @@ public class ProyectoSeleccionado {
     private Common common;
     private SQLiteDatabase db;
 
+
+    public int idProyectoSeleccionado;
     public int idBancoProyecto;
     public int idAlumno;
     public int idPeriodo;
@@ -41,19 +43,26 @@ public class ProyectoSeleccionado {
     }
 
     public int obtenerIdProyectoSeleccionado(int idAlumno){
-        String sql = "SELECT "+MproyectoSeleccionado.idBancoProyecto+" FROM "+MproyectoSeleccionado.table+" WHERE "+MproyectoSeleccionado.idAlumno+" = "+idAlumno;
+        String sql = "SELECT "+MproyectoSeleccionado.idProyectoSeleccionado+" FROM "+MproyectoSeleccionado.table+" WHERE "+MproyectoSeleccionado.idAlumno+" = "+idAlumno;
         Cursor c = db.rawQuery(sql,null);
         int idProyectoSeleccionado = 0;
         if(c.moveToFirst()){
             do{
-                idProyectoSeleccionado = c.getInt(c.getColumnIndex(MproyectoSeleccionado.idBancoProyecto));
+                idProyectoSeleccionado = c.getInt(c.getColumnIndex(MproyectoSeleccionado.idProyectoSeleccionado));
             }while(c.moveToNext());
         }
         return idProyectoSeleccionado;
     }
 
+    public boolean borrar(int idAlumno){
+        String sql = "DELETE FROM "+MproyectoSeleccionado.table+" WHERE "+MproyectoSeleccionado.idAlumno+" = "+idAlumno;
+        db.rawQuery(sql,null);
+        return true;
+    }
+
     public boolean guardar(){
         ContentValues cv = new ContentValues();
+        cv.put(MproyectoSeleccionado.idProyectoSeleccionado,getIdProyectoSeleccionado());
         cv.put(MproyectoSeleccionado.idBancoProyecto,getIdBancoProyecto());
         cv.put(MproyectoSeleccionado.idAlumno,getIdAlumno());
         cv.put(MproyectoSeleccionado.idPeriodo,getIdPeriodo());
@@ -74,6 +83,14 @@ public class ProyectoSeleccionado {
     }
     public void cerrarDB(){
         this.db.close();
+    }
+
+    public int getIdProyectoSeleccionado() {
+        return idProyectoSeleccionado;
+    }
+
+    public void setIdProyectoSeleccionado(int idProyectoSeleccionado) {
+        this.idProyectoSeleccionado = idProyectoSeleccionado;
     }
 
     public int getIdBancoProyecto() {
