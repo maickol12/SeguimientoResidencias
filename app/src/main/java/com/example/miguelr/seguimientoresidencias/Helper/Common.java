@@ -562,6 +562,7 @@ public class Common {
     }
     public void redirigirMenu(){
         Intent intent = new Intent(context, menuPrincipal.class);
+        ((MainActivity)context).finish();
         context.startActivity(intent);
     }
 
@@ -939,7 +940,8 @@ public class Common {
         @Override
         protected void onPostExecute(String result) {
             if(subidadExito==1){
-                Toast.makeText(context, "Subida de archivo completada. ", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(context, "Subida de archivo completada. ", Toast.LENGTH_SHORT).show();
+                dialogoGeneral("ITSA","Archivos subidos con exito").show();
             }
             dialog.dismiss();
         }
