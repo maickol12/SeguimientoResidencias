@@ -1,342 +1,643 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    android:background="@color/colorMenuColpaseBack"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-    <include layout="@layout/toolbar"/>
-    <ScrollView
+    android:background="@color/grey_10"
+    android:orientation="vertical">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <include layout="@layout/toolbar" />
+
+    </android.support.design.widget.AppBarLayout>
+
+    <android.support.v4.widget.NestedScrollView
+        android:id="@+id/nested_scroll_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fillViewport="true"
-        android:fitsSystemWindows="true"
-        android:weightSum="2"
-        xmlns:android="http://schemas.android.com/apk/res/android">
+        android:scrollbars="none"
+        android:scrollingCache="true">
+
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-            <com.github.florent37.expansionpanel.viewgroup.ExpansionsViewGroupLinearLayout
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingTop="@dimen/spacing_medium">
+            <!--CARTA DE PRESENTACION-->
+            <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:expansion_openOnlyOne="true"
-                android:orientation="vertical">
-                    <!--Lineas panel carta presentacion-->
+                android:layout_marginBottom="@dimen/spacing_medium"
+                android:layout_marginLeft="@dimen/spacing_middle"
+                android:layout_marginRight="@dimen/spacing_middle"
+                android:layout_marginTop="@dimen/spacing_medium"
+                android:visibility="visible"
+                app:cardCornerRadius="2dp"
+                app:cardElevation="2dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
                     <LinearLayout
-                        android:layout_marginTop="@dimen/paddingRegistro"
-                        android:layout_marginLeft="@dimen/paddingRegistro"
-                        android:layout_marginRight="@dimen/paddingRegistro"
-                        android:layout_height="wrap_content"
                         android:layout_width="match_parent"
-                        android:orientation="vertical"
-                        android:background="@color/primary_light"
-                        >
-                        <com.github.florent37.expansionpanel.ExpansionHeader
+                        android:layout_height="wrap_content"
+                        android:background="@android:color/white"
+                        android:gravity="center_vertical"
+                        android:minHeight="?attr/actionBarSize"
+                        android:orientation="horizontal">
+
+                        <View
+                            android:layout_width="@dimen/spacing_large"
+                            android:layout_height="wrap_content" />
+                        <TextView
+                            android:id="@+id/textView3"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/cartaPresentacion"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                            android:textColor="@color/grey_80" />
+
+                        <ImageButton
+                            android:id="@+id/bt_toggle_text_carta_presentacion"
+                            android:layout_width="?attr/actionBarSize"
+                            android:layout_height="?attr/actionBarSize"
+                            android:background="?attr/selectableItemBackgroundBorderless"
+                            android:tint="@color/grey_80"
+                            android:src="@drawable/ic_expand_arrow" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/lyt_expand_text_carta_presentacion"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <LinearLayout
                             android:layout_width="match_parent"
-                            app:expansion_headerIndicator="@id/headerIndicatorCartaPresentacion"
-                            app:expansion_layout="@id/expansionLayoutCartaPresentacion"
-                            app:expansion_toggleOnClick="true">
-                            <!-- HEADER -->
+                            android:layout_height="wrap_content"
+                            android:padding="@dimen/paddingRegistro"
+                            android:orientation="vertical">
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:textStyle="bold"
-                                android:padding="@dimen/paddingRegistro"
-                                android:text="@string/cartaPresentacion"/>
-                            ...
-                            <!-- HEADER INDICATOR -->
-                            <android.support.v7.widget.AppCompatImageView
-                                android:adjustViewBounds="true"
-                                android:layout_gravity="right"
-                                android:padding="@dimen/paddingRegistro"
-                                android:id="@+id/headerIndicatorCartaPresentacion"
-                                android:layout_height="wrap_content"
+                                android:text="@string/cartaPresentacionMenu"/>
+                            <ImageView
+                                android:onClick="escogerArhivo"
+                                android:layout_margin="@dimen/paddingRegistro"
+                                android:id="@+id/imageCartaPresentacion"
+                                android:layout_gravity="center"
                                 android:layout_width="wrap_content"
-                                app:srcCompat="@drawable/ic_expansion_header_indicator_grey_24dp" />
-                        </com.github.florent37.expansionpanel.ExpansionHeader>
-
-                        <com.github.florent37.expansionpanel.ExpansionLayout
-                            android:id="@+id/expansionLayoutCartaPresentacion"
-                            android:layout_height="wrap_content"
-                            android:layout_width="match_parent"
-                            android:background="@color/primary_light">
-                            <LinearLayout
-                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:padding="@dimen/paddingRegistro"
-                                android:orientation="vertical">
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="@string/cartaPresentacionMenu"/>
-                                <ImageView
-                                    android:onClick="escogerArhivo"
-                                    android:layout_margin="@dimen/paddingRegistro"
-                                    android:id="@+id/imageCartaPresentacion"
-                                    android:layout_gravity="center"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:src="@drawable/choose"/>
-                                <TextView
-                                    android:id="@+id/cartaPresentacionMensaje"
-                                    android:visibility="gone"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:gravity="center"
-                                    android:text="@string/archivoSeleccionado"/>
-                            </LinearLayout>
-                        </com.github.florent37.expansionpanel.ExpansionLayout>
+                                android:src="@drawable/choose"/>
+                            <TextView
+                                android:id="@+id/cartaPresentacionMensaje"
+                                android:visibility="gone"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:text="@string/archivoSeleccionado"/>
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="@color/grey_10" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="end"
+                            android:orientation="horizontal">
+
+                            <Button
+                                android:id="@+id/bt_hide_text_carta_presentacion"
+                                style="@style/Widget.AppCompat.Button.Borderless"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:text="Cerrar" />
+
+                        </LinearLayout>
+
                     </LinearLayout>
 
-                    <!--Lineas panel carta Aceptacion-->
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+            <!--CARTA DE ACEPTACION-->
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/spacing_medium"
+                android:layout_marginLeft="@dimen/spacing_middle"
+                android:layout_marginRight="@dimen/spacing_middle"
+                android:layout_marginTop="@dimen/spacing_medium"
+                android:visibility="visible"
+                app:cardCornerRadius="2dp"
+                app:cardElevation="2dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
                     <LinearLayout
-
-                        android:layout_height="wrap_content"
                         android:layout_width="match_parent"
-                        android:orientation="vertical"
-                        android:layout_margin="@dimen/paddingRegistro"
-                        android:background="@color/primary_light"
-                        >
+                        android:layout_height="wrap_content"
+                        android:background="@android:color/white"
+                        android:gravity="center_vertical"
+                        android:minHeight="?attr/actionBarSize"
+                        android:orientation="horizontal">
 
-                        <com.github.florent37.expansionpanel.ExpansionHeader
+                        <View
+                            android:layout_width="@dimen/spacing_large"
+                            android:layout_height="wrap_content" />
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/cartaAceptacion"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                            android:textColor="@color/grey_80" />
+
+                        <ImageButton
+                            android:id="@+id/bt_toggle_text_carta_aceptacion"
+                            android:layout_width="?attr/actionBarSize"
+                            android:layout_height="?attr/actionBarSize"
+                            android:background="?attr/selectableItemBackgroundBorderless"
+                            android:tint="@color/grey_80"
+                            android:src="@drawable/ic_expand_arrow" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/lyt_expand_text_carta_aceptacion"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            app:expansion_headerIndicator="@id/headerIndicatorCartaAceptacion"
-                            app:expansion_layout="@id/expansionLayoutCartaAceptacion"
-                            app:expansion_toggleOnClick="true">
-                            <!-- HEADER -->
+                            android:padding="@dimen/paddingRegistro"
+                            android:orientation="vertical">
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:padding="@dimen/paddingRegistro"
-                                android:text="@string/cartaAceptacion"
-                                android:textStyle="bold" />
-                            ...
-                            <!-- HEADER INDICATOR -->
-                            <android.support.v7.widget.AppCompatImageView
-                                android:id="@+id/headerIndicatorCartaAceptacion"
+                                android:text="@string/cartaAceptacioMenu"/>
+                            <ImageView
+                                android:onClick="escogerArhivo"
+                                android:layout_margin="@dimen/paddingRegistro"
+                                android:id="@+id/imageCartaAceptacion"
+                                android:layout_gravity="center"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_gravity="right"
-                                android:adjustViewBounds="true"
-                                android:padding="@dimen/paddingRegistro"
-                                app:srcCompat="@drawable/ic_expansion_header_indicator_grey_24dp" />
-                        </com.github.florent37.expansionpanel.ExpansionHeader>
-
-                        <com.github.florent37.expansionpanel.ExpansionLayout
-                            android:id="@+id/expansionLayoutCartaAceptacion"
-                            android:layout_height="wrap_content"
+                                android:src="@drawable/choose"/>
+                        </LinearLayout>
+                        <View
                             android:layout_width="match_parent"
-                            android:background="@color/primary_light">
-                            <LinearLayout
-                                android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="@color/grey_10" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="end"
+                            android:orientation="horizontal">
+
+                            <Button
+                                android:id="@+id/bt_hide_text_carta_aceptacion"
+                                style="@style/Widget.AppCompat.Button.Borderless"
+                                android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:padding="@dimen/paddingRegistro"
-                                android:orientation="vertical">
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="@string/cartaAceptacioMenu"/>
-                                <ImageView
-                                    android:onClick="escogerArhivo"
-                                    android:layout_margin="@dimen/paddingRegistro"
-                                    android:id="@+id/imageCartaAceptacion"
-                                    android:layout_gravity="center"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:src="@drawable/choose"/>
-                            </LinearLayout>
-                        </com.github.florent37.expansionpanel.ExpansionLayout>
+                                android:gravity="center"
+                                android:text="Cerrar" />
+
+                        </LinearLayout>
+
                     </LinearLayout>
 
-                    <!--Lineas panel carta Reporte1-->
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+            <!--REPORTE 1-->
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/spacing_medium"
+                android:layout_marginLeft="@dimen/spacing_middle"
+                android:layout_marginRight="@dimen/spacing_middle"
+                android:layout_marginTop="@dimen/spacing_medium"
+                android:visibility="visible"
+                app:cardCornerRadius="2dp"
+                app:cardElevation="2dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
                     <LinearLayout
-
-                        android:layout_height="wrap_content"
                         android:layout_width="match_parent"
-                        android:orientation="vertical"
-                        android:layout_margin="@dimen/paddingRegistro"
-                        android:background="@color/primary_light"
-                        >
+                        android:layout_height="wrap_content"
+                        android:background="@android:color/white"
+                        android:gravity="center_vertical"
+                        android:minHeight="?attr/actionBarSize"
+                        android:orientation="horizontal">
 
-                        <com.github.florent37.expansionpanel.ExpansionHeader
+                        <View
+                            android:layout_width="@dimen/spacing_large"
+                            android:layout_height="wrap_content" />
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/reporte1"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                            android:textColor="@color/grey_80" />
+
+                        <ImageButton
+                            android:id="@+id/bt_toggle_text_carta_reporte_1"
+                            android:layout_width="?attr/actionBarSize"
+                            android:layout_height="?attr/actionBarSize"
+                            android:background="?attr/selectableItemBackgroundBorderless"
+                            android:tint="@color/grey_80"
+                            android:src="@drawable/ic_expand_arrow" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/lyt_expand_text_carta_reporte_1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            app:expansion_headerIndicator="@id/headerIndicatorReporte1"
-                            app:expansion_layout="@id/expansionLayoutReporte1"
-                            app:expansion_toggleOnClick="true">
-                            <!-- HEADER -->
+                            android:padding="@dimen/paddingRegistro"
+                            android:orientation="vertical">
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:padding="@dimen/paddingRegistro"
-                                android:text="@string/reporte1"
-                                android:textStyle="bold" />
-                            ...
-                            <!-- HEADER INDICATOR -->
-                            <android.support.v7.widget.AppCompatImageView
-                                android:id="@+id/headerIndicatorReporte1"
+                                android:text="@string/reporte1Menu"/>
+                            <ImageView
+                                android:onClick="escogerArhivo"
+                                android:layout_margin="@dimen/paddingRegistro"
+                                android:id="@+id/imageReporte1"
+                                android:layout_gravity="center"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_gravity="right"
-                                android:adjustViewBounds="true"
-                                android:padding="@dimen/paddingRegistro"
-                                app:srcCompat="@drawable/ic_expansion_header_indicator_grey_24dp" />
-                        </com.github.florent37.expansionpanel.ExpansionHeader>
-
-                        <com.github.florent37.expansionpanel.ExpansionLayout
-                            android:id="@+id/expansionLayoutReporte1"
-                            android:layout_height="wrap_content"
+                                android:src="@drawable/choose"/>
+                        </LinearLayout>
+                        <View
                             android:layout_width="match_parent"
-                            android:background="@color/primary_light">
-                            <LinearLayout
-                                android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="@color/grey_10" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="end"
+                            android:orientation="horizontal">
+
+                            <Button
+                                android:id="@+id/bt_hide_text_carta_reporte_1"
+                                style="@style/Widget.AppCompat.Button.Borderless"
+                                android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:padding="@dimen/paddingRegistro"
-                                android:orientation="vertical">
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="@string/reporte1Menu"/>
-                                <ImageView
-                                    android:onClick="escogerArhivo"
-                                    android:layout_margin="@dimen/paddingRegistro"
-                                    android:id="@+id/imageReporte1"
-                                    android:layout_gravity="center"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:src="@drawable/choose"/>
-                            </LinearLayout>
-                        </com.github.florent37.expansionpanel.ExpansionLayout>
+                                android:gravity="center"
+                                android:text="Cerrar" />
+
+                        </LinearLayout>
+
                     </LinearLayout>
 
-                    <!--Lineas panel carta Reporte2-->
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+            <!--REPORTE 2-->
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/spacing_medium"
+                android:layout_marginLeft="@dimen/spacing_middle"
+                android:layout_marginRight="@dimen/spacing_middle"
+                android:layout_marginTop="@dimen/spacing_medium"
+                android:visibility="visible"
+                app:cardCornerRadius="2dp"
+                app:cardElevation="2dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
                     <LinearLayout
-
-                        android:layout_height="wrap_content"
                         android:layout_width="match_parent"
-                        android:orientation="vertical"
-                        android:layout_margin="@dimen/paddingRegistro"
-                        android:background="@color/primary_light"
-                        >
+                        android:layout_height="wrap_content"
+                        android:background="@android:color/white"
+                        android:gravity="center_vertical"
+                        android:minHeight="?attr/actionBarSize"
+                        android:orientation="horizontal">
 
-                        <com.github.florent37.expansionpanel.ExpansionHeader
+                        <View
+                            android:layout_width="@dimen/spacing_large"
+                            android:layout_height="wrap_content" />
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/reporte2"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                            android:textColor="@color/grey_80" />
+
+                        <ImageButton
+                            android:id="@+id/bt_toggle_text_carta_reporte_2"
+                            android:layout_width="?attr/actionBarSize"
+                            android:layout_height="?attr/actionBarSize"
+                            android:background="?attr/selectableItemBackgroundBorderless"
+                            android:tint="@color/grey_80"
+                            android:src="@drawable/ic_expand_arrow" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/lyt_expand_text_carta_reporte_2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            app:expansion_headerIndicator="@id/headerIndicatorReporte2"
-                            app:expansion_layout="@id/expansionLayoutReporte2"
-                            app:expansion_toggleOnClick="true">
-                            <!-- HEADER -->
-                            ...
-                            <!-- HEADER INDICATOR -->
-                            <android.support.v7.widget.AppCompatImageView
-                                android:id="@+id/headerIndicatorReporte2"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="right"
-                                android:adjustViewBounds="true"
-                                android:padding="@dimen/paddingRegistro"
-                                app:srcCompat="@drawable/ic_expansion_header_indicator_grey_24dp" />
-
+                            android:layout_height="wrap_content"
+                            android:padding="@dimen/paddingRegistro"
+                            android:orientation="vertical">
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-
-                                android:padding="@dimen/paddingRegistro"
-                                android:text="@string/reporte2"
-                                android:textStyle="bold" />
-                        </com.github.florent37.expansionpanel.ExpansionHeader>
-
-                        <com.github.florent37.expansionpanel.ExpansionLayout
-                            android:id="@+id/expansionLayoutReporte2"
-                            android:layout_height="wrap_content"
-                            android:layout_width="match_parent"
-                            android:background="@color/primary_light">
-                            <LinearLayout
-                                android:layout_width="match_parent"
+                                android:text="@string/reporte2Menu"/>
+                            <ImageView
+                                android:onClick="escogerArhivo"
+                                android:layout_margin="@dimen/paddingRegistro"
+                                android:id="@+id/imageReporte2"
+                                android:layout_gravity="center"
+                                android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:padding="@dimen/paddingRegistro"
-                                android:orientation="vertical">
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="@string/reporte2Menu"/>
-                                <ImageView
-                                    android:onClick="escogerArhivo"
-                                    android:layout_margin="@dimen/paddingRegistro"
-                                    android:id="@+id/imageReporte2"
-                                    android:layout_gravity="center"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:src="@drawable/choose"/>
-                            </LinearLayout>
-                        </com.github.florent37.expansionpanel.ExpansionLayout>
+                                android:src="@drawable/choose"/>
+                        </LinearLayout>
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="@color/grey_10" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="end"
+                            android:orientation="horizontal">
+
+                            <Button
+                                android:id="@+id/bt_hide_text_carta_reporte_2"
+                                style="@style/Widget.AppCompat.Button.Borderless"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:text="Cerrar" />
+
+                        </LinearLayout>
+
                     </LinearLayout>
 
-                    <!--Lineas panel carta Reporte3-->
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+            <!--REPORTE 3-->
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/spacing_medium"
+                android:layout_marginLeft="@dimen/spacing_middle"
+                android:layout_marginRight="@dimen/spacing_middle"
+                android:layout_marginTop="@dimen/spacing_medium"
+                android:visibility="visible"
+                app:cardCornerRadius="2dp"
+                app:cardElevation="2dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
                     <LinearLayout
-
-                        android:layout_height="wrap_content"
                         android:layout_width="match_parent"
-                        android:orientation="vertical"
-                        android:layout_margin="@dimen/paddingRegistro"
-                        android:background="@color/primary_light"
-                        >
+                        android:layout_height="wrap_content"
+                        android:background="@android:color/white"
+                        android:gravity="center_vertical"
+                        android:minHeight="?attr/actionBarSize"
+                        android:orientation="horizontal">
 
-                        <com.github.florent37.expansionpanel.ExpansionHeader
+                        <View
+                            android:layout_width="@dimen/spacing_large"
+                            android:layout_height="wrap_content" />
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/reporte3"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                            android:textColor="@color/grey_80" />
+
+                        <ImageButton
+                            android:id="@+id/bt_toggle_text_carta_reporte_3"
+                            android:layout_width="?attr/actionBarSize"
+                            android:layout_height="?attr/actionBarSize"
+                            android:background="?attr/selectableItemBackgroundBorderless"
+                            android:tint="@color/grey_80"
+                            android:src="@drawable/ic_expand_arrow" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/lyt_expand_text_carta_reporte_3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            app:expansion_headerIndicator="@id/headerIndicatorReporte3"
-                            app:expansion_layout="@id/expansionLayoutReporte3"
-                            app:expansion_toggleOnClick="true">
-                            <!-- HEADER -->
+                            android:padding="@dimen/paddingRegistro"
+                            android:orientation="vertical">
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:padding="@dimen/paddingRegistro"
-                                android:text="@string/reporte3"
-                                android:textStyle="bold" />
-                            ...
-                            <!-- HEADER INDICATOR -->
-                            <android.support.v7.widget.AppCompatImageView
-                                android:id="@+id/headerIndicatorReporte3"
+                                android:text="@string/reporte3Menu"/>
+                            <ImageView
+                                android:id="@+id/imgreporte3"
+                                android:onClick="escogerArhivo"
+                                android:layout_margin="@dimen/paddingRegistro"
+                                android:layout_gravity="center"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_gravity="right"
-                                android:adjustViewBounds="true"
-                                android:padding="@dimen/paddingRegistro"
-                                app:srcCompat="@drawable/ic_expansion_header_indicator_grey_24dp" />
-                        </com.github.florent37.expansionpanel.ExpansionHeader>
-
-                        <com.github.florent37.expansionpanel.ExpansionLayout
-                            android:id="@+id/expansionLayoutReporte3"
-                            android:layout_height="wrap_content"
+                                android:src="@drawable/choose"/>
+                        </LinearLayout>
+                        <View
                             android:layout_width="match_parent"
-                            android:background="@color/primary_light">
-                            <LinearLayout
-                                android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="@color/grey_10" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="end"
+                            android:orientation="horizontal">
+
+                            <Button
+                                android:id="@+id/bt_hide_text_carta_reporte_3"
+                                style="@style/Widget.AppCompat.Button.Borderless"
+                                android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:padding="@dimen/paddingRegistro"
-                                android:orientation="vertical">
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="@string/reporte3Menu"/>
-                                <ImageView
-                                    android:id="@+id/imgreporte3"
-                                    android:onClick="escogerArhivo"
-                                    android:layout_margin="@dimen/paddingRegistro"
-                                    android:layout_gravity="center"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:src="@drawable/choose"/>
-                            </LinearLayout>
-                        </com.github.florent37.expansionpanel.ExpansionLayout>
+                                android:gravity="center"
+                                android:text="Cerrar" />
+
+                        </LinearLayout>
+
                     </LinearLayout>
-            </com.github.florent37.expansionpanel.viewgroup.ExpansionsViewGroupLinearLayout>
+
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/spacing_medium"
+                android:layout_marginLeft="@dimen/spacing_middle"
+                android:layout_marginRight="@dimen/spacing_middle"
+                android:layout_marginTop="@dimen/spacing_medium"
+                android:visibility="visible"
+                app:cardCornerRadius="2dp"
+                app:cardElevation="2dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@android:color/white"
+                        android:gravity="center_vertical"
+                        android:minHeight="?attr/actionBarSize"
+                        android:orientation="horizontal">
+
+                        <View
+                            android:layout_width="@dimen/spacing_large"
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Input"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                            android:textColor="@color/grey_80" />
+
+                        <ImageButton
+                            android:id="@+id/bt_toggle_input"
+                            android:layout_width="?attr/actionBarSize"
+                            android:layout_height="?attr/actionBarSize"
+                            android:background="?attr/selectableItemBackgroundBorderless"
+                            android:tint="@color/grey_80"
+                            app:srcCompat="@drawable/ic_expand_arrow" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/lyt_expand_input"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <EditText
+                            android:id="@+id/appCompatEditText"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:layout_marginLeft="@dimen/spacing_large"
+                            android:layout_marginRight="@dimen/spacing_large"
+                            android:layout_marginTop="@dimen/spacing_large"
+                            android:background="@color/grey_5"
+                            android:gravity="center_vertical"
+                            android:hint="Name"
+                            android:padding="@dimen/spacing_middle"
+                            android:textColor="@color/grey_60" />
+
+                        <RadioGroup
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/spacing_large"
+                            android:layout_marginTop="@dimen/spacing_medium">
+
+                            <android.support.v7.widget.AppCompatRadioButton
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Male" />
+
+                            <android.support.v7.widget.AppCompatRadioButton
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Female" />
+
+                        </RadioGroup>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="@color/grey_10" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="end"
+                            android:orientation="horizontal">
+
+                            <Button
+                                android:id="@+id/bt_hide_input"
+                                style="@style/Widget.AppCompat.Button.Borderless"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:text="Cerrar" />
+
+                            <Button
+                                android:id="@+id/bt_save_input"
+
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:text="Guardar" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
         </LinearLayout>
-    </ScrollView>
+
+    </android.support.v4.widget.NestedScrollView>
+
 </LinearLayout>
+

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.v4.view.ViewCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -18,6 +19,7 @@ import com.example.miguelr.seguimientoresidencias.DataBase.Tables.Modelos.Carrer
 import com.example.miguelr.seguimientoresidencias.Helper.Common;
 import com.example.miguelr.seguimientoresidencias.R;
 import com.github.clans.fab.FloatingActionButton;
+import com.mikhaellopez.circularimageview.CircularImageView;
 
 
 /**
@@ -40,33 +42,57 @@ public class PerfilActivity extends AppCompatActivity{
         common = new Common(this);
         toolbar = (Toolbar) findViewById(R.id.toolbarGeneralDez);
 
-        FBmostrarAlumnos = (FloatingActionButton) findViewById(R.id.FBmostrarAlumnos);
+       /* FBmostrarAlumnos = (FloatingActionButton) findViewById(R.id.FBmostrarAlumnos);
         FBmostrarExpedienteFinal = (FloatingActionButton) findViewById(R.id.FBmostrarExpedienteFinal);
         FBmostrarAvance = (FloatingActionButton) findViewById(R.id.FBmostrarAvance);
         collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
         appBarLayout            = (AppBarLayout) findViewById(R.id.appBarLayout);
-        tvProyectoSeleccionado  = (TextView) findViewById(R.id.tvProyectoSeleccionado);
 
-        TVNombreAlumno = (TextView)  findViewById(R.id.TVNombreAlumno);
-        tvCarrera      = (TextView)  findViewById(R.id.tvCarrera);
 
+
+
+
+
+
+        configurarToolbar();
+*/
+        TVNombreAlumno = (TextView)  findViewById(R.id.TVNombreAlumnoPerfil);
+        tvCarrera      = (TextView)  findViewById(R.id.TVCarreraPerfil);
         alumno = new Alumnos(PerfilActivity.this);
         alumno = alumno.obtenerAlumnoSession();
+        tvProyectoSeleccionado  = (TextView) findViewById(R.id.tvProyectoSeleccionado);
 
         if(alumno!=null){
             TVNombreAlumno.setText(alumno.getvNombre());
             tvCarrera.setText(alumno.getNombreCarrera());
             tvProyectoSeleccionado.setText(alumno.getProyectoSeleccionado());
         }
-
-        configurarToolbar();
-
-
+       initToolbar();
+       initComponent();
 
     }
+    private void initToolbar() {
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setNavigationIcon(R.drawable.ic_menu);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Perfil");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
+    private void initComponent() {
+        final CircularImageView image = (CircularImageView) findViewById(R.id.image);
+        final CollapsingToolbarLayout collapsing_toolbar = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
+        ((AppBarLayout) findViewById(R.id.app_bar_layout)).addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
+            @Override
+            public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
+                int min_height = ViewCompat.getMinimumHeight(collapsing_toolbar) * 2;
+                float scale = (float) (min_height + verticalOffset) / min_height;
+                image.setScaleX(scale >= 0 ? scale : 0);
+                image.setScaleY(scale >= 0 ? scale : 0);
+            }
+        });
+    }
 
-
-    public void configurarToolbar(){
+  /*public void configurarToolbar(){
         setSupportActionBar(toolbar);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -91,7 +117,7 @@ public class PerfilActivity extends AppCompatActivity{
                 }
             }
         });
-    }
+    }*/
 
 
     public boolean onCreateOptionsMenu(Menu menu){

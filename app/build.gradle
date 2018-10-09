@@ -46,6 +46,7 @@ dependencies {
     compile 'com.android.support:recyclerview-v7:26.0.+'
     compile 'com.github.clans:fab:1.6.4'
     compile 'com.github.florent37:expansionpanel:1.0.3'
+    implementation 'com.mikhaellopez:circularimageview:3.2.0'          // circle image view
 
 
 
