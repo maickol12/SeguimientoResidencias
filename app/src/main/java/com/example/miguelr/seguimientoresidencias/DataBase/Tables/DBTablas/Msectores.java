@@ -17,6 +17,6 @@ public class Msectores {
                 ""+vSector+" TEXT)";
     }
     public static String deleteTable(){
-        return "DELETE TABLE "+table;
+        return "DROP TABLE IF EXISTS "+table;
     }
 }

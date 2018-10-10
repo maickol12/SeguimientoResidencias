@@ -15,6 +15,6 @@ public class Mperiodos {
                 ""+vPeriodo+" TEXT)";
     }
     public static String deleteTable(){
-        return "DELETE TABLE "+table;
+        return "DROP TABLE IF EXISTS "+table;
     }
 }

@@ -14,7 +14,7 @@ import java.util.UUID;
  */
 
 public class config {
-    public static int versionDB                         = 16;
+    public static int versionDB                         = 17;
     public static String dbName                         = "ServicioSocial";
     public static String url                            = "http://residenciasitsa.diplomadosdelasep.com.mx/wssegres/";
     public static String WebMethodMessages              = "getMessages";

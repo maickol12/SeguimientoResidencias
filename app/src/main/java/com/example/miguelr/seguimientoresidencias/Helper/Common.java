@@ -29,6 +29,7 @@ import com.example.miguelr.seguimientoresidencias.DataBase.Tables.DataBase;
 import com.example.miguelr.seguimientoresidencias.DataBase.Tables.Modelos.Alumnos;
 import com.example.miguelr.seguimientoresidencias.DataBase.Tables.Modelos.ArchivoSeleccionado;
 import com.example.miguelr.seguimientoresidencias.DataBase.Tables.Modelos.Carreras;
+import com.example.miguelr.seguimientoresidencias.DataBase.Tables.Modelos.Estados;
 import com.example.miguelr.seguimientoresidencias.DataBase.Tables.Modelos.Giros;
 import com.example.miguelr.seguimientoresidencias.DataBase.Tables.Modelos.Opciones;
 import com.example.miguelr.seguimientoresidencias.DataBase.Tables.Modelos.Periodos;
@@ -711,6 +712,26 @@ public class Common {
                     }
                 }
                 bp.cerrarDB();
+
+                /****************************
+                 * estados
+                 *****************************/
+                JSONArray estados = array.getJSONArray("estados");
+                Estados e = new Estados(context);
+                e.borrar();
+                for (int i = 0;i<estados.length();i++){
+                    obj = estados.getJSONObject(i);
+                    e.setIdEstado(obj.getInt("idEstado"));
+                    e.setvEstado(obj.getString("vEstado"));
+                    e.setBactivo(obj.getInt("bActivo"));
+
+                    if(e.guardar()){
+                        Log.d("guardar","estados guardado");
+                    }else{
+                        Log.d("guardar","estados no guardado");
+                    }
+                }
+
 
             }catch (Exception e){
                 Log.d("error",e.getMessage());

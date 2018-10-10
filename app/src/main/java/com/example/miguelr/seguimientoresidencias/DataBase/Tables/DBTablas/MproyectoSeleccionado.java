@@ -48,6 +48,6 @@ public class MproyectoSeleccionado {
                 bReporte3+"             INTEGER)";
     }
     public static String deleteTable(){
-        return "DELETE FROM "+table;
+        return "DROP FROM IF EXISTS "+table;
     }
 }
