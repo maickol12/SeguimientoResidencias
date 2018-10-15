@@ -703,7 +703,7 @@ public class Common {
                     bp.setIdEstado(obj.getInt(Mbancoproyectos.idEstado));
                     bp.setvNombreProyecto(obj.getString(Mbancoproyectos.vNombreProyecto));
                     bp.setvDescripcion(obj.getString(Mbancoproyectos.vDescripcion));
-                    bp.setvDependencia(obj.getString(Mbancoproyectos.vDependencia));
+                  //  bp.setvDependencia(obj.getString(Mbancoproyectos.vDependencia));
                     bp.setiTotalResidentes(obj.getInt(Mbancoproyectos.iTotalResidentes));
                     if(bp.guardar()){
                         Log.d("guardar","bancoProyecto guardado");
