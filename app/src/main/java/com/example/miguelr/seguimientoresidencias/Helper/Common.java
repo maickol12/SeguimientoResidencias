@@ -1,12 +1,14 @@
 package com.example.miguelr.seguimientoresidencias.Helper;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.support.v7.app.AlertDialog;
@@ -15,6 +17,8 @@ import android.text.Spanned;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.Window;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -197,11 +201,28 @@ public class Common {
 
 
     public void dialogoMensajes(String title,String message){
-        AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        builder.setMessage(message);
-        builder.setTitle(title);
-        builder.setPositiveButton("SI",null);
-        builder.show();
+        final Dialog dialog = new Dialog(context);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE); // before
+        LayoutInflater inflater = (LayoutInflater) context.getSystemService( Context.LAYOUT_INFLATER_SERVICE );
+
+        View view = inflater.inflate(R.layout.dialog_mensajes,null);
+        TextView tvMessage,tvTittle;
+        Button btnCerrar;
+        tvTittle  = view.findViewById(R.id.dialogTittle);
+        tvMessage = view.findViewById(R.id.dialogMessage);
+        btnCerrar = view.findViewById(R.id.btnCerrar);
+        tvTittle.setText(title);
+        tvMessage.setText(message);
+        dialog.setContentView(view);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        dialog.setCancelable(true);
+        btnCerrar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
     }
     public AlertDialog.Builder dialogoGeneral(String title,String message){
         AlertDialog.Builder builder = new AlertDialog.Builder(context);

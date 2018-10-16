@@ -59,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
         common.asyncMessages();
         common.asyncDescargarCatalogos();
 
+
         carreras = new Carreras(this);
         session = new sessionHelper(this);
 

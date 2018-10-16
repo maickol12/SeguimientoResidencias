@@ -14,5 +14,8 @@
         <!-- Customize your theme here. -->
         <item name="colorPrimary">#000</item>
     </style>
+    <style name="Button.Primary.Borderless" parent="@style/Widget.AppCompat.Button.Borderless.Colored">
+        <item name="android:textColor">@color/colorPrimary</item>
+    </style>
 
 </resources>
