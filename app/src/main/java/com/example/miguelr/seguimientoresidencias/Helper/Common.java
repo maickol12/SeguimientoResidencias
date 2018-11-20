@@ -236,6 +236,10 @@ public class Common {
         String url = config.url+config.WebMethodMessages;
         new asyncTask(context,1,url).execute();
     }
+    public void asyncMessagesPorAlumno(int idAlumno){
+        String url = config.url+config.WebMethodMessagesPorAlumno;
+        new asynTaskMensajesPorAlumnos(context,1,url,idAlumno).execute();
+    }
 
 
     public ProgressDialog getProgressBar(String titulo,String mensaje){
@@ -766,18 +770,71 @@ public class Common {
         }
     }
 
+    public class asynTaskMensajesPorAlumnos extends AsyncTask<String,String,String>{
+        private Context context;
+        private int     type;
+        private String  url;
+        private int     idAlumno;
+        public asynTaskMensajesPorAlumnos(Context context,int type,String url,int idAlumno){
+            this.context = context;
+            this.type    = type;
+            this.url     = url;
+            this.idAlumno   = idAlumno;
+        }
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected String doInBackground(String... strings) {
+            String respuesta = "";
+            try {
+                List<NameValuePair> params = new ArrayList<NameValuePair>();
+                params.add(new BasicNameValuePair("idAlumno",String.valueOf(idAlumno)));
+                final HttpClient Client = new DefaultHttpClient();
+                HttpPost httppostreq = new HttpPost(url);
+                httppostreq.setEntity(new UrlEncodedFormEntity(params));
+
+                HttpResponse httpresponse = Client.execute(httppostreq);
+                respuesta = EntityUtils.toString(httpresponse.getEntity());
+            }catch (Exception e){
+                Log.d("mensajeerror",e.getMessage());
+            }
+            return respuesta;
+        }
+
+        @Override
+        protected void onPostExecute(String json) {
+            if(type==1){
+                if(json.trim().length()>2){
+                    try{
+                        JSONArray array = new JSONArray(json);
+                        JSONObject obj = array.getJSONObject(0);
+                        String titulo = obj.getString("vTitulo");
+                        String mensaje = obj.getString("vDescripcion");
+                        dialogoMensajes(titulo,mensaje);
+                    }catch (Exception e){
+                        Log.d("mensajeerror",e.getMessage());
+                    }
+                }
+            }
+        }
+    }
+
     public class asyncTask extends AsyncTask<String,String,String>{
         private Context context;
         private int     type;
         private String  url;
+
         public asyncTask(Context context,int type,String url){
-            this.context = context;
-            this.type    = type;
-            this.url     = url;
+            this.context    = context;
+            this.type       = type;
+            this.url        = url;
+
         }
         @Override
         protected void onPreExecute(){
-
 
         }
 

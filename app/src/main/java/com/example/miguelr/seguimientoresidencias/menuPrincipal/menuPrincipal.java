@@ -36,6 +36,7 @@ public class menuPrincipal extends AppCompatActivity{
         alumno = new Alumnos(this);
 
         configurarToolbar();
+        buscarMensajesPorAlumno();
     }
     private void configurarToolbar(){
         alumno = alumno.obtenerAlumnoSession();
@@ -81,5 +82,13 @@ public class menuPrincipal extends AppCompatActivity{
             }
         });
         builder.show();
+    }
+    public void buscarMensajesPorAlumno(){
+        try{
+            int idAlumnoLoged = session.obtenerIdAlumno();
+             common.asyncMessagesPorAlumno(idAlumnoLoged);
+        }catch (Exception e){
+
+        }
     }
 }

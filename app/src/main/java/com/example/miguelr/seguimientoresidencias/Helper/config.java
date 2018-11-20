@@ -18,6 +18,7 @@ public class config {
     public static String dbName                         = "ServicioSocial";
     public static String url                            = "http://residenciasitsa.diplomadosdelasep.com.mx/wssegres/";
     public static String WebMethodMessages              = "getMessages";
+    public static String WebMethodMessagesPorAlumno     = "getMessageByAlumno";
     public static String WebMethodCatalogs              = "getCatalogs";
     public static String WebMethoduploadDataFromFile    = "uploadDataFromFile";
     public static String WebMethodSaveUsuer             = "registrarAlumno";
