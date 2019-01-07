@@ -322,7 +322,7 @@ public class Common {
         protected void onPostExecute(String json) {
             try{
                 JSONObject object = new JSONObject(json);
-                JSONArray table1 = object.getJSONArray("tabla1");
+                    JSONArray table1 = object.getJSONArray("tabla1");
                 int response = table1.getJSONObject(0).getInt("response");
 
                 JSONArray table2 = object.getJSONArray("tabla2");

@@ -6,6 +6,8 @@ import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -16,10 +18,14 @@ import android.widget.TextView;
 
 import com.example.miguelr.seguimientoresidencias.DataBase.Tables.Modelos.Alumnos;
 import com.example.miguelr.seguimientoresidencias.DataBase.Tables.Modelos.Carreras;
+import com.example.miguelr.seguimientoresidencias.DataBase.Tables.Modelos.cascaronLineaTiempo;
 import com.example.miguelr.seguimientoresidencias.Helper.Common;
 import com.example.miguelr.seguimientoresidencias.R;
+import com.example.miguelr.seguimientoresidencias.adaptadores.rvLineaDelTiempo;
 import com.github.clans.fab.FloatingActionButton;
 import com.mikhaellopez.circularimageview.CircularImageView;
+
+import java.util.ArrayList;
 
 
 /**
@@ -31,10 +37,8 @@ public class PerfilActivity extends AppCompatActivity{
     private Common common;
     private Alumnos alumno;
     private TextView TVNombreAlumno,tvCarrera,tvProyectoSeleccionado;
-    private FloatingActionButton FBmostrarAlumnos,FBmostrarExpedienteFinal,FBmostrarAvance;
-    private CollapsingToolbarLayout collapsingToolbarLayout;
-    private AppBarLayout appBarLayout;
-
+    private RecyclerView rvLinea;
+    private rvLineaDelTiempo adapter;
     public void onCreate(Bundle bundle){
         super.onCreate(bundle);
         setContentView(R.layout.acitivity_perfil);
@@ -42,25 +46,27 @@ public class PerfilActivity extends AppCompatActivity{
         common = new Common(this);
         toolbar = (Toolbar) findViewById(R.id.toolbarGeneralDez);
 
-       /* FBmostrarAlumnos = (FloatingActionButton) findViewById(R.id.FBmostrarAlumnos);
-        FBmostrarExpedienteFinal = (FloatingActionButton) findViewById(R.id.FBmostrarExpedienteFinal);
-        FBmostrarAvance = (FloatingActionButton) findViewById(R.id.FBmostrarAvance);
-        collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
-        appBarLayout            = (AppBarLayout) findViewById(R.id.appBarLayout);
-
-
-
-
-
-
-
-        configurarToolbar();
-*/
-        TVNombreAlumno = (TextView)  findViewById(R.id.TVNombreAlumnoPerfil);
-        tvCarrera      = (TextView)  findViewById(R.id.TVCarreraPerfil);
-        alumno = new Alumnos(PerfilActivity.this);
+        rvLinea                     = findViewById(R.id.rvLineaDelTiempo);
+        TVNombreAlumno              =  findViewById(R.id.TVNombreAlumnoPerfil);
+        tvCarrera                   =    findViewById(R.id.TVCarreraPerfil);
+        alumno                      = new Alumnos(PerfilActivity.this);
         alumno = alumno.obtenerAlumnoSession();
         tvProyectoSeleccionado  = (TextView) findViewById(R.id.tvProyectoSeleccionado);
+
+        ArrayList<cascaronLineaTiempo> rows = new ArrayList<>();
+        for(int i = 0;i < 4; i++){
+            cascaronLineaTiempo cas = new cascaronLineaTiempo();
+            cas.setvTitulo("Titulo "+i);
+            cas.setvDescripcion("Some ");
+            rows.add(cas);
+        }
+        adapter = new rvLineaDelTiempo(this,rows);
+        LinearLayoutManager lim = new LinearLayoutManager(this);
+        lim.setOrientation(LinearLayoutManager.VERTICAL);
+        rvLinea.setLayoutManager(lim);
+        rvLinea.setAdapter(adapter);
+
+
 
         if(alumno!=null){
             TVNombreAlumno.setText(alumno.getvNombre());
