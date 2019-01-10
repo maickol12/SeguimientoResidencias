@@ -19,6 +19,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,8 +41,10 @@ import com.example.miguelr.seguimientoresidencias.DataBase.Tables.Modelos.Period
 import com.example.miguelr.seguimientoresidencias.DataBase.Tables.Modelos.ProyectoSeleccionado;
 import com.example.miguelr.seguimientoresidencias.DataBase.Tables.Modelos.Sectores;
 import com.example.miguelr.seguimientoresidencias.DataBase.Tables.Modelos.bancoProyectos;
+import com.example.miguelr.seguimientoresidencias.DataBase.Tables.Modelos.cascaronLineaTiempo;
 import com.example.miguelr.seguimientoresidencias.Login.MainActivity;
 import com.example.miguelr.seguimientoresidencias.MenuArchivos.menuArchivos;
+import com.example.miguelr.seguimientoresidencias.Perfil.PerfilActivity;
 import com.example.miguelr.seguimientoresidencias.R;
 import com.example.miguelr.seguimientoresidencias.escogerProyecto.escogerProyecto;
 import com.example.miguelr.seguimientoresidencias.menuPrincipal.menuPrincipal;
@@ -240,6 +243,13 @@ public class Common {
         String url = config.url+config.WebMethodMessagesPorAlumno;
         new asynTaskMensajesPorAlumnos(context,1,url,idAlumno).execute();
     }
+    public void asyncObtenerSeguimiento(){
+        sessionHelper sesion = new sessionHelper(context);
+
+        String url = config.url+config.WebMehodgetSeguimiento;
+        ProgressDialog dialog = getProgressBar("Itsa","Descargando catalogos");
+        new asyncTaskObtenerSeguimiento(url,dialog,sesion.obtenerIdAlumno()).execute();
+    }
 
 
     public ProgressDialog getProgressBar(String titulo,String mensaje){
@@ -271,6 +281,60 @@ public class Common {
 
     public void asyncEncogerProyecto(int idBancoProyecto,int idAlumno,int idPeriodo,int idOpcion,int idGiro,int idEstado, int idSector){
         new asyncTaskEscogerProyecto(idBancoProyecto,idAlumno,idPeriodo,idOpcion,idGiro,idEstado,idSector).execute();
+    }
+
+    public class asyncTaskObtenerSeguimiento extends AsyncTask<Void,String,Void>{
+        private String respuesta;
+        private String url;
+        private ProgressDialog progressDialog;
+        private int idAlumno;
+        private ArrayList<cascaronLineaTiempo> seguimiento;
+
+        public asyncTaskObtenerSeguimiento(String url,ProgressDialog progressDialog,int idAlumno){
+            this.url            = url;
+            this.progressDialog = progressDialog;
+            this.idAlumno       = idAlumno;
+            this.seguimiento    = null;
+        }
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            this.progressDialog.show();
+        }
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            try{
+                List<NameValuePair> params = new ArrayList<NameValuePair>();
+                params.add(new BasicNameValuePair("idAlumno",String.valueOf(idAlumno)));
+                final HttpClient Client = new DefaultHttpClient();
+                HttpPost httppostreq = new HttpPost(url);
+                httppostreq.setEntity(new UrlEncodedFormEntity(params));
+
+                HttpResponse httpresponse = Client.execute(httppostreq);
+                respuesta = EntityUtils.toString(httpresponse.getEntity());
+                JSONArray obj = new JSONArray(respuesta);
+                this.seguimiento = new ArrayList<>();
+                for(int i = 0;i<obj.length();i++){
+                    JSONObject row = obj.getJSONObject(i);
+                    cascaronLineaTiempo cas = new cascaronLineaTiempo();
+                    cas.setvTitulo(row.getString("vNombre"));
+                    cas.setvDescripcion("Some ");
+                    this.seguimiento.add(cas);
+                }
+
+            }catch (Exception e){
+
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            this.progressDialog.hide();
+            ((PerfilActivity)context).cargarSeguimiento(this.seguimiento);
+        }
     }
 
     public class asyncTaskEscogerProyecto extends AsyncTask<Void,String,String>{
@@ -1062,7 +1126,7 @@ public class Common {
     public double isNullDouble(String dato){
         double response = 0;
         if(!dato.equalsIgnoreCase("null")){
-            response = Integer.parseInt(dato);
+            response = Double.parseDouble(dato);
         }
         return response;
     }

@@ -23,6 +23,7 @@ public class config {
     public static String WebMethoduploadDataFromFile    = "uploadDataFromFile";
     public static String WebMethodSaveUsuer             = "registrarAlumno";
     public static String WebMehodEscogerProy            = "escogerProyecto";
+    public static String WebMehodgetSeguimiento         = "getSeguimiento";
     public static String WebMethodLogin                 = "login";
 
     /**********************************************************************************************************

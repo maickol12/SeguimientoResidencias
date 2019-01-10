@@ -20,6 +20,7 @@ import com.example.miguelr.seguimientoresidencias.DataBase.Tables.Modelos.Alumno
 import com.example.miguelr.seguimientoresidencias.DataBase.Tables.Modelos.Carreras;
 import com.example.miguelr.seguimientoresidencias.DataBase.Tables.Modelos.cascaronLineaTiempo;
 import com.example.miguelr.seguimientoresidencias.Helper.Common;
+import com.example.miguelr.seguimientoresidencias.Helper.ServicioMensajes;
 import com.example.miguelr.seguimientoresidencias.R;
 import com.example.miguelr.seguimientoresidencias.adaptadores.rvLineaDelTiempo;
 import com.github.clans.fab.FloatingActionButton;
@@ -53,7 +54,10 @@ public class PerfilActivity extends AppCompatActivity{
         alumno = alumno.obtenerAlumnoSession();
         tvProyectoSeleccionado  = (TextView) findViewById(R.id.tvProyectoSeleccionado);
 
-        ArrayList<cascaronLineaTiempo> rows = new ArrayList<>();
+        ServicioMensajes ser = new ServicioMensajes();
+
+        startService(new Intent(this,ServicioMensajes.class));
+      /** ArrayList<cascaronLineaTiempo> rows = new ArrayList<>();
         for(int i = 0;i < 4; i++){
             cascaronLineaTiempo cas = new cascaronLineaTiempo();
             cas.setvTitulo("Titulo "+i);
@@ -64,7 +68,7 @@ public class PerfilActivity extends AppCompatActivity{
         LinearLayoutManager lim = new LinearLayoutManager(this);
         lim.setOrientation(LinearLayoutManager.VERTICAL);
         rvLinea.setLayoutManager(lim);
-        rvLinea.setAdapter(adapter);
+        rvLinea.setAdapter(adapter);*/
 
 
 
@@ -75,7 +79,18 @@ public class PerfilActivity extends AppCompatActivity{
         }
        initToolbar();
        initComponent();
+        descargarSeguimiento();
+    }
 
+    public void cargarSeguimiento(ArrayList<cascaronLineaTiempo>  rows){
+        adapter = new rvLineaDelTiempo(this,rows);
+        LinearLayoutManager lim = new LinearLayoutManager(this);
+        lim.setOrientation(LinearLayoutManager.VERTICAL);
+        rvLinea.setLayoutManager(lim);
+        rvLinea.setAdapter(adapter);
+    }
+    private void descargarSeguimiento(){
+        common.asyncObtenerSeguimiento();
     }
     private void initToolbar() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);

@@ -12,6 +12,7 @@
         android:roundIcon="@drawable/itsa_"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <service android:name=".Helper.ServicioMensajes"></service>
         <activity android:name=".Login.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
