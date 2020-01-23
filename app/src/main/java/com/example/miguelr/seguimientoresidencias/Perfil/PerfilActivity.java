@@ -57,18 +57,6 @@ public class PerfilActivity extends AppCompatActivity{
         ServicioMensajes ser = new ServicioMensajes();
 
         startService(new Intent(this,ServicioMensajes.class));
-      /** ArrayList<cascaronLineaTiempo> rows = new ArrayList<>();
-        for(int i = 0;i < 4; i++){
-            cascaronLineaTiempo cas = new cascaronLineaTiempo();
-            cas.setvTitulo("Titulo "+i);
-            cas.setvDescripcion("Some ");
-            rows.add(cas);
-        }
-        adapter = new rvLineaDelTiempo(this,rows);
-        LinearLayoutManager lim = new LinearLayoutManager(this);
-        lim.setOrientation(LinearLayoutManager.VERTICAL);
-        rvLinea.setLayoutManager(lim);
-        rvLinea.setAdapter(adapter);*/
 
 
 
@@ -79,7 +67,7 @@ public class PerfilActivity extends AppCompatActivity{
         }
        initToolbar();
        initComponent();
-        descargarSeguimiento();
+       descargarSeguimiento();
     }
 
     public void cargarSeguimiento(ArrayList<cascaronLineaTiempo>  rows){
@@ -93,15 +81,15 @@ public class PerfilActivity extends AppCompatActivity{
         common.asyncObtenerSeguimiento();
     }
     private void initToolbar() {
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar =  findViewById(R.id.toolbar);
         toolbar.setNavigationIcon(R.drawable.ic_menu);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Perfil");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
     private void initComponent() {
-        final CircularImageView image = (CircularImageView) findViewById(R.id.image);
-        final CollapsingToolbarLayout collapsing_toolbar = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
+        final CircularImageView image =  findViewById(R.id.image);
+        final CollapsingToolbarLayout collapsing_toolbar = findViewById(R.id.collapsing_toolbar);
         ((AppBarLayout) findViewById(R.id.app_bar_layout)).addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
             @Override
             public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
@@ -112,43 +100,12 @@ public class PerfilActivity extends AppCompatActivity{
             }
         });
     }
-
-  /*public void configurarToolbar(){
-        setSupportActionBar(toolbar);
-
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
-        getSupportActionBar().setTitle(alumno.getvNombre());
-
-        appBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
-            boolean isShow = true;
-            int scrollRange = -1;
-
-            @Override
-            public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
-                if (scrollRange == -1) {
-                    scrollRange = appBarLayout.getTotalScrollRange();
-                }
-                if (scrollRange + verticalOffset == 0) {
-                    collapsingToolbarLayout.setTitle(alumno.getvNombre());
-                    isShow = true;
-                } else if(isShow) {
-                    collapsingToolbarLayout.setTitle(" ");//carefull there should a space between double quote otherwise it wont work
-                    isShow = false;
-                }
-            }
-        });
-    }*/
-
-
     public boolean onCreateOptionsMenu(Menu menu){
-        //getMenuInflater().inflate(R.menu.menu_principal,menu);
         return true;
     }
     public boolean onOptionsItemSelected(MenuItem item){
         switch (item.getItemId()){
             case android.R.id.home:
-                //common.dialogoSalir();
                 onBackPressed();
             break;
             case R.id.mostrarAlumnos:
@@ -158,14 +115,4 @@ public class PerfilActivity extends AppCompatActivity{
         return true;
     }
 
-
-   /* public void onBackPressed(){
-        common.dialogoSalir();
-    }
-*/
-
-    private void iniciarActividad(Class<?> clase){
-        Intent intent = new Intent(PerfilActivity.this,clase);
-        startActivity(intent);
-    }
 }

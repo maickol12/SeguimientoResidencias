@@ -21,11 +21,13 @@ public class rvLineaDelTiempo extends RecyclerView.Adapter<rvLineaDelTiempo.line
         this.lineaDelTiempo     = lineaDelTiempo;
     }
     public static class lineaHolder extends RecyclerView.ViewHolder{
-        private TextView rowTitulo,rowDescripcion;
+        private TextView rowTitulo,rowDescripcion,AI,AE;
         public lineaHolder(View itemView) {
             super(itemView);
             rowTitulo           =  itemView.findViewById(R.id.rowTitulo);
             rowDescripcion      =  itemView.findViewById(R.id.rowDescripcion);
+            AI                  =  itemView.findViewById(R.id.AI);
+            AE                  =  itemView.findViewById(R.id.AE);
 
         }
     }
@@ -43,6 +45,8 @@ public class rvLineaDelTiempo extends RecyclerView.Adapter<rvLineaDelTiempo.line
         cascaronLineaTiempo row = lineaDelTiempo.get(position);
         holder.rowTitulo.setText(row.getvTitulo());
         holder.rowDescripcion.setText(row.getvDescripcion());
+        holder.AI.setText(row.getvAceptadoAI());
+        holder.AE.setText(row.getvAceptadoAE());
     }
 
     @Override

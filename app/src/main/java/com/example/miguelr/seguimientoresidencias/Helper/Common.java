@@ -145,6 +145,7 @@ public class Common {
         if(Build.VERSION.SDK_INT<Build.VERSION_CODES.M){
             return true;
         }
+
         if(context.checkSelfPermission(WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED &&
                 context.checkSelfPermission(INTERNET) == PackageManager.PERMISSION_GRANTED){
             return true;
@@ -319,7 +320,21 @@ public class Common {
                     JSONObject row = obj.getJSONObject(i);
                     cascaronLineaTiempo cas = new cascaronLineaTiempo();
                     cas.setvTitulo(row.getString("vNombre"));
-                    cas.setvDescripcion("Some ");
+                    int bAceptadoAI = row.getInt("bAceptadoAI");
+                    int bAceptadoAE = row.getInt("bAceptadoAE");
+
+                    if(bAceptadoAI >= 1){
+                        cas.setvAceptadoAI("Aceptado");
+                    }else{
+                        cas.setvAceptadoAI("Rechazado");
+                    }
+                    if(bAceptadoAE >= 1){
+                        cas.setvAceptadoAE("Aceptado");
+                    }else{
+                        cas.setvAceptadoAE("Rechazado");
+                    }
+
+                    //cas.setvDescripcion("Some ");
                     this.seguimiento.add(cas);
                 }
 
@@ -487,43 +502,48 @@ public class Common {
             try{
                 JSONObject object = new JSONObject(json);
                 JSONArray tabla1 = object.optJSONArray("tabla1");
-                JSONArray tabla2 = object.optJSONArray("tabla2");
-                JSONArray tabla3 = object.getJSONArray("tabla3");
-                JSONArray tabla4 = object.getJSONArray("tabla4");
+
 
 
                 int response = tabla1.getJSONObject(0).getInt("response");
                 if(response == 200){
-                    Alumnos alumnos = new Alumnos(context);
+                    JSONArray tabla2 = object.optJSONArray("tabla2");
+                    JSONArray tabla3 = object.getJSONArray("tabla3");
+                    JSONArray tabla4 = object.getJSONArray("tabla4");
+                    Alumnos alumnos = null;
 
-                    JSONObject jsonAlumno = tabla2.getJSONObject(0);
-                    alumnos.setIdAlumno(jsonAlumno.getInt(Malumnos.idAlumno));
-                    alumnos.setIdCarrera(jsonAlumno.getInt(Malumnos.idCarrera));
-                    alumnos.setIdUsuario(jsonAlumno.getInt(Malumnos.idUsuario));
-                    alumnos.setbSexo(jsonAlumno.getInt(Malumnos.bSexo));
-                    alumnos.setvNumeroControl(jsonAlumno.getString(Malumnos.vNumeroControl));
-                    alumnos.setvNombre(jsonAlumno.getString(Malumnos.vNombre));
-                    alumnos.setvApellidoPaterno(jsonAlumno.getString(Malumnos.vApellidoPaterno));
-                    alumnos.setvApellidoMaterno(jsonAlumno.getString(Malumnos.vApellidoMaterno));
-                    alumnos.setvSemestre(isNull(jsonAlumno.getString(Malumnos.vSemestre)));
-                    alumnos.setvPlanEstudios(isNull(jsonAlumno.getString(Malumnos.vPlanEstudios)));
-                    alumnos.setdFechaIngreso(jsonAlumno.getString(Malumnos.dFechaIngreso));
-                    alumnos.setdFechaTermino(jsonAlumno.getString(Malumnos.dFechaTermino));
-                    alumnos.setiCreditosTotales(isNull(jsonAlumno.getString(Malumnos.iCreditosTotales)));
-                    alumnos.setiCreditosAcumulados(isNull(jsonAlumno.getString(Malumnos.iCreditosAcumulados)));
-                    alumnos.setfPorcentaje(isNullDouble(jsonAlumno.getString(Malumnos.fPorcentaje)));
-                    alumnos.setiPeriodo(isNull(jsonAlumno.getString(Malumnos.iPeriodo)));
-                    alumnos.setfPromedio(isNullDouble(jsonAlumno.getString(Malumnos.fPromedio)));
-                    alumnos.setvSituacion(jsonAlumno.getString(Malumnos.vSituacion));
-                    alumnos.setbServicioSocial(isNull(jsonAlumno.getString(Malumnos.bServicioSocial)));
-                    alumnos.setbActividadesComplementarias(isNull(jsonAlumno.getString(Malumnos.bActividadesComplementarias)));
-                    alumnos.setbMateriasEspecial(isNull(jsonAlumno.getString(Malumnos.bMateriasEspecial)));
-                    alumnos.setvCorreoInstitucional(jsonAlumno.getString(Malumnos.vCorreoInstitucional));
-                    alumnos.setdFechaNacimiento(jsonAlumno.getString(Malumnos.dFechaNacimiento));
+                    if (tabla2.length() > 0) {
+                        alumnos = new Alumnos(context);
+                        JSONObject jsonAlumno = tabla2.getJSONObject(0);
+                        alumnos.setIdAlumno(jsonAlumno.getInt(Malumnos.idAlumno));
+                        alumnos.setIdCarrera(jsonAlumno.getInt(Malumnos.idCarrera));
+                        alumnos.setIdUsuario(jsonAlumno.getInt(Malumnos.idUsuario));
+                        alumnos.setbSexo(jsonAlumno.getInt(Malumnos.bSexo));
+                        alumnos.setvNumeroControl(jsonAlumno.getString(Malumnos.vNumeroControl));
+                        alumnos.setvNombre(jsonAlumno.getString(Malumnos.vNombre));
+                        alumnos.setvApellidoPaterno(jsonAlumno.getString(Malumnos.vApellidoPaterno));
+                        alumnos.setvApellidoMaterno(jsonAlumno.getString(Malumnos.vApellidoMaterno));
+                        alumnos.setvSemestre(isNull(jsonAlumno.getString(Malumnos.vSemestre)));
+                        alumnos.setvPlanEstudios(isNull(jsonAlumno.getString(Malumnos.vPlanEstudios)));
+                        alumnos.setdFechaIngreso(jsonAlumno.getString(Malumnos.dFechaIngreso));
+                        alumnos.setdFechaTermino(jsonAlumno.getString(Malumnos.dFechaTermino));
+                        alumnos.setiCreditosTotales(isNull(jsonAlumno.getString(Malumnos.iCreditosTotales)));
+                        alumnos.setiCreditosAcumulados(isNull(jsonAlumno.getString(Malumnos.iCreditosAcumulados)));
+                        alumnos.setfPorcentaje(isNullDouble(jsonAlumno.getString(Malumnos.fPorcentaje)));
+                        alumnos.setiPeriodo(isNull(jsonAlumno.getString(Malumnos.iPeriodo)));
+                        alumnos.setfPromedio(isNullDouble(jsonAlumno.getString(Malumnos.fPromedio)));
+                        alumnos.setvSituacion(jsonAlumno.getString(Malumnos.vSituacion));
+                        alumnos.setbServicioSocial(isNull(jsonAlumno.getString(Malumnos.bServicioSocial)));
+                        alumnos.setbActividadesComplementarias(isNull(jsonAlumno.getString(Malumnos.bActividadesComplementarias)));
+                        alumnos.setbMateriasEspecial(isNull(jsonAlumno.getString(Malumnos.bMateriasEspecial)));
+                        alumnos.setvCorreoInstitucional(jsonAlumno.getString(Malumnos.vCorreoInstitucional));
+                        alumnos.setdFechaNacimiento(jsonAlumno.getString(Malumnos.dFechaNacimiento));
 
-                    if(alumnos.buscar()){
-                        alumnos.borrar();
+                        if(alumnos.buscar()){
+                            alumnos.borrar();
+                        }
                     }
+
 
                     if(tabla3.length()>0){
                         ArchivoSeleccionado as = new ArchivoSeleccionado(context);
@@ -571,12 +591,14 @@ public class Common {
 
 
 
-                    if(alumnos.guardar()){
-                       session.createSession(alumnos);
-                        redirigirMenu();
-                    }else{
-                        Toast.makeText(context,"Ocurrio un error al guardar el usuario",Toast.LENGTH_LONG).show();
+                    if(alumnos != null){
+                        if(alumnos.guardar()){
+                            session.createSession(alumnos);
+                        }else{
+                            Toast.makeText(context,"Ocurrio un error al guardar el usuario",Toast.LENGTH_LONG).show();
+                        }
                     }
+                    redirigirMenu();
                 }else{
                     dialogErrorLogin().show();
                 }
